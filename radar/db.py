@@ -15,7 +15,7 @@ from typing import Any, TypeVar
 from radar import models as m
 from radar.settings import SQLITE_PATH
 
-SCHEMA_VERSION = 2   # 2: possible_duplicate (M12)
+SCHEMA_VERSION = 3   # 2: possible_duplicate (M12); 3: project_snapshot (M13)
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL);
@@ -76,6 +76,11 @@ CREATE TABLE IF NOT EXISTS possible_duplicate (
 CREATE TABLE IF NOT EXISTS change_event (
   event_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, project_id TEXT NOT NULL, event_type TEXT NOT NULL,
   old TEXT, new TEXT, mention_id TEXT, created_at TEXT
+);
+
+-- M13: per-run snapshot of each project's derived state; the next run diffs against the latest one.
+CREATE TABLE IF NOT EXISTS project_snapshot (
+  run_id TEXT NOT NULL, project_id TEXT NOT NULL, state TEXT NOT NULL, PRIMARY KEY (run_id, project_id)
 );
 
 CREATE TABLE IF NOT EXISTS run (
