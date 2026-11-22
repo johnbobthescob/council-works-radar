@@ -15,12 +15,8 @@ from radar.settings import load_councils, load_trades
 
 NOT_IMPLEMENTED_EXIT = 2
 
-# (name, milestone, help). Milestones refer to PLAN.md §10.
-STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("export", "M15", "write out/ui/data.js for the web UI"),
-    ("serve", "M15", "serve out/ui/ on localhost with http.server"),
-    ("run", "M16", "full pipeline for the selected councils (--councils a,b,c)"),
-]
+# (name, milestone, help) for planned-but-unbuilt commands. Milestones refer to PLAN.md §10.
+STUB_COMMANDS: list[tuple[str, str, str]] = []
 
 
 def _config_check(_args: argparse.Namespace) -> int:
@@ -231,6 +227,72 @@ def _digest(args: argparse.Namespace) -> int:
     return 0
 
 
+def _export(args: argparse.Namespace) -> int:
+    from radar import db, export
+
+    ui = export.export_ui(db.connect(args.db), args.out)
+    print(f"wrote {ui / 'data.js'} (+ index.html, app.js, style.css)")
+    return 0
+
+
+def _serve(args: argparse.Namespace) -> int:
+    """Serve out/ on 127.0.0.1 (PLAN §7.2). Bound to localhost only; never exposed on the network."""
+    import functools
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+    from pathlib import Path
+
+    from radar.settings import OUT_DIR
+
+    root = Path(args.out) if args.out else OUT_DIR
+    if not (root / "ui" / "index.html").exists():
+        print(f"{root / 'ui' / 'index.html'} not found; run `python -m radar export` (or `run`) first", file=sys.stderr)
+        return 1
+    handler = functools.partial(SimpleHTTPRequestHandler, directory=str(root))
+    with ThreadingHTTPServer(("127.0.0.1", args.port), handler) as srv:
+        print(f"serving {root} at http://127.0.0.1:{srv.server_address[1]}/ui/  (Ctrl+C to stop)")
+        try:
+            srv.serve_forever()
+        except KeyboardInterrupt:
+            pass
+    return 0
+
+
+def _run(args: argparse.Namespace) -> int:
+    import logging
+
+    from radar import db, pipeline
+
+    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(levelname)s %(name)s: %(message)s")
+    councils = [c.strip() for c in args.councils.split(",") if c.strip()] if args.councils else None
+    conn = db.connect(args.db)
+    try:
+        res = pipeline.run_pipeline(conn, councils, out_dir=args.out, offline=args.offline, allow_large=args.allow_large,
+                                    pdf=not args.no_pdf, enable=set(args.enable or ()), max_meeting_docs=args.max_meeting_docs)
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+    s = res.summary
+    print(f"run {res.run_id} ({s['mode']}, {'baseline' if s['baseline'] else 'incremental'}) week {res.iso_week}")
+    for cid, c in s["councils"].items():
+        outcomes = ", ".join(f"{k} {v}" for k, v in sorted(c["outcomes"].items())) or "no documents"
+        print(f"  {cid:<11} {c['status']:<8} listed {c['docs_listed']:>3}  selected {c['docs_selected']:>2}  [{outcomes}]  "
+              f"mentions {c['mentions_extracted']:>4}  projects {c['projects_total']:>4}")
+        for e in c["errors"]:
+            print(f"      error: {e}")
+    t = s["totals"]
+    print(f"projects {t['projects']}, events {t['events']} {t['events_by_type']}")
+    if res.digest:
+        print(f"wrote {res.digest.html_path}")
+        if res.digest.pdf_path:
+            print(f"wrote {res.digest.pdf_path} ({res.digest.pdf_engine})")
+        elif res.digest.pdf_error:
+            print(f"PDF not written: {res.digest.pdf_error}", file=sys.stderr)
+    print(f"wrote {res.ui_dir / 'index.html'} (+ data.js)")
+    print(f"wrote {res.summary_path}")
+    ok = any(c["status"] != "failed" for c in s["councils"].values())
+    return 0 if ok else 1
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -306,6 +368,34 @@ def build_parser() -> argparse.ArgumentParser:
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)
     prune.set_defaults(handler=_prune)
+
+    exp = sub.add_parser("export", help="write out/ui/ (data.js + static UI files) from the DB [M15]",
+                         description="Writes out/ui/{index.html,app.js,style.css,data.js}. Open index.html directly or use `serve`.")
+    exp.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    exp.add_argument("--out", default=None, help="output directory (default out/)")
+    exp.set_defaults(handler=_export)
+
+    sv = sub.add_parser("serve", help="serve out/ on http://127.0.0.1:8000/ui/ [M15]",
+                        description="A localhost-only wrapper around http.server for the web UI.")
+    sv.add_argument("--out", default=None, help="directory to serve (default out/)")
+    sv.add_argument("--port", type=int, default=8000)
+    sv.set_defaults(handler=_serve)
+
+    rn = sub.add_parser("run", help="full pipeline: list, fetch, extract, link, changes, digest, UI [M16]",
+                        description="Runs every stage for the selected councils (polite, rate-limited, live) and writes "
+                                    "out/digest-YYYY-Www.html/.pdf, out/ui/ and out/run-summary-YYYY-Www.json. "
+                                    "--offline re-extracts already-stored documents from .cache/raw with no network.")
+    rn.add_argument("--councils", default=None, help="comma-separated council keys (default: all enabled)")
+    rn.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    rn.add_argument("--out", default=None, help="output directory (default out/)")
+    rn.add_argument("--offline", action="store_true", help="no network: replay stored documents from .cache/raw")
+    rn.add_argument("--allow-large", action="store_true", help="allow documents over the 40 MB threshold")
+    rn.add_argument("--no-pdf", action="store_true", help="digest HTML only")
+    rn.add_argument("--enable", action="append", choices=["blackspot"],
+                    help="enable an optional extractor (repeatable), e.g. --enable blackspot")
+    rn.add_argument("--max-meeting-docs", type=int, default=None, help="override the per-council meeting doc cap (default 2)")
+    rn.add_argument("-v", "--verbose", action="store_true", help="log progress")
+    rn.set_defaults(handler=_run)
 
     for name, milestone, help_text in STUB_COMMANDS:
         stub = sub.add_parser(name, help=f"{help_text} [{milestone}]", description=help_text)

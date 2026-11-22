@@ -1,1 +1,72 @@
-<!-- web UI shell (PLAN §7.2, milestone M15). Placeholder. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WA Council Works Radar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="header">
+  <h1>WA Council Works Radar</h1>
+  <div id="meta" class="muted"></div>
+  <div id="counters">
+    <span><strong id="count-shown">0</strong> of <strong id="count-total">0</strong> projects</span>
+    <span>Total value shown: <strong id="value-total">$0</strong></span>
+    <button id="download-csv" type="button">Download CSV of current filter</button>
+  </div>
+</header>
+
+<div id="layout">
+  <aside id="filters" aria-label="Filters">
+    <label for="search">Search name / road / suburb</label>
+    <input id="search" type="search" placeholder="e.g. Warwick Road">
+
+    <fieldset id="filter-council"><legend>Council</legend></fieldset>
+
+    <fieldset id="filter-trade"><legend>Trade</legend>
+      <label class="inline"><input type="checkbox" id="include-implied"> include implied trades</label>
+    </fieldset>
+
+    <label for="filter-stage">Stage</label>
+    <select id="filter-stage"><option value="">Any</option></select>
+
+    <label for="filter-fy">Financial year</label>
+    <select id="filter-fy"><option value="">Any</option></select>
+
+    <label>Value (AUD)</label>
+    <div class="row"><input id="value-min" type="number" min="0" placeholder="min"><input id="value-max" type="number" min="0" placeholder="max"></div>
+
+    <label for="filter-confidence">Confidence</label>
+    <select id="filter-confidence">
+      <option value="0">Any</option><option value="0.5">Medium or higher (≥ 0.5)</option><option value="0.75">High (≥ 0.75)</option>
+    </select>
+
+    <label for="filter-weeks">Changed in the last N weeks</label>
+    <input id="filter-weeks" type="number" min="1" placeholder="any">
+
+    <label class="inline"><input type="checkbox" id="filter-flags"> has uncertainty flags</label>
+    <button id="reset" type="button">Reset filters</button>
+  </aside>
+
+  <main>
+    <p id="empty" class="muted" hidden>No projects match these filters.</p>
+    <table id="results">
+      <thead><tr id="results-head">
+        <th data-sort="name">Project</th><th data-sort="council">Council</th><th data-sort="suburb">Suburb</th>
+        <th data-sort="trade">Trades</th><th data-sort="value" class="num">Value</th><th data-sort="value_basis">Basis</th>
+        <th data-sort="stage">Stage</th><th data-sort="last_change">Last change</th>
+        <th data-sort="confidence">Confidence</th><th data-sort="sources" class="num"># sources</th>
+      </tr></thead>
+      <tbody id="results-body"></tbody>
+    </table>
+    <p id="truncated" class="muted" hidden></p>
+  </main>
+</div>
+
+<footer id="footer"><p id="footer-text"></p><p id="footer-note" class="small"></p></footer>
+<noscript><p>This page needs JavaScript to filter the table.</p></noscript>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

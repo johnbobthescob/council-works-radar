@@ -13,6 +13,8 @@ def test_help_lists_planned_subcommands(capsys):
     for name, _, _ in cli.STUB_COMMANDS:
         assert name in out, f"{name} missing from --help"
     assert "config-check" in out and "link" in out
+    for name in ("export", "serve", "run"):
+        assert name in out
 
 
 def test_config_check_exits_zero(capsys):
