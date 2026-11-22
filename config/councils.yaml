@@ -1,0 +1,147 @@
+# Per-council endpoints, adapter types and compliance blocklist.
+# Source of truth: PLAN.md §3.2-§3.4 and §9; endpoints from RESEARCH.md §1.2 (retrieved 2026-11-22).
+# Nothing here is fetched in M0; this file only configures later milestones.
+
+defaults:
+  min_delay_s: 5          # stricter than the 2 s floor; R§3.3 recommends 5 s
+  max_bytes: 83886080     # 80 MB hard cap
+  large_threshold_bytes: 41943040  # 40 MB, opt-in via --allow-large
+  meeting_window_days: 60
+  max_meeting_docs_per_run: 2
+
+councils:
+  joondalup:
+    name: City of Joondalup
+    enabled: true
+    hosts: [www.joondalup.wa.gov.au, api.joondalup.wa.gov.au]
+    blocked_hosts: [search.joondalup.wa.gov.au]   # 401 on robots: never fetch
+    terms_url: https://www.joondalup.wa.gov.au/disclaimer
+    adapters:
+      - type: static_links
+        docs:
+          - url: "https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf"
+            doc_type: budget
+            financial_year: "2026-27"
+            extractor: joondalup_budget
+      - type: joondalup_htmlresult
+        endpoint: https://www.joondalup.wa.gov.au/search/htmlresult
+        listing_url: https://www.joondalup.wa.gov.au/city-and-council/council-and-committee-meetings/council-agenda-and-minutes
+        page_size: 24
+        search_index: CouncilMeeting
+        extractor: agenda_items
+
+  wanneroo:
+    name: City of Wanneroo
+    enabled: true
+    hosts: [wanneroo.infocouncil.biz, www.wanneroo.wa.gov.au]
+    blocked_hosts: []
+    terms_url: https://www.wanneroo.wa.gov.au/
+    adapters:
+      - type: infocouncil
+        listing_url: https://wanneroo.infocouncil.biz/
+        prefer: htm_paper          # PLAN §3.1: prefer ..._AGN_AT.HTM over _WEB.htm / PDF
+        meeting_codes: [OC]        # Ordinary Council first; others optional (BSS, PRCCC, CPRCC)
+        extractor: agenda_items
+
+  stirling:
+    name: City of Stirling
+    enabled: true
+    hosts: [www.stirling.wa.gov.au]
+    blocked_hosts: []
+    terms_url: https://www.stirling.wa.gov.au/
+    adapters:
+      - type: kentico_ksearch
+        endpoint: https://www.stirling.wa.gov.au/ksearchmna/ksearchresult
+        method: POST
+        body: {take: 12, skip: 0, page: 1, pageSize: 12}
+        response_list_key: Data
+        fields:
+          agenda: Agenda
+          minutes: MinutesFile
+          attachments: Attachments
+        extractor: agenda_items
+
+  melville:
+    name: City of Melville
+    enabled: true
+    hosts: [www.melvillecity.com.au]
+    blocked_hosts: []
+    terms_url: https://www.melvillecity.com.au/
+    adapters:
+      - type: static_links
+        docs:
+          - url: "https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program"
+            doc_type: capital_works_program
+            financial_year: "2026-27"
+            format: html
+            extractor: melville_cwp
+      - type: kentico_ksearch
+        endpoint: https://www.melvillecity.com.au/ksearch/mnaresult
+        method: POST
+        search_param:
+          - {key: classname, values: ["AWPT.MNA"]}
+          - {key: searchindexes, values: ["MNA"]}
+        response_fields:
+          file_name: MNAFirstFileName
+          file_url: MNAFirstFileUrl
+          meeting_type: MNAMeetingType
+          file_size: MNAFirstFileSize
+          page_url: PageUrl
+        extractor: agenda_items
+    notes: "Non-commercial terms; minutes preferred over 50 MB agendas (PLAN §3.3)."
+
+  cockburn:
+    name: City of Cockburn
+    enabled: true
+    hosts: [www.cockburn.wa.gov.au]
+    blocked_hosts: []
+    terms_url: https://www.cockburn.wa.gov.au/
+    adapters:
+      - type: static_links
+        discover_from: https://www.cockburn.wa.gov.au/Strategies-and-Plans
+        docs:
+          - url: "https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx"
+            doc_type: project_plans
+            financial_year: "2026-27"
+            extractor: cockburn_plans
+      - type: cockburn_html
+        listing_url: https://www.cockburn.wa.gov.au/City-and-Council/About-Council-Meetings-and-Elections/Agendas-and-Minutes
+        query: {page: 1, keyword: "OCM|Ordinary Council Meeting", titleonly: "true", years: 2026}
+        extractor: agenda_items
+
+  rockingham:
+    name: City of Rockingham
+    enabled: true
+    hosts: [rockingham.wa.gov.au]
+    blocked_hosts: []
+    terms_url: https://rockingham.wa.gov.au/
+    adapters:
+      - type: kentico_ksearch
+        endpoint: https://rockingham.wa.gov.au/ksearch/mnaresult
+        method: POST
+        search_param:
+          - {key: classname, values: ["AWPT.MNA"]}
+          - {key: searchindexes, values: ["MNA"]}
+        response_fields:
+          title: MNATitle
+          file_url: MNAFileUrl
+          document_type: MNADocumentType
+          meeting_type: MNAMeetingType
+          file_size: MNAFileSizeByte
+          publication_date: MNAPublicationDate
+        extractor: agenda_items
+    notes: "Terms say no reuse or redistribution without prior written permission (RESEARCH §1.2.6). Flag in the digest footer; see PLAN §3.2."
+
+# Enforced in fetch.py regardless of robots result (PLAN §3.4, §9.2).
+global_blocklist:
+  - host: cdn.canning.wa.gov.au
+    reason: "robots.txt disallows all paths (Disallow: /) on the document host"
+  - host: www.swan.wa.gov.au
+    path_prefix: /v1/
+    reason: robots disallows /v1/
+  - host: www.tenders.wa.gov.au
+    reason: robots disallows all but homepage; terms forbid commercial reuse (R§2.1)
+  - host: www.gosnells.wa.gov.au
+    reason: robots 401/403 bot wall
+  - host: search.joondalup.wa.gov.au
+    reason: robots 401

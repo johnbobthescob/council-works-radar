@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+
+# Radar runtime state and caches (PLAN.md §9.9)
+.cache/
+data/
+*.sqlite
+
+# Council PDFs never go into git. Generated out/ artefacts are kept.
+*.pdf
+!out/**/*.pdf
+
+# Local secrets / env
+.env
+.env.*

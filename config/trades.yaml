@@ -1,0 +1,158 @@
+# Trade taxonomy and keyword rules (PLAN.md §6.1-§6.3; RESEARCH.md §5.5).
+# Patterns are case-insensitive Python regexes (re.IGNORECASE applied by trades.py in M5).
+# Match text = project_name_raw + description + location_raw (PLAN §6.3 step 1).
+# Each label records the pattern that fired as evidence (kw:<pattern>).
+
+trades:
+  ROAD_RESURF:
+    label: Road resurfacing / preservation
+    keywords:
+      - '\bresurfac\w*'
+      - '\breseal\w*'
+      - 'asphalt overlay'
+      - 'mill(?:ing)? and fill'
+      - 'road preservation'
+      - 'pavement renewal'
+      - 'spray seal'
+      - 'road (?:rehabilitation|renewal)'
+      - 'rehabilitation.{0,30}\broad'
+    negative:          # recreation surfaces: "tennis court resurfacing" -> NON_CIVIL (Joondalup PEP2925)
+      - 'tennis'
+      - 'netball'
+      - 'basketball'
+      - '\bcourts?\b'
+      - 'synthetic (?:turf|surface)'
+      - 'bowling green'
+      - 'cricket (?:pitch|wicket)'
+      - 'playground'
+    on_negative: NON_CIVIL
+
+  ROAD_CONST:
+    label: Road construction / upgrade
+    keywords:
+      - '\bduplicat\w*'
+      - '\bwidening'
+      - '\bnew road'
+      - '\bextension'
+      - '\bupgrade'
+      - 'dual carriageway'
+      - 'road construction'
+      - '\breconstruct\w*'
+    negative: []
+
+  INTERSECTION:
+    label: Intersection / traffic treatment
+    keywords:
+      - '\broundabout'
+      - '\bintersection'
+      - 'black spot'
+      - 'traffic calming'
+      - 'raised plateau'
+      - '\bmedian'
+      - 'slip lane'
+      - '\bsignals?\b'
+    negative: []
+
+  DRAINAGE:
+    label: Drainage
+    keywords:
+      - '\bdrainage'
+      - '\bstormwater'
+      - '\bsump'
+      - 'soak ?well'
+      - '\bgull(?:y|ies)'
+      - '\bculvert'
+      - '\boutfall'
+      - '\bswale'
+      - '\bbasin'
+      - '\bdrain(?:age)? pipe'
+      - '\bpipes?\b'      # bare "pipe" needs drainage context (context_required below)
+    negative: []
+
+  FOOTPATH:
+    label: Footpaths / shared paths
+    keywords:
+      - '\bfootpath'
+      - '\bshared path'
+      - '\bPSP\b'
+      - 'dual use path'
+      - '\bpedestrian'
+      - '\bcycleway'
+      - 'bike lane'
+      - '\bpath\b'       # bare "path" needs foot/shared/cycle context (context_required below)
+    negative:
+      - 'bush ?walk'
+      - 'nature trail'
+
+  KERBING:
+    label: Kerbing
+    keywords:
+      - '\bkerb\w*'
+    negative: []
+
+  LINE_MARK:
+    label: Line marking
+    keywords:
+      - 'line ?marking'
+      - 'pavement marking'
+      - '\bRRPM'
+      - 'raised pavement markers?'
+    negative: []
+
+  CARPARK:
+    label: Car parks (cross-trade)
+    keywords:
+      - 'car ?park'
+      - 'parking bays?'
+    negative: []
+
+  BRIDGE:
+    label: Bridges / underpasses
+    keywords:
+      - '\bbridge'
+      - '\bunderpass'
+      - '\bboardwalk'
+    negative: []
+
+  STREETSCAPE:
+    label: Streetscape (multi-trade)
+    keywords:
+      - '\bstreetscape'
+      - '\bverge'
+      - '\blandscap\w*'  # only with road context (context_required below)
+    negative: []
+
+  OTHER_CIVIL:
+    label: Other civil (residual)
+    keywords: []
+    negative: []
+
+  NON_CIVIL:
+    label: Non-civil (buildings, HVAC, changerooms, IT, recreation surfaces)
+    keywords:
+      - '\bbuildings?\b'
+      - '\bhvac\b'
+      - 'change ?rooms?'
+      - '\bIT (?:systems?|network|upgrade|software)'   # bare "IT" would match "it" (patterns are case-insensitive)
+    negative: []
+
+  UNKNOWN:
+    label: No rule fired
+    keywords: []
+    negative: []
+
+# Code-prefix priors (PLAN §6.3 step 2; RESEARCH §5.5). Strong priors, recorded as prefix:<code>.
+code_prefixes:
+  joondalup: {RPR: ROAD_RESURF, RDC: ROAD_CONST, PEP: NON_CIVIL}   # extend from fixture in M9
+
+# A bare keyword counts only when one of these context words appears in the same text.
+context_required:
+  pipe: [drain, stormwater]
+  path: [foot, shared, cycle]
+  landscap: [road, street, verge]
+
+# Composite rules (PLAN §6.3 step 4). Matching `when` adds `implies` as rule_implied labels.
+composite_rules:
+  - when: ROAD_CONST
+    implies: [KERBING, DRAINAGE, LINE_MARK]
+    method: rule_implied
