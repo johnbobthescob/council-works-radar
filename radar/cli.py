@@ -17,7 +17,6 @@ NOT_IMPLEMENTED_EXIT = 2
 
 # (name, milestone, help). Milestones refer to PLAN.md §10.
 STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("robots-check", "M2", "print the robots.txt decision for every configured host"),
     ("list", "M6", "list recent source documents for a council (--council X)"),
     ("extract", "M8", "extract project mentions from fetched documents"),
     ("trades-report", "M5", "per-trade counts and top UNKNOWN project names"),
@@ -26,7 +25,6 @@ STUB_COMMANDS: list[tuple[str, str, str]] = [
     ("export", "M15", "write out/ui/data.js for the web UI"),
     ("serve", "M15", "serve out/ui/ on localhost with http.server"),
     ("run", "M16", "full pipeline for the selected councils (--councils a,b,c)"),
-    ("prune", "M2", "delete .cache/raw files older than 30 days"),
 ]
 
 
@@ -37,6 +35,65 @@ def _config_check(_args: argparse.Namespace) -> int:
     print(f"councils: {len(councils.councils)} configured, {len(enabled)} enabled")
     print(f"global blocklist entries: {len(councils.global_blocklist)}")
     print(f"trade labels: {len(trades.trades)}")
+    return 0
+
+
+def robots_targets(councils) -> list[tuple[str, str]]:
+    """(label, url) pairs to check: every configured council host, plus blocklist entries (PLAN §9.2)."""
+    targets: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for council in councils.councils.values():
+        for host in council.hosts:
+            url = f"https://{host}/"
+            if url not in seen:
+                seen.add(url)
+                targets.append((council.key, url))
+    for entry in councils.global_blocklist:
+        url = f"https://{entry.host}{entry.path_prefix or '/'}"
+        if url not in seen:
+            seen.add(url)
+            targets.append(("blocklist", url))
+    for council in councils.councils.values():
+        for host in council.blocked_hosts:
+            url = f"https://{host}/"
+            if url not in seen:
+                seen.add(url)
+                targets.append((council.key + " (blocked_hosts)", url))
+    return targets
+
+
+def robots_decision(fetcher, url: str, offline: bool) -> str:
+    from radar.fetch import blocklist_match
+
+    why = blocklist_match(url, fetcher.config.global_blocklist, fetcher._blocked_hosts)
+    if why:
+        return f"BLOCKED   ({why}; never contacted)"
+    if fetcher.pauses.is_paused(url.split("/")[2]):
+        return "PAUSED    (host paused after 403/429/challenge)"
+    allowed, reason = fetcher.robots.can_fetch(url, offline=offline)
+    if reason == "robots_unknown":
+        return "UNKNOWN   (offline and no cached robots.txt)"
+    return ("ALLOWED   " if allowed else "DISALLOWED") + f" ({reason})"
+
+
+def _robots_check(args: argparse.Namespace) -> int:
+    """Live by default (it fetches each host's robots.txt, rate-limited); --offline uses blocklist + cache only."""
+    from radar.fetch import Fetcher
+
+    councils = load_councils()
+    fetcher = Fetcher(config=councils)
+    targets = [("custom", u) for u in args.url] if args.url else robots_targets(councils)
+    width = max(len(label) for label, _ in targets)
+    for label, url in targets:
+        print(f"{label:<{width}}  {url:<70}  {robots_decision(fetcher, url, args.offline)}")
+    return 0
+
+
+def _prune(args: argparse.Namespace) -> int:
+    from radar.fetch import Fetcher
+
+    removed = Fetcher().prune_raw(args.days)
+    print(f"pruned {removed} file(s) older than {args.days} days from .cache/raw")
     return 0
 
 
@@ -61,6 +118,17 @@ def build_parser() -> argparse.ArgumentParser:
 
     config_parser = sub.add_parser("config-check", help="load config/councils.yaml and config/trades.yaml and summarise them")
     config_parser.set_defaults(handler=_config_check)
+
+    robots = sub.add_parser("robots-check", help="print the robots.txt decision for every configured host [M2]",
+                            description="Checks robots.txt for every configured host (live, rate-limited) and shows "
+                                        "the compliance blocklist. Blocklisted hosts are never contacted.")
+    robots.add_argument("--offline", action="store_true", help="use blocklist and cached robots.txt only; no network")
+    robots.add_argument("--url", action="append", default=[], help="check this URL instead of the configured hosts (repeatable)")
+    robots.set_defaults(handler=_robots_check)
+
+    prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
+    prune.add_argument("--days", type=int, default=30)
+    prune.set_defaults(handler=_prune)
 
     for name, milestone, help_text in STUB_COMMANDS:
         stub = sub.add_parser(name, help=f"{help_text} [{milestone}]", description=help_text)
