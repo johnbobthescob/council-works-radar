@@ -15,7 +15,7 @@ from typing import Any, TypeVar
 from radar import models as m
 from radar.settings import SQLITE_PATH
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2   # 2: possible_duplicate (M12)
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL);
@@ -66,6 +66,12 @@ CREATE TABLE IF NOT EXISTS project_mention_link (
   link_method TEXT NOT NULL, link_score REAL NOT NULL DEFAULT 1.0
 );
 CREATE INDEX IF NOT EXISTS ix_link_project ON project_mention_link(project_id);
+
+-- M12: pairs of projects that may be the same (fuzzy name match or cross-key conflict); never auto-merged.
+CREATE TABLE IF NOT EXISTS possible_duplicate (
+  project_a TEXT NOT NULL, project_b TEXT NOT NULL, method TEXT NOT NULL, score REAL NOT NULL DEFAULT 0,
+  mention_id TEXT, PRIMARY KEY (project_a, project_b)
+);
 
 CREATE TABLE IF NOT EXISTS change_event (
   event_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, project_id TEXT NOT NULL, event_type TEXT NOT NULL,
@@ -237,6 +243,45 @@ def get_project(conn: sqlite3.Connection, project_id: str) -> m.Project | None:
 def upsert_link(conn: sqlite3.Connection, link: m.ProjectMentionLink) -> None:
     _upsert(conn, link)
     conn.commit()
+
+
+def get_link(conn: sqlite3.Connection, mention_id: str) -> m.ProjectMentionLink | None:
+    return _get(conn, m.ProjectMentionLink, mention_id)
+
+
+def all_links(conn: sqlite3.Connection) -> list[m.ProjectMentionLink]:
+    rows = conn.execute("SELECT * FROM project_mention_link ORDER BY project_id, mention_id").fetchall()
+    return [_from_row(m.ProjectMentionLink, r) for r in rows]
+
+
+def all_projects(conn: sqlite3.Connection, council_id: str | None = None) -> list[m.Project]:
+    sql, args = "SELECT * FROM project", ()
+    if council_id:
+        sql, args = sql + " WHERE council_id = ?", (council_id,)
+    return [_from_row(m.Project, r) for r in conn.execute(sql + " ORDER BY project_id", args).fetchall()]
+
+
+def all_mentions(conn: sqlite3.Connection, council_id: str | None = None) -> list[m.ProjectMention]:
+    sql, args = "SELECT * FROM project_mention", ()
+    if council_id:
+        sql, args = sql + " WHERE council_id = ?", (council_id,)
+    return [_from_row(m.ProjectMention, r) for r in conn.execute(sql + " ORDER BY mention_id", args).fetchall()]
+
+
+def all_source_documents(conn: sqlite3.Connection) -> list[m.SourceDocument]:
+    return [_from_row(m.SourceDocument, r) for r in conn.execute("SELECT * FROM source_document").fetchall()]
+
+
+def upsert_possible_duplicate(conn: sqlite3.Connection, a: str, b: str, method: str, score: float,
+                              mention_id: str | None = None) -> None:
+    """Record an unordered project pair once (the first evidence is kept)."""
+    a, b = sorted((a, b))
+    conn.execute("INSERT OR IGNORE INTO possible_duplicate (project_a, project_b, method, score, mention_id) "
+                 "VALUES (?, ?, ?, ?, ?)", (a, b, method, score, mention_id))
+
+
+def possible_duplicates(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    return conn.execute("SELECT * FROM possible_duplicate ORDER BY project_a, project_b").fetchall()
 
 
 def upsert_change_event(conn: sqlite3.Connection, event: m.ChangeEvent) -> None:

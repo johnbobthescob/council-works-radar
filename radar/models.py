@@ -195,7 +195,7 @@ class Project:
 class ProjectMentionLink:
     project_id: str
     mention_id: str
-    link_method: str = "singleton"   # code | segment | intersection | tender | fuzzy | singleton
+    link_method: str = "singleton"   # code | segment | intersection | tender | version | fuzzy | singleton
     link_score: float = 1.0
 
     JSON_FIELDS: ClassVar[tuple[str, ...]] = ()

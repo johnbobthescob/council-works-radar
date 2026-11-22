@@ -17,7 +17,6 @@ NOT_IMPLEMENTED_EXIT = 2
 
 # (name, milestone, help). Milestones refer to PLAN.md §10.
 STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("link", "M12", "dedupe mentions into projects (idempotent)"),
     ("digest", "M14", "write the weekly digest to out/ (HTML, and PDF if WeasyPrint is installed)"),
     ("export", "M15", "write out/ui/data.js for the web UI"),
     ("serve", "M15", "serve out/ui/ on localhost with http.server"),
@@ -211,6 +210,15 @@ def _extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def _link(args: argparse.Namespace) -> int:
+    from radar import db, dedupe
+
+    conn = db.connect(args.db)
+    report = dedupe.link(conn, council_id=args.council, rebuild=args.rebuild)
+    print(report.summary())
+    return 0
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -265,6 +273,15 @@ def build_parser() -> argparse.ArgumentParser:
     ex.add_argument("--doc-type", default="other")
     ex.add_argument("--allow-large", action="store_true", help="allow documents over the 40 MB threshold")
     ex.set_defaults(handler=_extract)
+
+    lk = sub.add_parser("link", help="dedupe mentions into projects (idempotent) [M12]",
+                        description="Assigns unlinked mentions to projects with the key ladder (code, segment, "
+                                    "intersection, tender; fuzzy matches are flagged, never merged) and re-derives "
+                                    "project state. Safe to re-run.")
+    lk.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    lk.add_argument("--council", default=None, help="only this council's mentions")
+    lk.add_argument("--rebuild", action="store_true", help="clear links/projects first and relink everything")
+    lk.set_defaults(handler=_link)
 
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)
