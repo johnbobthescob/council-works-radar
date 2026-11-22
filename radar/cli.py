@@ -260,7 +260,7 @@ def build_parser() -> argparse.ArgumentParser:
     ex.add_argument("--council", help="council key from config/councils.yaml")
     ex.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
     ex.add_argument("--file", help="extract a local file instead of fetching (no network)")
-    ex.add_argument("--extractor", help="extractor name for --file (melville_cwp, cockburn_plans, joondalup_budget)")
+    ex.add_argument("--extractor", help="extractor name for --file (melville_cwp, cockburn_plans, joondalup_budget, agenda_items)")
     ex.add_argument("--url", help="source URL to record for --file")
     ex.add_argument("--doc-type", default="other")
     ex.add_argument("--allow-large", action="store_true", help="allow documents over the 40 MB threshold")

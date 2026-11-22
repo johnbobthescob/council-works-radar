@@ -36,6 +36,8 @@ councils:
     hosts: [wanneroo.infocouncil.biz, www.wanneroo.wa.gov.au]
     blocked_hosts: []
     terms_url: https://www.wanneroo.wa.gov.au/
+    agenda_items:
+      item_pattern: '[A-Z]{2}\d{2}-\d{2}/\d{2}'      # AS01-11/26 (R§1.2.2)
     adapters:
       - type: infocouncil
         listing_url: https://wanneroo.infocouncil.biz/
@@ -49,6 +51,8 @@ councils:
     hosts: [www.stirling.wa.gov.au]
     blocked_hosts: []
     terms_url: https://www.stirling.wa.gov.au/
+    agenda_items:
+      item_pattern: '\d{1,2}\.\d{1,2}/[A-Z]{1,5}\d{1,3}'  # 12.1/CR3 (R§5.1)
     adapters:
       - type: kentico_ksearch
         endpoint: https://www.stirling.wa.gov.au/ksearchmna/ksearchresult

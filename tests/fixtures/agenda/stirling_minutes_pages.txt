@@ -1,0 +1,52 @@
+# Synthetic minutes text in the City of Stirling style (R§1.2.3, §5.1). Documented facts: item style 12.1/CR3,
+# "That the tender from Kardan Australia Pty Ltd ... for 9 Leeway Court, Osborne Park Roof and HVAC ...
+# $1,064,854 (ex GST)", "Tender Deadline: Monday 21 September 2026". Everything else is invented. Comment lines are stripped.
+City of Stirling
+Minutes
+Council Meeting
+17 November 2026
+
+Contents
+12.1/CR3 Tender – 9 Leeway Court, Osborne Park Roof and HVAC ................ 2
+12.2/IS1 Erindale Road Resurfacing – Budget Amendment ...................... 3
+12.3/CR4 Community Garden Licence – Inglewood ............................... 4
+=====PAGE=====
+12.1/CR3 Tender – 9 Leeway Court, Osborne Park Roof and HVAC
+Responsible Officer: Manager Property Services
+Purpose
+To consider the outcome of the request for tender for roof and HVAC replacement works at
+9 Leeway Court, Osborne Park.
+Background
+Tender Deadline: Monday 21 September 2026
+Four submissions were received and evaluated in accordance with Regulation 18 of the Local
+Government (Functions and General) Regulations 1996.
+Officer's Recommendation
+That the tender from Kardan Australia Pty Ltd for 9 Leeway Court, Osborne Park Roof and
+HVAC in the lump sum amount of $1,064,854 (ex GST) be accepted.
+=====PAGE=====
+Council Resolution
+Moved Cr Example A, Seconded Cr Example B
+That the tender from Kardan Australia Pty Ltd for 9 Leeway Court, Osborne Park Roof and
+HVAC in the lump sum amount of $1,064,854 (ex GST) be accepted.
+CARRIED 13/0
+
+12.2/IS1 Erindale Road Resurfacing – Budget Amendment
+Purpose
+To amend the 2026-27 budget to bring forward resurfacing works.
+Officer's Recommendation
+That Council APPROVES a budget amendment of $180,000 for the resurfacing of Erindale Road
+between Beach Road and Karrinyup Road, Hamersley, funded from the Road Renewal Reserve.
+Council Resolution
+Moved Cr Example C, Seconded Cr Example D
+That Council APPROVES a budget amendment of $180,000 for the resurfacing of Erindale Road
+between Beach Road and Karrinyup Road, Hamersley, funded from the Road Renewal Reserve.
+CARRIED BY ABSOLUTE MAJORITY 13/0
+=====PAGE=====
+12.3/CR4 Community Garden Licence – Inglewood
+Purpose
+To grant a licence to a community group for a garden on a reserve.
+Officer's Recommendation
+That Council grants a five year licence to the Inglewood Community Garden Group.
+Council Resolution
+That the recommendation be adopted.
+CARRIED 13/0

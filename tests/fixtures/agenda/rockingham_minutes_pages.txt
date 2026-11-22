@@ -1,0 +1,36 @@
+# Synthetic minutes text using generic item numbering (13.1). Rockingham's real item style is NOT documented in
+# RESEARCH.md; all facts here are invented for the test. Comment lines are stripped.
+City of Rockingham
+Minutes
+Ordinary Council Meeting
+=====PAGE=====
+13. Planning and Engineering Services
+13.1 Tender T26/27-05 Road Resurfacing Program 2026/27
+File No: EGS/123
+Purpose of Report
+To consider tenders for the resurfacing of local roads in Baldivis and Warnbro.
+Details
+Submissions were assessed against the qualitative criteria. The evaluation panel recommends
+the lowest priced conforming tender.
+Officer Recommendation
+That Council ACCEPTS Tender T26/27-05 from Example Civil Pty Ltd for the Road Resurfacing
+Program 2026/27 for the lump sum of $900,000 (ex GST).
+Committee Recommendation
+That Council ACCEPTS Tender T26/27-05 from Example Civil Pty Ltd for the Road Resurfacing
+Program 2026/27 for the lump sum of $850,000 (ex GST).
+Council Resolution
+Moved Cr Example E, seconded Cr Example F
+That Council ACCEPTS Tender T26/27-05 from Example Civil Pty Ltd for the Road Resurfacing
+Program 2026/27 for the lump sum of $850,000 (ex GST).
+Carried 10/0
+13.2 Safety Bay Road Footpath Extension
+Purpose of Report
+To consider a petition requesting a footpath along Safety Bay Road, Waikiki.
+Officer Recommendation
+That Council lists the footpath for consideration in the 2027/28 capital works budget.
+Council Resolution
+That Council DEFERS consideration of the footpath until the 2027/28 budget workshop.
+Carried 10/0
+13.3 Elected Member Training Policy
+Purpose of Report
+To adopt a revised policy.
