@@ -71,7 +71,7 @@ councils:
       - type: static_links
         docs:
           - url: "https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program"
-            doc_type: capital_works_program
+            doc_type: capital_program
             financial_year: "2026-27"
             format: html
             extractor: melville_cwp
@@ -99,6 +99,9 @@ councils:
     adapters:
       - type: static_links
         discover_from: https://www.cockburn.wa.gov.au/Strategies-and-Plans
+        discover_pattern: 'Project[-\s]Plans[-\s]*20\d{2}[-\s]*20\d{2}'   # link URL or text
+        discover_doc_type: project_plans
+        discover_extractor: cockburn_plans
         docs:
           - url: "https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx"
             doc_type: project_plans

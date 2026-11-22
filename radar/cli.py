@@ -17,7 +17,6 @@ NOT_IMPLEMENTED_EXIT = 2
 
 # (name, milestone, help). Milestones refer to PLAN.md §10.
 STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("list", "M6", "list recent source documents for a council (--council X)"),
     ("extract", "M8", "extract project mentions from fetched documents"),
     ("link", "M12", "dedupe mentions into projects (idempotent)"),
     ("digest", "M14", "write the weekly digest to out/ (HTML, and PDF if WeasyPrint is installed)"),
@@ -147,6 +146,32 @@ def _trades_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def format_docrefs(refs, limit: int | None = None) -> str:
+    rows = sorted(refs, key=lambda r: r.meeting_date or "", reverse=True)
+    if limit:
+        rows = rows[:limit]
+    lines = []
+    for r in rows:
+        size = f"{r.size_bytes / 1048576:.1f}MB" if r.size_bytes else "-"
+        lines.append(f"{r.meeting_date or r.financial_year or '-':<10}  {r.doc_type:<15} {r.fmt or '-':<5} {size:>8}  "
+                     f"{(r.meeting_type or r.title or '')[:40]:<40}  {r.url}")
+    return "\n".join(lines)
+
+
+def _list(args: argparse.Namespace) -> int:
+    from radar.adapters import list_council
+    from radar.fetch import Fetcher
+
+    councils = load_councils()
+    council = councils.councils.get(args.council)
+    if council is None:
+        print(f"unknown council {args.council!r}; configured: {', '.join(councils.councils)}", file=sys.stderr)
+        return 2
+    refs = list_council(council, Fetcher(config=councils))
+    print(format_docrefs(refs, args.limit) or "(no documents found)")
+    return 0
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -183,6 +208,12 @@ def build_parser() -> argparse.ArgumentParser:
     tr.add_argument("--gold", nargs="?", const="", default=None, metavar="CSV",
                     help="print per-label precision/recall on the gold CSV (default tests/fixtures/trade_gold.csv); exit 1 if < 0.85")
     tr.set_defaults(handler=_trades_report)
+
+    lst = sub.add_parser("list", help="list recent source documents for a council [M6]",
+                         description="Runs the council's listing adapters (polite, rate-limited, live) and prints DocRefs.")
+    lst.add_argument("--council", required=True, help="council key from config/councils.yaml")
+    lst.add_argument("--limit", type=int, default=30, help="max rows to print (newest first)")
+    lst.set_defaults(handler=_list)
 
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)
