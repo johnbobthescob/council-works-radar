@@ -6,6 +6,7 @@ import importlib
 
 IMPLEMENTED = {
     "melville_cwp": "radar.extract.melville_cwp",
+    "cockburn_plans": "radar.extract.cockburn_plans",
 }
 
 

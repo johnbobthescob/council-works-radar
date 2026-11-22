@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 MONTHS = {m: i for i, m in enumerate(
     ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], start=1)}
@@ -41,13 +41,21 @@ def parse_date_text(text: str | None) -> str | None:
     return None
 
 
-def parse_month_year(text: str | None) -> str | None:
-    """'July 2026' -> '2026-07-01' (first of the month); used for project start/end dates."""
+def parse_month_year(text: str | None, *, end_of_month: bool = False) -> str | None:
+    """'July 2026' -> '2026-07-01' (or the last day of the month with ``end_of_month``)."""
     for m in _MON_Y.finditer(text or ""):
         mon = MONTHS.get(m.group(1)[:3].lower())
         if mon:
-            return _mk(int(m.group(2)), mon, 1)
+            year = int(m.group(2))
+            if end_of_month:
+                return (date(year + (mon == 12), mon % 12 + 1, 1) - timedelta(days=1)).isoformat()
+            return _mk(year, mon, 1)
     return None
+
+
+def parse_project_date(text: str | None, *, end: bool = False) -> str | None:
+    """Project start/end: a full date, else a month and year (end dates snap to month end)."""
+    return parse_date_text(text) or parse_month_year(text, end_of_month=end)
 
 
 def parse_date_flexible(value: object) -> str | None:
