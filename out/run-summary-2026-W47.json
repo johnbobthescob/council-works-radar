@@ -1,8 +1,8 @@
 {
-  "run_id": "20261122T133911-9a3e5e",
+  "run_id": "20261122T141724-845086",
   "iso_week": "2026-W47",
-  "started_at": "2026-11-22T13:39:11+00:00",
-  "finished_at": "2026-11-22T13:42:31+00:00",
+  "started_at": "2026-11-22T14:17:24+00:00",
+  "finished_at": "2026-11-22T14:21:19+00:00",
   "mode": "live",
   "baseline": true,
   "councils": {
@@ -14,8 +14,8 @@
         "extracted": 2,
         "skipped": 1
       },
-      "mentions_extracted": 220,
-      "projects_total": 218,
+      "mentions_extracted": 212,
+      "projects_total": 212,
       "documents": [
         {
           "url": "https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf",
@@ -34,7 +34,7 @@
           "meeting_date": "2026-10-27",
           "extractor": "agenda_items",
           "outcome": "extracted",
-          "mentions": 18,
+          "mentions": 10,
           "detail": "ok"
         },
         {
@@ -549,14 +549,16 @@
         }
       ],
       "errors": [],
+      "notes": [],
       "status": "ok"
     },
     "melville": {
       "name": "City of Melville",
-      "docs_listed": 1,
-      "docs_selected": 1,
+      "docs_listed": 309,
+      "docs_selected": 3,
       "outcomes": {
-        "extracted": 1
+        "extracted": 2,
+        "skipped": 1
       },
       "mentions_extracted": 23,
       "projects_total": 23,
@@ -570,11 +572,1835 @@
           "outcome": "extracted",
           "mentions": 23,
           "detail": "ok"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/21ed1f23-57da-4b53-82a9-79b75dcad9b2/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Minutes-17-November-2026-OMC.pdf?language=en",
+          "doc_type": "minutes",
+          "title": "Minutes - Ordinary Meeting of Council - 17 November 2026",
+          "meeting_date": "2026-11-17",
+          "extractor": "agenda_items",
+          "outcome": "skipped",
+          "mentions": 0,
+          "detail": "skipped_size: content-length 83081569 > large threshold 41943040 (use --allow-large)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/b5c1d80e-2a89-48f4-873e-3fd770de14ab/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Minutes-20-October-2026-OMC.pdf?language=en",
+          "doc_type": "minutes",
+          "title": "Minutes - Ordinary Meeting of Council - 20 October 2026",
+          "meeting_date": "2026-10-20",
+          "extractor": "agenda_items",
+          "outcome": "extracted",
+          "mentions": 0,
+          "detail": "partial"
         }
       ],
-      "skipped": [],
-      "errors": [],
-      "status": "ok"
+      "skipped": [
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-8-december-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-12-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-1-december-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-12-01",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-10-november-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-11-10",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-13-october-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-15-september-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-09-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-8-september-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-09-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-audit-risk-and-improvement-committee-meeting-31-august-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-31",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-18-august-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-11-august-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-21-july-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-14-july-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-special-meeting-of-electors-23-june-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-16-june-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-9-june-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-19-may-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-agenda-briefing-forum-12-may-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-special-meeting-of-council-12-may-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-audit-risk-and-improvement-committee-meting-11-may-2026",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-april-2026",
+          "doc_type": "minutes",
+          "meeting_date": "2026-04-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-31-march-2026",
+          "doc_type": "minutes",
+          "meeting_date": "2026-03-31",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-march-2026",
+          "doc_type": "minutes",
+          "meeting_date": "2026-03-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-february-2026",
+          "doc_type": "minutes",
+          "meeting_date": "2026-02-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-2-february-2026",
+          "doc_type": "minutes",
+          "meeting_date": "2026-02-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-16-december-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-12-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-9-december-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-12-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-november-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-11-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-14-october-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-10-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-september-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-09-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-27-august-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-08-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-august-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-08-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-july-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-07-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-25-june-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-06-25",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-june-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-06-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-may-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-05-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-april-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-04-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-1-april-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-04-01",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-march-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-03-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-february-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-02-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-3-february-2025",
+          "doc_type": "minutes",
+          "meeting_date": "2025-02-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-10-december-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-12-10",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-november-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-11-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-october-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-10-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-september-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-09-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-august-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-08-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-july-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-07-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-june-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-06-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-may-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-05-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-april-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-04-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-25-march-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-03-25",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-25-march-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-03-25",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-march-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-03-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-27-february-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-02-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-february-2024",
+          "doc_type": "minutes",
+          "meeting_date": "2024-02-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-12-december-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-12-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-november-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-11-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-25-october-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-10-25",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-october-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-10-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-september-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-09-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-30-august-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-08-30",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-august-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-08-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-july-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-07-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-28-june-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-06-28",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-june-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-06-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-31-may-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-05-31",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-may-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-05-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-3-april-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-04-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-march-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-03-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-february-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-02-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-6-february-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-02-06",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-1-february-2023",
+          "doc_type": "minutes",
+          "meeting_date": "2023-02-01",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-13-december-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-12-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-21-november-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-11-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-november-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-11-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-october-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-10-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-september-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-09-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-august-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-08-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-july-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-07-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-11-july-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-07-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-june-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-06-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-7-june-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-06-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-may-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-05-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-april-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-04-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-4-april-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-04-04",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-march-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-03-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-15-february-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-02-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-7-february-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-02-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-2-february-2022",
+          "doc_type": "minutes",
+          "meeting_date": "2022-02-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-14-december-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-12-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-16-november-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-11-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-27-october-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-10-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-18-october-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-10-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-12-october-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-10-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-17-august-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-08-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-27-july-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-07-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-20-july-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-07-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-22-june-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-06-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-15-june-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-06-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-8-june-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-06-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-25-may-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-05-25",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-18-may-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-05-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-3-may-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-05-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-20-april-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-04-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-6-april-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-04-06",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-16-march-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-03-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-17-february-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-02-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-16-february-2021",
+          "doc_type": "minutes",
+          "meeting_date": "2021-02-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-november-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-11-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-4-november-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-11-04",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-august-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-08-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-14-july-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-07-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-29-june-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-06-29",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-18-june-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-06-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-june-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-06-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-19-may-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-05-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-04-may-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-05-04",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-21-april-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-04-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-9-april-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-04-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-8-april-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-04-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-17-march-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-03-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-february-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-02-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-11-february-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-02-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-3-february-2020",
+          "doc_type": "minutes",
+          "meeting_date": "2020-02-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-10-december-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-12-10",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-27-november-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-11-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-19-november-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-11-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-4-november-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-11-04",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-riseley-centre-4-november-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-11-04",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-29-october-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-10-29",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-21-october-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-10-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-october-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-10-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-september-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-09-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-the-council-20-august-2019",
+          "doc_type": "agenda",
+          "meeting_date": "2019-08-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-12-august-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-08-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-16-july-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-07-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-18-june-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-06-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-16-april-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-04-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-march-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-03-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-6-march-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-03-06",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-february-2019",
+          "doc_type": "minutes",
+          "meeting_date": "2019-02-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-18-december-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-12-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-11-december-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-12-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-5-december-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-12-05",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-november-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-11-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-12-november-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-11-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-october-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-10-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-10-october-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-10-10",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-september-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-09-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-august-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-08-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-20-august-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-08-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-17-july-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-07-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-smc-26-june-2018-budget",
+          "doc_type": "minutes",
+          "meeting_date": "2018-06-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-smc-26-june-2018-dap",
+          "doc_type": "minutes",
+          "meeting_date": "2018-06-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-june-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-06-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-may-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-05-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-26-april-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-04-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-april-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-04-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-march-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-03-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-february-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-02-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-13-february-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-02-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-1-february-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-02-01",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-smc-23-january-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-01-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-17-january-2018",
+          "doc_type": "minutes",
+          "meeting_date": "2018-01-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-12-december-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-12-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-november-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-11-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-7-november-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-11-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-23-october-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-10-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-october-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-10-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-september-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-09-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-22-august-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-08-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-august-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-08-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-july-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-07-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-27-june-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-06-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-22-june-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-06-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-june-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-06-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-may-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-05-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-april-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-04-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-6-april-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-04-06",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-23-march-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-03-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-march-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-03-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-15-march-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-03-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-14-march-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-03-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-february-2017",
+          "doc_type": "minutes",
+          "meeting_date": "2017-02-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-23-january-2017-elector-voting",
+          "doc_type": "minutes",
+          "meeting_date": "2017-01-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-23-january-2017-wave-park",
+          "doc_type": "minutes",
+          "meeting_date": "2017-01-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-13-december-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-12-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-12-december-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-12-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-7-december-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-12-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-7-december-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-12-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-28-november-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-11-28",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-november-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-11-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-october-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-10-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-september-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-09-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-august-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-08-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-july-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-07-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-june-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-06-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-26-may-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-05-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-may-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-05-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-april-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-04-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-march-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-03-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-february-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-02-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-3-february-2016",
+          "doc_type": "minutes",
+          "meeting_date": "2016-02-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-8-december-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-12-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-2-december-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-12-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-november-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-11-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-19-october-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-10-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-15-october-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-10-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-13-october-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-10-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-september-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-09-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-the-council-18-august-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-08-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-17-august-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-08-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-july-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-07-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-24-june-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-06-24",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-june-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-06-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-12-may-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-05-12",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-april-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-04-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-march-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-03-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-5-march-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-03-05",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-february-2015",
+          "doc_type": "minutes",
+          "meeting_date": "2015-02-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-18-december-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-12-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-9-december-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-12-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-2-december-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-12-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-november-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-11-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-october-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-10-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-22-september-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-09-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-september-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-09-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-august-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-08-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-july-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-07-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-24-june-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-06-24",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-june-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-06-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-may-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-05-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-april-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-04-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-14-april-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-04-14",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-march-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-03-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-24-february-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-02-24",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-february-2014",
+          "doc_type": "minutes",
+          "meeting_date": "2014-02-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-17-december-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-12-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-11-december-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-12-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-10-december-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-12-10",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-9-december-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-12-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-november-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-11-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-21-october-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-10-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-october-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-10-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-2-october-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-10-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-september-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-09-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-2-september-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-09-02",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-28-august-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-08-28",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-august-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-08-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-13-august-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-08-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-5-august-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-08-05",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-23-july-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-07-23",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-july-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-07-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-26-june-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-06-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-june-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-06-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-may-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-05-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-13-may-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-05-13",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-29-april-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-04-29",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-22-april-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-04-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-april-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-04-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-3-april-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-04-03",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-march-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-03-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-february-2013",
+          "doc_type": "minutes",
+          "meeting_date": "2013-02-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-11-december-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-12-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-5-december-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-12-05",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-november-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-11-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-october-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-10-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-18-september-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-09-18",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-august-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-08-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-council-24-july-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-07-24",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-july-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-07-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-council-26-june-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-06-26",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-june-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-06-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-council-21-may-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-05-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-may-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-05-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-april-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-04-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-council-27-march-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-03-27",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-march-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-03-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-february-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-02-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-council-7-february-2012",
+          "doc_type": "minutes",
+          "meeting_date": "2012-02-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-december-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-12-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-annual-general-meeting-of-electors-8-december-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-12-08",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-22-november-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-11-22",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-november-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-11-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-the-council-17-october-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-10-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-11-october-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-10-11",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-20-september-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-09-20",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-16-august-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-08-16",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-9-august-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-08-09",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-july-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-07-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-electors-29-june-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-06-29",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-special-meeting-of-council-28-june-2011-budget-adoption",
+          "doc_type": "minutes",
+          "meeting_date": "2011-06-28",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-21-june-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-06-21",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-may-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-05-17",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-19-april-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-04-19",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-march-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-03-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-15-february-2011",
+          "doc_type": "minutes",
+          "meeting_date": "2011-02-15",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/our-city/our-council/agendas-and-minutes/minutes-of-special-meeting-of-electors-7-october-2010",
+          "doc_type": "minutes",
+          "meeting_date": "2010-10-07",
+          "reason": "meeting landing page (no document text)"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/206ebf87-53e1-44ca-9080-464ae51e7ad5/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Attachments-17-November-2026-OMC.pdf?language=en",
+          "doc_type": "attachments",
+          "meeting_date": "2026-11-17",
+          "reason": "doc_type attachments is not an agenda or minutes"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/4901e81e-c829-4e8a-a189-186f25526f5f/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Agenda-17-November-2026-OMC-(Final).pdf?language=en",
+          "doc_type": "agenda",
+          "meeting_date": "2026-11-17",
+          "reason": "minutes of the same meeting preferred"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/e093d6fd-bdca-4138-bfab-0ed6cf4c0c1f/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Agenda-20-October-2026-OMC.pdf?language=en",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-20",
+          "reason": "minutes of the same meeting preferred"
+        },
+        {
+          "url": "https://www.melvillecity.com.au/getContentAsset/7e00849a-d3f8-42d3-9957-b42e452ae0e4/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Officer-Advice-Note-Motion-16-1-Safety-and-Participation-in-Local-Government-20-October-2026-OMC.pdf?language=en",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-20",
+          "reason": "minutes of the same meeting preferred"
+        }
+      ],
+      "errors": [
+        "adapter kentico_ksearch failed (ListingError: ksearch listing https://www.melvillecity.com.au/ksearch/mnaresult: http_error HTTP 500 (http 500)); used sitemap fallback (308 docs)"
+      ],
+      "notes": [],
+      "status": "partial"
     },
     "cockburn": {
       "name": "City of Cockburn",
@@ -584,8 +2410,8 @@
         "extracted": 2,
         "skipped": 1
       },
-      "mentions_extracted": 59,
-      "projects_total": 58,
+      "mentions_extracted": 54,
+      "projects_total": 53,
       "documents": [
         {
           "url": "https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx",
@@ -614,7 +2440,7 @@
           "meeting_date": "2026-10-13",
           "extractor": "agenda_items",
           "outcome": "extracted",
-          "mentions": 10,
+          "mentions": 5,
           "detail": "ok"
         }
       ],
@@ -705,29 +2531,36 @@
         }
       ],
       "errors": [],
+      "notes": [],
       "status": "ok"
     }
   },
   "totals": {
-    "docs_listed": 104,
-    "docs_selected": 7,
-    "mentions_extracted": 302,
-    "docs_extracted": 5,
-    "docs_skipped": 2,
-    "projects": 299,
-    "events": 299,
+    "docs_listed": 412,
+    "docs_selected": 9,
+    "mentions_extracted": 289,
+    "docs_extracted": 6,
+    "docs_skipped": 3,
+    "projects": 288,
+    "events": 288,
     "events_by_type": {
-      "new": 299
+      "new": 288
     },
     "linked": {
-      "singleton": 295,
-      "version": 3,
+      "singleton": 284,
+      "version": 1,
       "fuzzy": 4
     },
     "possible_duplicates_new": 4
   },
+  "cross_checks": {},
   "paused_hosts": {},
-  "errors": [],
+  "errors": [
+    {
+      "council": "melville",
+      "error": "adapter kentico_ksearch failed (ListingError: ksearch listing https://www.melvillecity.com.au/ksearch/mnaresult: http_error HTTP 500 (http 500)); used sitemap fallback (308 docs)"
+    }
+  ],
   "outputs": {
     "digest_html": "digest-2026-W47.html",
     "digest_pdf": "digest-2026-W47.pdf",

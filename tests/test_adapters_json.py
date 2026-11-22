@@ -181,3 +181,25 @@ def test_list_council_joondalup_reads_last_pages(tmp_path):
     f = FakeFetcher(tmp_path, lambda url, body: {**page, "recordCountValue": 10})
     jh.list_docs(council, adapter.raw, f)
     assert [c.body["PG"] for c in f.calls] == [1]                    # fits on one page: no extra requests
+
+
+def test_listing_http_error_is_an_error_not_an_empty_listing(monkeypatch):
+    """Melville/Rockingham ksearch returned HTTP 500 live (2026-11-22): that must be an adapter error."""
+
+    from radar.adapters import list_adapter, sitemap
+    from radar.adapters.base import ListingError
+    from radar.fetch import FetchResult
+    from radar.settings import Adapter
+
+    class Fake:
+        def fetch(self, url, **kw):
+            return FetchResult(url, "http_error", status=500)
+
+    council = SimpleNamespace(key="melville")
+    cfg = {"endpoint": "https://www.melvillecity.com.au/ksearch/mnaresult", "body": {}, "search_param": [],
+           "extractor": "agenda_items"}
+    with pytest.raises(ListingError, match="HTTP 500"):
+        ks.list_docs(council, cfg, Fake())
+    monkeypatch.setattr(sitemap, "list_docs", lambda *a, **k: [])
+    refs, errors, notes = list_adapter(council, Adapter("kentico_ksearch", {**cfg, "fallback": {"sitemap_url": "u"}}), Fake())
+    assert refs == [] and notes == [] and "HTTP 500" in errors[0] and "sitemap fallback" in errors[0]

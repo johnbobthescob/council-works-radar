@@ -24,7 +24,6 @@ from radar.settings import DATA_DIR, OUT_DIR, TIMEZONE, Council, CouncilsConfig,
 
 log = logging.getLogger(__name__)
 
-ANNUAL_TYPES = ("budget", "capital_program", "project_plans", "blackspot_list")
 MEETING_TYPES = ("minutes", "agenda")
 FAILURE_PREFIXES = ("http_error", "challenge", "error", "paused")
 OPTIONAL_EXTRACTORS = {"blackspot"}            # disabled unless named in ``enable`` (PLAN M17)
@@ -56,7 +55,9 @@ def select_docs(refs: list[DocRef], *, today: date, window_days: int, max_meetin
         if ref.doc_key in seen:
             continue
         seen.add(ref.doc_key)
-        if not ref.extractor or ref.extractor not in IMPLEMENTED:
+        if ref.landing:
+            skipped.append((ref, "meeting landing page (no document text)"))
+        elif not ref.extractor or ref.extractor not in IMPLEMENTED:
             skipped.append((ref, f"no implemented extractor ({ref.extractor or 'none'})"))
         elif ref.extractor in OPTIONAL_EXTRACTORS and ref.extractor not in enable:
             skipped.append((ref, f"{ref.extractor} disabled (use --enable {ref.extractor})"))

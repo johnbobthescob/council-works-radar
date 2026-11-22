@@ -15,9 +15,9 @@ import re
 
 from radar.extract.common import funding_refs, make_mention
 from radar.models import ProjectMention, SourceDocument
-from radar.normalise import (find_money, gst_basis, lookup_suburb, normalise_name, parse_fy, parse_intersection,
+from radar.normalise import (gst_basis, lookup_suburb, normalise_name, parse_fy, parse_intersection,
                              parse_money, parse_segment)
-from radar.text import Block, DocText
+from radar.text import DocText
 
 NAME = "melville_cwp"
 VERSION = "1"

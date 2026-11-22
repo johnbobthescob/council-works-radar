@@ -135,7 +135,7 @@ def test_list_docs_filters_follows_index_cap_and_pdf_discovery(tmp_path, server)
                     "/sm3.xml": urlset(s.base), "/sm4.xml": b"<urlset><url><loc>http://never</loc></url></urlset>",
                     PAGES[0][0]: MEETING_PAGE})
     cfg = {"type": "sitemap", "sitemap_url": f"{s.base}/sitemap.xml", "pattern": PATTERN, "extractor": "agenda_items",
-           "follow_pages": 1, "doc_pattern": r"\.pdf|getmedia|/files/"}
+           "follow_pages": 2, "doc_pattern": r"\.pdf|getmedia|/files/"}
     council, fetcher = fetcher_for(tmp_path, s.base)
     refs = sitemap.list_docs(council, cfg, fetcher)
     assert "/sm4.xml" not in s.hits and "/sm3.xml" in s.hits                      # max 3 children
@@ -144,7 +144,8 @@ def test_list_docs_filters_follows_index_cap_and_pdf_discovery(tmp_path, server)
     pdf = refs[0]
     assert (pdf.doc_type, pdf.meeting_date, pdf.fmt, pdf.extractor) == ("agenda", "2026-11-17", "pdf", "agenda_items")
     assert refs[2].fmt == "html" and refs[2].doc_type == "minutes" and refs[2].meeting_date == "2026-10-20"
-    assert PAGES[1][0] not in s.hits                                              # only the newest page is fetched
+    assert refs[2].landing and refs[3].landing and not refs[0].landing   # landing pages: listed, never selected
+    assert PAGES[1][0] in s.hits and PAGES[2][0] not in s.hits        # 2 recent Ordinary pages followed, not the old special
 
 
 def test_page_without_pdf_falls_back_to_page_ref(tmp_path, server):
@@ -160,7 +161,7 @@ def test_page_without_pdf_falls_back_to_page_ref(tmp_path, server):
 def fallback_council(tmp_path, s, primary):
     raw = {"type": primary, "extractor": "agenda_items",
            "fallback": {"type": "sitemap", "sitemap_url": f"{s.base}/sitemap.xml", "pattern": PATTERN,
-                        "follow_pages": 1, "doc_pattern": r"\.pdf|getmedia"}}
+                        "follow_pages": 2, "doc_pattern": r"\.pdf|getmedia"}}
     return fetcher_for(tmp_path, s.base, [raw])
 
 
@@ -175,7 +176,8 @@ def test_fallback_when_adapter_raises(tmp_path, server, monkeypatch):
     monkeypatch.setattr(kentico_ksearch, "list_docs", boom)
     result = CouncilResult("melville")
     refs = list_refs(council, fetcher, result)
-    assert len(refs) == 4 and all(r.adapter == "sitemap" and r.extractor == "agenda_items" for r in refs)
+    assert len(refs) == 4 and all(r.adapter == "sitemap" for r in refs)
+    assert all(r.extractor == "agenda_items" for r in refs) and [r.landing for r in refs] == [False, False, True, True]
     assert refs[0].fmt == "pdf" and refs[0].meeting_date == "2026-11-17"
     assert len(result.errors) == 1 and "adapter kentico_ksearch failed (KeyError: 'MNAFirstFileUrl')" in result.errors[0]
     assert "used sitemap fallback (4 docs)" in result.errors[0] and result.notes == []
@@ -259,3 +261,22 @@ def test_export_has_program_totals(conn):
     assert "statutory budget total" in payload["program_totals_note"]
     js = (export.UI_SOURCE_DIR / "app.js").read_text()
     assert "program_totals" in js and "innerHTML" not in js.split("program_totals", 1)[1][:600]
+
+
+@pytest.fixture(autouse=True)
+def _fixed_today(monkeypatch):
+    from datetime import date
+
+    monkeypatch.setattr(sitemap, "_today", lambda: date(2026, 11, 22))
+
+
+def test_future_and_old_meeting_pages_are_not_followed(tmp_path, server):
+    s = server({})
+    future = f"{BASE}/agenda-ordinary-meeting-of-council-8-december-2026"
+    s.files.update({"/sitemap.xml": urlset(s.base)[:-len(b"</urlset>")] +
+                    f"<url><loc>{s.base}{future}</loc></url></urlset>".encode(), PAGES[0][0]: MEETING_PAGE})
+    cfg = {"sitemap_url": f"{s.base}/sitemap.xml", "pattern": PATTERN, "follow_pages": 1, "doc_pattern": r"\.pdf",
+           "extractor": "agenda_items"}
+    council, fetcher = fetcher_for(tmp_path, s.base)
+    sitemap.list_docs(council, cfg, fetcher)
+    assert future not in s.hits and PAGES[2][0] not in s.hits

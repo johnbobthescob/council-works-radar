@@ -9,7 +9,6 @@ import requests
 from radar import db, fetch as F
 from radar.models import SourceDocument
 from radar.ratelimit import HostPauses, HostRateLimiter
-from radar.robots import RobotsCache
 from radar.settings import CouncilsConfig, Defaults, Blocklist
 
 
@@ -363,3 +362,13 @@ def test_cached_raw_finds_bytes_stored_under_a_redirect_host(tmp_path, clock):
     p.write_bytes(b"%PDF")
     assert f.cached_raw("a" * 64, "https://www.example.org/doc.pdf") == p
     assert f.cached_raw("b" * 64, "https://www.example.org/doc.pdf") is None
+
+
+def test_size_thresholds_come_from_config_defaults(tmp_path, clock):
+    cfg = CouncilsConfig(defaults=Defaults(min_delay_s=5, max_bytes=1000, large_threshold_bytes=100), councils={},
+                         global_blocklist=[])
+    f = F.Fetcher(config=cfg, cache_dir=tmp_path / "c", log_path=None, pause_path=tmp_path / "p.json",
+                  clock=clock.now, sleep=clock.sleep)
+    assert (f.max_bytes, f.large_threshold) == (1000, 100)
+    assert "large threshold" in f._size_verdict(200, None, False) and f._size_verdict(200, None, True) is None
+    assert "cap" in (f._size_verdict(5000, None, True) or "")

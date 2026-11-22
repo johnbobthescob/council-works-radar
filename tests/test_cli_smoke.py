@@ -202,3 +202,15 @@ def test_f_cli_unknown_council(tmp_path, capsys):
     rc = cli.main(["run", "--councils", "nope", "--db", str(tmp_path / "x.sqlite"), "--out", str(tmp_path / "o")])
     assert rc == 2
     assert "unknown council" in capsys.readouterr().err
+
+
+def test_select_docs_skips_landing_pages():
+    from datetime import date
+
+    from radar.adapters.base import DocRef
+    from radar.pipeline import select_docs
+
+    page = DocRef(council_id="melville", url="https://x/agenda-ordinary-meeting-17-november-2026", doc_type="agenda",
+                  meeting_date="2026-11-17", extractor="agenda_items", landing=True)
+    selected, skipped = select_docs([page], today=date(2026, 11, 22), window_days=60, max_meeting_docs=2)
+    assert selected == [] and "landing page" in skipped[0][1]

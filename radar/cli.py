@@ -1,7 +1,7 @@
 """Command-line entry point: `python -m radar <subcommand>`.
 
-Subcommands are registered now so `--help` documents the planned surface (PLAN §2.3, §10).
-Each one that is not yet built exits with status 2 and names the milestone that delivers it.
+Stages (PLAN §2.1, §12.2): list, extract (fetch + extract), link, digest, export/ui, and run (all stages);
+plus robots-check, trades-report, serve, prune and config-check. Heavy imports happen inside each handler.
 """
 
 from __future__ import annotations
@@ -12,11 +12,6 @@ from collections.abc import Sequence
 
 from radar import __version__
 from radar.settings import load_councils, load_trades
-
-NOT_IMPLEMENTED_EXIT = 2
-
-# (name, milestone, help) for planned-but-unbuilt commands. Milestones refer to PLAN.md §10.
-STUB_COMMANDS: list[tuple[str, str, str]] = []
 
 
 def _config_check(_args: argparse.Namespace) -> int:
@@ -184,7 +179,6 @@ def _extract(args: argparse.Namespace) -> int:
         print("give --council X (live: fetches that council's configured documents) or --file PATH", file=sys.stderr)
         return 2
     from radar.adapters import list_council
-    from radar.adapters import static_links
     from radar.fetch import Fetcher
 
     councils = load_councils()
@@ -298,17 +292,6 @@ def _run(args: argparse.Namespace) -> int:
     return 0 if ok else 1
 
 
-def _make_stub(name: str, milestone: str):
-    def _handler(_args: argparse.Namespace) -> int:
-        print(
-            f"radar {name}: not implemented yet (planned for milestone {milestone}; see PLAN.md §10)",
-            file=sys.stderr,
-        )
-        return NOT_IMPLEMENTED_EXIT
-
-    return _handler
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="radar",
@@ -374,7 +357,7 @@ def build_parser() -> argparse.ArgumentParser:
     prune.add_argument("--days", type=int, default=30)
     prune.set_defaults(handler=_prune)
 
-    exp = sub.add_parser("export", help="write out/ui/ (data.js + static UI files) from the DB [M15]",
+    exp = sub.add_parser("export", aliases=["ui"], help="write out/ui/ (data.js + static UI files) from the DB [M15]",
                          description="Writes out/ui/{index.html,app.js,style.css,data.js}. Open index.html directly or use `serve`.")
     exp.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
     exp.add_argument("--out", default=None, help="output directory (default out/)")
@@ -401,10 +384,6 @@ def build_parser() -> argparse.ArgumentParser:
     rn.add_argument("--max-meeting-docs", type=int, default=None, help="override the per-council meeting doc cap (default 2)")
     rn.add_argument("-v", "--verbose", action="store_true", help="log progress")
     rn.set_defaults(handler=_run)
-
-    for name, milestone, help_text in STUB_COMMANDS:
-        stub = sub.add_parser(name, help=f"{help_text} [{milestone}]", description=help_text)
-        stub.set_defaults(handler=_make_stub(name, milestone))
 
     return parser
 

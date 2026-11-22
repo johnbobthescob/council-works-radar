@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import re
 import statistics
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -41,7 +42,7 @@ from radar.normalise import extract_direction, looks_like_road, lookup_suburb, n
 from radar.text import DocText, Word, pdftotext_pages
 
 NAME = "joondalup_budget"
-VERSION = "1"
+VERSION = "2"
 COUNCIL = "joondalup"
 
 CODE_RE = re.compile(r"^[A-Z]{3}\d{4}$")
@@ -173,6 +174,7 @@ class Header:
     columns: dict[str, Column]
     bottom: float                 # y of the header's lower edge (rows start below)
     height: float                 # typical word height on the header page
+    top: float = 0.0              # y of the header's upper edge (a second table on the same page starts here)
 
     @property
     def ordered(self) -> list[Column]:
@@ -207,10 +209,20 @@ def _visual_lines(words: list[Word], tol: float) -> list[list[Word]]:
     return [sorted(line, key=lambda w: w.x0) for line in lines]
 
 
-def detect_header(words: list[Word]) -> Header | None:
+def detect_headers(words: list[Word]) -> list[Header]:
+    """Every table header on a page, top to bottom (some pages carry two tables with different columns)."""
+    out: list[Header] = []
+    after = float("-inf")
+    while (hd := detect_header(words, after_y=after)) is not None:
+        out.append(hd)
+        after = hd.bottom
+    return out
+
+
+def detect_header(words: list[Word], *, after_y: float = float("-inf")) -> Header | None:
     """Locate the column header by its label words. Needs Expenditure and a name/description column."""
     h = _median_height(words)
-    refs = [w for w in words if w.text.strip(":").lower() == "expenditure"]
+    refs = [w for w in words if w.text.strip(":").lower() == "expenditure" and w.y0 > after_y]
     for ref in sorted(refs, key=_yc):
         band = [w for w in words if abs(_yc(w) - _yc(ref)) <= 2.2 * h and w.text.strip(":").lower() in _HEADER_VOCAB]
         # inline phrases per visual line (word gap < 0.8 h), then stack phrases that overlap in x
@@ -242,8 +254,8 @@ def detect_header(words: list[Word]) -> Header | None:
                 cols[key] = Column(key, min(w.x0 for w in g), max(w.x1 for w in g))
         if "expenditure" in cols and ({"project_name", "description"} & set(cols)) and \
                 any(k in cols for k in FUNDING_COLS):
-            bottom = max(w.y1 for g in groups for w in g if classify_label(" ".join(x.text for x in g)))
-            return Header(cols, bottom, h)
+            labelled = [w for g in groups for w in g if classify_label(" ".join(x.text for x in g))]
+            return Header(cols, max(w.y1 for w in labelled), h, top=min(w.y0 for w in labelled))
     return None
 
 
@@ -273,11 +285,39 @@ def _numeric_column(header: Header, w: Word, tol: float) -> str | None:
     return best.key
 
 
+def refine_text_columns(header: Header, lines: list[list[Word]], h: float) -> Header:
+    """Move text-column left edges to where the body text actually starts.
+
+    Header labels are often centred over their column (the real Joondalup schedule centres "Description" ~60 pt
+    right of where the descriptions start), so label x0 is not the column edge. Body columns show up as recurring
+    *segment starts* (a line's first word, or a word after a wide gap). For each gathered text column, take the
+    most frequent segment start in (previous label's x0, this label's x0]."""
+    starts: Counter[int] = Counter()
+    for line in lines:
+        prev = None
+        for w in line:
+            if prev is None or w.x0 - prev.x1 > 0.8 * h:
+                starts[round(w.x0)] += 1
+            prev = w
+    ordered = header.ordered
+    cols = dict(header.columns)
+    for i, col in enumerate(ordered):
+        if col.key not in GATHER_COLS or i == 0:
+            continue
+        lo, hi = ordered[i - 1].x0 + 0.3 * h, col.x0 + 0.3 * h
+        cands = [(n, x) for x, n in starts.items() if lo < x <= hi and n >= 2]
+        if cands:
+            _n, x = max(cands)
+            cols[col.key] = Column(col.key, float(x), col.x1)
+    return Header(cols, header.bottom, header.height)
+
+
 def parse_wordbox_page(page_no: int, words: list[Word], header: Header) -> list[BudgetRow]:
     h = _median_height(words) or header.height
     tol = 0.3 * h
     body = [w for w in words if w.y0 >= header.bottom - 0.1 * h]
     lines = _visual_lines(body, 0.45 * h)
+    header = refine_text_columns(header, lines, h)
 
     # anchors: project number with a cost code on the same line
     anchors: list[tuple[float, list[Word], Word]] = []
@@ -528,9 +568,18 @@ def parse_layout_text(page_no: int, text: str) -> list[BudgetRow]:
 
 
 # ---- mentions ---------------------------------------------------------------------------------
+_DESC_SEGMENT = re.compile(r"^\s*(?P<a>[A-Z0-9][\w'./ -]{1,60}?)\s+to\s+(?P<b>[\w'./ -]{2,60}?)\.(?:\s|$)")
+
+
 def _location(row: BudgetRow) -> dict:
     out: dict = {}
     seg = parse_segment(row.name)
+    if not seg and looks_like_road(row.name) and row.description:
+        # the real schedule puts the extent in the description: "Glengarry Drive to Doveridge Drive. Resurfacing..."
+        m = _DESC_SEGMENT.match(row.description)
+        if m:
+            base, _direction = extract_direction(row.name)
+            seg = parse_segment(f"{base} – {m['a']} to {m['b']}")
     if seg:
         out.update(road_name=seg.road, from_road=seg.from_road, to_road=seg.to_road, direction=seg.direction)
     elif looks_like_road(row.name):
@@ -581,13 +630,18 @@ def parse_document(doc: DocText, *, path: str | Path | None = None) -> list[Budg
     for pt in doc.pages:
         page_rows: list[BudgetRow] = []
         if pt.words:
-            found = detect_header(pt.words)
+            found = detect_headers(pt.words)
+            bands: list[tuple[Header, list[Word]]] = []
+            if header is not None and (not found or any(w.y1 < found[0].top - 2 for w in pt.words)):
+                cont = Header(header.columns, bottom=0.0, height=header.height)        # continuation of last table
+                bands.append((cont, [w for w in pt.words if not found or w.y1 <= found[0].top]))
+            for i, hd in enumerate(found):
+                end = found[i + 1].top if i + 1 < len(found) else float("inf")
+                bands.append((hd, [w for w in pt.words if hd.top <= w.y0 < end]))
             if found:
-                header = found
-            elif header is not None:
-                header = Header(header.columns, bottom=0.0, height=header.height)   # continuation page
-            if header is not None:
-                page_rows = parse_wordbox_page(pt.page, pt.words, header)
+                header = found[-1]
+            for hd, band_words in bands:
+                page_rows.extend(parse_wordbox_page(pt.page, band_words, hd))
         if not page_rows and (header is None or not pt.words):
             has_anchor = re.search(r"(?m)(?:^|\s)[A-Z]{3}\d{4}\s+W\d{4}\b", pt.text) or \
                 any(CODE_RE.match(w.text) for w in pt.words)

@@ -20,6 +20,18 @@ _SIZE_RE = re.compile(r"([\d][\d,]*(?:\.\d+)?)\s*(bytes|kb|mb|gb|b)\b", re.IGNOR
 _SIZE_MULT = {"b": 1, "bytes": 1, "kb": 1024, "mb": 1024 ** 2, "gb": 1024 ** 3}
 
 
+class ListingError(RuntimeError):
+    """A listing request failed (HTTP error, robots/blocklist/pause stop, network). Recorded as an adapter error."""
+
+
+def require_listing(res, what: str):
+    """Return ``res`` if the listing fetch succeeded with a body, else raise ``ListingError``."""
+    if not res.ok or not res.path:
+        status = f" HTTP {res.status}" if res.status else ""
+        raise ListingError(f"{what}: {res.outcome}{status}" + (f" ({res.reason})" if res.reason else ""))
+    return res
+
+
 @dataclass
 class DocRef:
     council_id: str
@@ -37,6 +49,7 @@ class DocRef:
     fmt: str | None = None                   # pdf | html
     extractor: str | None = None             # extractor name configured for this document
     adapter: str | None = None
+    landing: bool = False                    # a meeting landing page, not a document (sitemap fallback)
 
     def __post_init__(self) -> None:
         self.doc_type = normalise_doc_type(self.doc_type)

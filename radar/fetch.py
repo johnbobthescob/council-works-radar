@@ -30,9 +30,6 @@ from radar.settings import (
     CACHE_DIR,
     FETCH_LOG_PATH,
     HOST_PAUSE_PATH,
-    LARGE_THRESHOLD_BYTES,
-    LISTING_MAX_BYTES,
-    MAX_BYTES,
     USER_AGENT,
     Blocklist,
     CouncilsConfig,
@@ -133,8 +130,8 @@ class Fetcher:
         pauses: HostPauses | None = None,
         robots: RobotsCache | None = None,
         user_agent: str = USER_AGENT,
-        max_bytes: int = MAX_BYTES,
-        large_threshold: int = LARGE_THRESHOLD_BYTES,
+        max_bytes: int | None = None,
+        large_threshold: int | None = None,
         clock: Callable[[], float] = time.monotonic,
         sleep: Callable[[float], None] = time.sleep,
         backoff: tuple[float, ...] = BACKOFF_SECONDS,
@@ -149,8 +146,9 @@ class Fetcher:
         self.limiter = limiter or HostRateLimiter(self.config.defaults.min_delay_s, clock=clock, sleep=sleep)
         self.pauses = pauses or HostPauses(pause_path)
         self.robots = robots or RobotsCache(self._robots_get, self.cache_dir / "robots", user_agent=user_agent)
-        self.max_bytes = max_bytes
-        self.large_threshold = large_threshold
+        # size caps come from councils.yaml defaults unless given explicitly (PLAN §3.3)
+        self.max_bytes = max_bytes if max_bytes is not None else self.config.defaults.max_bytes
+        self.large_threshold = large_threshold if large_threshold is not None else self.config.defaults.large_threshold_bytes
         self._sleep = sleep
         self.backoff = backoff
         self.timeout = timeout

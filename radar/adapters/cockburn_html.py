@@ -12,7 +12,7 @@ from urllib.parse import quote, unquote, urlsplit
 
 from bs4 import BeautifulSoup
 
-from radar.adapters.base import DocRef, absolute, doc_type_from_text, parse_ecm, parse_size
+from radar.adapters.base import DocRef, absolute, require_listing, doc_type_from_text, parse_ecm, parse_size
 from radar.dates import parse_date_text
 
 ADAPTER = "cockburn_html"
@@ -73,6 +73,5 @@ def list_docs(council, cfg: dict[str, Any], fetcher) -> list[DocRef]:
 
     url = build_listing_url(cfg["listing_url"], cfg.get("query"))
     res = fetcher.fetch(url, max_bytes=LISTING_MAX_BYTES)
-    if not res.ok or not res.path:
-        return []
+    require_listing(res, f"listing {url}")
     return parse_listing(council.key, res.read_bytes(), cfg["listing_url"], meeting_type=cfg.get("meeting_type"))

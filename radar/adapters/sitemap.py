@@ -10,11 +10,14 @@ from __future__ import annotations
 
 import re
 import xml.etree.ElementTree as ET
+from datetime import date, datetime, timedelta
 from typing import Any
 from urllib.parse import unquote, urlsplit
+from zoneinfo import ZoneInfo
 
 from radar.adapters.base import DocRef, doc_type_from_text
 from radar.dates import parse_date_flexible, parse_date_text
+from radar.settings import TIMEZONE
 
 ADAPTER = "sitemap"
 DEFAULT_MAX_CHILD_SITEMAPS = 3
@@ -106,18 +109,34 @@ def list_docs(council, cfg: dict[str, Any], fetcher) -> list[DocRef]:
     follow = int(cfg.get("follow_pages", 0) or 0)
     if not follow:
         return refs
-    refs.sort(key=lambda r: r.meeting_date or "", reverse=True)
+    # Follow the best recent meeting pages (same preference as the run's selection policy: Ordinary Council,
+    # minutes before agendas, newest; never future meetings). Landing pages themselves hold no project text, so
+    # pages that are not followed (or yield no links) are listed as ``landing`` refs and are never selected.
+    today = _today()
+    lo = (today - timedelta(days=int(cfg.get("window_days", 60)))).isoformat()
+    recent = [r for r in refs if r.meeting_date and lo <= r.meeting_date <= today.isoformat()]
+    recent.sort(key=lambda r: (r.meeting_type != "Ordinary Council Meeting", r.doc_type != "minutes",
+                               "".join(chr(0x7f - ord(c)) for c in r.meeting_date or "")))
+    to_follow = {r.url for r in recent[:follow]} if cfg.get("doc_pattern") else set()
     out: list[DocRef] = []
-    for i, page_ref in enumerate(refs):
-        html = _fetch_bytes(fetcher, page_ref.url) if i < follow and cfg.get("doc_pattern") else None
-        found = discover_links(council.key, html, page_ref.url, cfg["doc_pattern"]) if html else []
+    links_seen: set[str] = set()
+    for page_ref in sorted(refs, key=lambda r: r.meeting_date or "", reverse=True):
+        html = _fetch_bytes(fetcher, page_ref.url) if page_ref.url in to_follow else None
+        found = [f for f in (discover_links(council.key, html, page_ref.url, cfg["doc_pattern"]) if html else [])
+                 if f.url not in links_seen]
         if not found:
+            page_ref.landing = True
             out.append(page_ref)
             continue
         for link in found:
+            links_seen.add(link.url)
             link.doc_type = doc_type_from_text(f"{link.title or ''} {unquote(link.url)}", default=page_ref.doc_type)
             link.meeting_date, link.meeting_type = page_ref.meeting_date, page_ref.meeting_type
             link.extractor, link.adapter = cfg.get("extractor"), ADAPTER
             link.fmt = link.fmt or "pdf"
             out.append(link)
     return out
+
+
+def _today() -> date:
+    return datetime.now(ZoneInfo(TIMEZONE)).date()

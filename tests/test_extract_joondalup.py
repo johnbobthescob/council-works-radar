@@ -249,3 +249,65 @@ def test_registry_and_ingest(pdf_path, tmp_path):
     stored = {m.council_project_code: m for m in db.mentions_for_document(conn, doc.doc_id)}
     assert stored["RPR3542"].value_amount == 406364
     assert stored["RPR3542"].funding_split["municipal"] == 135455
+
+
+# ---- real-layout regressions (found on the live 2026-27 PDF in the final review) -----------------
+# The real schedule centres its header labels over the columns, so labels sit well right of where the column text
+# starts; and one page carries two tables (a short "Capital Projects" table with no name column, then the schedule).
+CENTRE_SHIFT = {"project_name": 30, "description": 60, "suburb": 10, "ward": 8}
+
+
+def _centred_header(page, y):
+    for key, labels in HEADER.items():
+        for i, label in enumerate(labels):
+            if key in NUM_R:
+                _put(page, NUM_R[key], y + i * 9, label, right=True)
+            else:
+                _put(page, TEXT_X[key] + CENTRE_SHIFT.get(key, 0), y + i * 9, label)
+
+
+def build_real_layout_pdf(path: Path) -> Path:
+    doc = pymupdf.open()
+    p = doc.new_page(width=1190, height=842)
+    # first table: no Project Name / Suburb / Ward columns (codes are not schedule codes, so it yields no rows)
+    for key, label in (("project_number", "Project Number"), ("team", "Team"), ("description", "Description")):
+        _put(p, TEXT_X[key], 60, label)
+    _put(p, NUM_R["municipal"], 60, "Municipal", right=True)
+    _put(p, NUM_R["expenditure"], 60, "Expenditure", right=True)
+    _put(p, TEXT_X["project_number"], 80, "333-1")
+    _put(p, TEXT_X["project_name"], 80, "Corporate Printers Replacement")
+    _put(p, NUM_R["expenditure"], 80, "12,000", right=True)
+    # second table: the schedule, with centred labels
+    _centred_header(p, 200)
+    _row(p, 240, "RPR3634", "W5093", "621", ["Foston Drive"], ["Glengarry Drive to Doveridge Drive. Resurfacing",
+         "and rehabilitation works to local access road."], "Duncraig", "South",
+         ["199,210", "-", "-", "-", "-", "-", "-", "-", "199,210"])
+    _row(p, 280, "BCW2700", "W4970", "644", ["Warrandyte Park Clubrooms", "Upgrade"],
+         ["Upgrades including painting of the clubhouse"], "Craigie", "Central",
+         ["70,000", "-", "-", "-", "-", "-", "-", "-", "70,000"])
+    _row(p, 320, "RPR3627", "W5086", "621", ["Nandus Court"], ["Caprella Street to cul-de-sac. Resurfacing"],
+         "Heathridge", "North-Central", ["55,603", "-", "-", "-", "-", "-", "-", "-", "55,603"])
+    doc.save(path)
+    doc.close()
+    return path
+
+
+def test_centred_labels_and_two_tables_per_page(tmp_path):
+    pdf = build_real_layout_pdf(tmp_path / "real.pdf")
+    dt = extract_pdf(pdf)
+    assert len(jb.detect_headers(dt.pages[0].words)) == 2
+    rows = {r.code: r for r in jb.parse_document(dt)}
+    assert list(rows) == ["RPR3634", "BCW2700", "RPR3627"]
+    r = rows["RPR3634"]
+    assert (r.name, r.suburb, r.ward, r.expenditure) == ("Foston Drive", "Duncraig", "South", 199210)
+    assert r.description.startswith("Glengarry Drive to Doveridge Drive.")
+    assert rows["BCW2700"].name == "Warrandyte Park Clubrooms Upgrade"
+    assert (rows["RPR3627"].suburb, rows["RPR3627"].ward) == ("Heathridge", "North-Central")
+
+
+def test_segment_from_description_extent(tmp_path, source):
+    pdf = build_real_layout_pdf(tmp_path / "real.pdf")
+    ms = {m.council_project_code: m for m in jb.extract(extract_pdf(pdf), source, now=NOW)}
+    m = ms["RPR3634"]
+    assert (m.road_name, m.from_road, m.to_road) == ("foston drive", "glengarry drive", "doveridge drive")
+    assert ms["BCW2700"].road_name is None

@@ -19,7 +19,7 @@ from urllib.parse import unquote
 
 from bs4 import BeautifulSoup
 
-from radar.adapters.base import DocRef, absolute
+from radar.adapters.base import DocRef, absolute, require_listing
 from radar.dates import parse_compact_ddmmyyyy
 
 ADAPTER = "infocouncil"
@@ -95,7 +95,6 @@ def list_docs(council, cfg: dict[str, Any], fetcher) -> list[DocRef]:
 
     url = cfg["listing_url"]
     res = fetcher.fetch(url, max_bytes=LISTING_MAX_BYTES)
-    if not res.ok or not res.path:
-        return []
+    require_listing(res, f"listing {url}")
     prefer = "pdf" if cfg.get("prefer") == "pdf" else "htm_paper"
     return parse_listing(council.key, res.read_bytes(), url, meeting_codes=cfg.get("meeting_codes"), prefer=prefer)

@@ -166,3 +166,35 @@ def test_doc_kind_and_provenance(stirling):
 
 def test_registry():
     assert get_extractor("agenda_items") is ai.extract
+
+
+@pytest.mark.parametrize("title,ok", [
+    ("(2026/MINUTE NO 0149) RFT21/2026 - Plumbing Services", True),
+    ("Tender 12/2026 Road Resurfacing Program", True),
+    ("Warwick Road Footpath Construction Pty Ltd", True),          # payee-like but civil: kept
+    ("01425", False), ("263.55", False), ("EF192097", False), ("PROPOSAL", False),
+    ("15/7/2026 4PM - CLC TEAM SPORTS JULY", False),
+    ("BUNNINGS GROUP LIMITED (TOOL KIT", False), ("FUTURO NOMINEES PTY LTD", False),
+])
+def test_plausible_item_title(title, ok):
+    assert ai.plausible_title(title) is ok
+
+
+def test_payment_list_lines_in_attachments_are_not_items():
+    page = ("9.1 Tender 05/2026 Road Resurfacing\nThat Council accepts the tender from Asphalt Co Pty Ltd for $250,000 "
+            "(excl GST).\n\nATTACHMENT 3 LIST OF PAYMENTS\n12.34 01425 FUTURO NOMINEES PTY LTD road works\n"
+            "63.55 00723\n")
+    src = SourceDocument(doc_id="p" * 64, doc_key="u", council_id="cockburn", source_url="https://x/m.pdf",
+                         doc_type="minutes")
+    ms = ai.extract(DocText("pdf", pages=[PageText(1, page)]), src, item_pattern=ai.GENERIC_PATTERN)
+    assert {m.project_name_raw for m in ms} == {"Tender 05/2026 Road Resurfacing"}
+
+
+def test_melville_item_pattern_from_config():
+    assert ai.item_pattern_for("melville") == r"[A-Z]{1,3}\d{2}/\d{2,4}"
+    page = ("E26/106 John Connell Reserve Transplanting Trees\nThat Council approves a budget amendment of $78,500 "
+            "for the transplanting of trees and footpath reinstatement.\n\nC26/429 Annual Report 2025-26\nReceived.\n")
+    src = SourceDocument(doc_id="m" * 64, doc_key="u", council_id="melville", source_url="https://x/Minutes.pdf",
+                         doc_type="minutes")
+    ms = ai.extract(DocText("pdf", pages=[PageText(1, page)]), src)
+    assert [m.project_name_raw for m in ms] == ["John Connell Reserve Transplanting Trees"]

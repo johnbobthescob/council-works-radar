@@ -18,7 +18,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from radar.adapters.base import DocRef, absolute, doc_type_from_text, parse_size
+from radar.adapters.base import DocRef, absolute, doc_type_from_text, parse_size, require_listing
 from radar.dates import parse_date_flexible, parse_date_text
 
 ADAPTER = "kentico_ksearch"
@@ -137,7 +137,6 @@ def list_docs(council, cfg: dict[str, Any], fetcher) -> list[DocRef]:
     from radar.settings import LISTING_MAX_BYTES
 
     url, headers, body = build_request(cfg)
-    res = fetcher.fetch(url, method="POST", json_body=body, headers=headers, max_bytes=LISTING_MAX_BYTES)
-    if not res.ok or not res.path:
-        return []
+    res = require_listing(fetcher.fetch(url, method="POST", json_body=body, headers=headers,
+                                        max_bytes=LISTING_MAX_BYTES), f"ksearch listing {url}")
     return parse_listing(council.key, json.loads(res.read_bytes()), cfg)

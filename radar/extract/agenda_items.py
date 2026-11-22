@@ -25,7 +25,7 @@ from __future__ import annotations
 
 import bisect
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from functools import lru_cache
 
 from radar.extract.common import funding_refs, make_mention
@@ -128,6 +128,20 @@ class Item:
         return flat.text[self.start:self.end]
 
 
+_TITLE_WORD = re.compile(r"[A-Za-z][A-Za-z'’-]{2,}")
+_PAYEE = re.compile(r"\b(?:PTY|LTD|LIMITED|INC|INCORPORATED|P/L)\b\.?", re.I)
+
+
+def plausible_title(title: str) -> bool:
+    """Item headings start with a letter and have >= 2 real words. This drops lines the generic ``\\d.\\d`` id
+    pattern picks up in attachments: payment lists ('12.34 01425 ...', '263.55'), document refs ('EF192097') and
+    payee names ('BUNNINGS GROUP LIMITED') unless the title itself is civil."""
+    t = re.sub(r"^\([^)]{1,40}\)\s*", "", title.strip())        # leading minute ref: "(2026/MINUTE NO 0149) RFT..."
+    if not t or not t[0].isalpha() or len(_TITLE_WORD.findall(t)) < 2:
+        return False
+    return not (_PAYEE.search(t) and not CIVIL_RE.search(t))
+
+
 def segment_items(doc: DocText, pattern: str) -> tuple[Flat, list[Item]]:
     flat = Flat(doc)
     rx = re.compile(rf"(?m)^[ \t]*(?P<id>{pattern})(?![\w/])[ \t]*[-–—:]?[ \t]*(?P<title>[A-Z0-9][^\n]*)?$")
@@ -140,7 +154,7 @@ def segment_items(doc: DocText, pattern: str) -> tuple[Flat, list[Item]]:
         if not title:      # title on the next non-empty line
             nxt = re.match(r"\s*\n[ \t]*([^\n]+)", flat.text[m.end():])
             title = nxt.group(1).strip() if nxt else ""
-        if not title or len(title) > 200:
+        if not title or len(title) > 200 or not plausible_title(title):
             continue
         heads.append((m.start(), m["id"], title, m.end()))
     items: list[Item] = []

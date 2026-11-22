@@ -135,7 +135,6 @@ def test_empty_db_exports_valid_data_js(tmp_path):
     assert p["projects"] == [] and p["councils"] == [] and p["baseline"] is False
 
 
-@pytest.mark.skipif("export" in {n for n, _, _ in cli.STUB_COMMANDS}, reason="export CLI not implemented yet")
 def test_cli_export(conn, tmp_path):
     cycle(conn)
     path = tmp_path / "t.sqlite"

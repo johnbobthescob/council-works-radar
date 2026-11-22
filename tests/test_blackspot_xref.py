@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from radar import blackspot, changes, db, dedupe, digest, export
+from radar import blackspot, db, dedupe, digest, export
 from radar.extract import blackspot as bs_extract
 from radar.models import ProjectMention, SourceDocument, make_mention_id
 from radar.text import DocText, PageText
