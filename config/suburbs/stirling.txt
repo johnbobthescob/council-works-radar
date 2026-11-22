@@ -1,0 +1,32 @@
+# Seed suburb list for stirling (one per line). Hand-written from general knowledge, NOT an authoritative gazetteer:
+# verify against the council's own suburb list before relying on it (PLAN §1.2: suburb lists only, no geocoding).
+Balcatta
+Carine
+Churchlands
+Doubleview
+Glendalough
+Gwelup
+Hamersley
+Innaloo
+Joondanna
+Karrinyup
+Mount Lawley
+Nollamara
+North Beach
+Osborne Park
+Scarborough
+Stirling
+Trigg
+Tuart Hill
+Warwick
+Wembley Downs
+Westminster
+Woodlands
+Yokine
+Watermans Bay
+Dianella
+Inglewood
+Mirrabooka
+Menora
+Floreat
+Herdsman

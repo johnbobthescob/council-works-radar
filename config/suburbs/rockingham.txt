@@ -1,0 +1,18 @@
+# Seed suburb list for rockingham (one per line). Hand-written from general knowledge, NOT an authoritative gazetteer:
+# verify against the council's own suburb list before relying on it (PLAN §1.2: suburb lists only, no geocoding).
+Rockingham
+Baldivis
+Cooloongup
+Safety Bay
+Shoalwater
+Waikiki
+Warnbro
+Port Kennedy
+Secret Harbour
+Golden Bay
+Singleton
+Karnup
+Hillman
+East Rockingham
+Peron
+Garden Island

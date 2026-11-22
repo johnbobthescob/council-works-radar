@@ -1,0 +1,23 @@
+# Seed suburb list for cockburn (one per line). Hand-written from general knowledge, NOT an authoritative gazetteer:
+# verify against the council's own suburb list before relying on it (PLAN §1.2: suburb lists only, no geocoding).
+Atwell
+Aubin Grove
+Banjup
+Beeliar
+Bibra Lake
+Cockburn Central
+Coogee
+Coolbellup
+Hamilton Hill
+Hammond Park
+Henderson
+Jandakot
+Munster
+North Coogee
+Success
+Spearwood
+South Lake
+Yangebup
+Treeby
+Wattleup
+Lake Coogee

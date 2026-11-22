@@ -1,0 +1,20 @@
+# Seed suburb list for melville (one per line). Hand-written from general knowledge, NOT an authoritative gazetteer:
+# verify against the council's own suburb list before relying on it (PLAN §1.2: suburb lists only, no geocoding).
+Applecross
+Ardross
+Alfred Cove
+Attadale
+Bateman
+Booragoon
+Brentwood
+Bull Creek
+Willagee
+Winthrop
+Murdoch
+Myaree
+Palmyra
+Kardinya
+Leeming
+Melville
+Mount Pleasant
+Rossmoyne

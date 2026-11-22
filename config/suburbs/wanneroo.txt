@@ -1,0 +1,37 @@
+# Seed suburb list for wanneroo (one per line). Hand-written from general knowledge, NOT an authoritative gazetteer:
+# verify against the council's own suburb list before relying on it (PLAN §1.2: suburb lists only, no geocoding).
+Wanneroo
+Alexander Heights
+Girrawheen
+Koondoola
+Marangaroo
+Madeley
+Darch
+Landsdale
+Hocking
+Pearsall
+Sinagra
+Wangara
+Jandabup
+Gnangara
+Mariginiup
+Carabooda
+Nowergup
+Pinjar
+Yanchep
+Two Rocks
+Eglinton
+Alkimos
+Jindalee
+Quinns Rocks
+Mindarie
+Butler
+Clarkson
+Merriwa
+Ridgewood
+Tapping
+Ashby
+Banksia Grove
+Carramar
+Neerabup
+Wanneroo
