@@ -147,6 +147,19 @@ councils:
         extractor: agenda_items
     notes: "Terms say no reuse or redistribution without prior written permission (RESEARCH §1.2.6). Flag in the digest footer; see PLAN §3.2."
 
+# Optional cross-check sources (PLAN §3.2 Main Roads licence caution, M17). Disabled by default: the Main Roads
+# licence is unverified (R§2.2). Rows only tag funding on council-sourced projects; never standalone projects.
+cross_checks:
+  blackspot:
+    name: Main Roads WA State Black Spot Program
+    enabled: false            # licence unverified (R§2.2); only with --enable blackspot
+    hosts: [www.mainroads.wa.gov.au, assets.mainroads.wa.gov.au]
+    docs:
+      - url: "https://www.mainroads.wa.gov.au/4a2bf3/globalassets/road-safety/road-safety-improvement-programs/black-spot-program/2026-27-state-black-spot-program-metropolitan-and-regional-local-roads.pdf"
+        doc_type: blackspot_list
+        financial_year: "2026-27"
+        extractor: blackspot
+
 # Enforced in fetch.py regardless of robots result (PLAN §3.4, §9.2).
 global_blocklist:
   - host: cdn.canning.wa.gov.au

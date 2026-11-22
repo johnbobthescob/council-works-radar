@@ -9,11 +9,12 @@ IMPLEMENTED = {
     "cockburn_plans": "radar.extract.cockburn_plans",
     "joondalup_budget": "radar.extract.joondalup_budget",
     "agenda_items": "radar.extract.agenda_items",
+    "blackspot": "radar.extract.blackspot",
 }
 
 
 def get_extractor(name: str):
-    """The ``extract`` callable for ``name``; KeyError if the extractor is not built yet (M17)."""
+    """The ``extract`` callable for ``name``; KeyError if the extractor is not built yet."""
     if name not in IMPLEMENTED:
         raise KeyError(f"extractor {name!r} is not implemented yet")
     return importlib.import_module(IMPLEMENTED[name]).extract

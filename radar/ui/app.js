@@ -48,7 +48,7 @@
   distinct("fy").forEach(function (s) { $("filter-fy").appendChild(el("option", { value: s, text: s })); });
   $("meta").textContent = "Week " + (DATA.iso_week || "") + (DATA.baseline ? " · baseline run" : "") + " · data generated " + (DATA.generated_at || "");
   $("footer-text").textContent = DATA.footer || "";
-  $("footer-note").textContent = DATA.noncommercial || "";
+  $("footer-note").textContent = [DATA.noncommercial, DATA.blackspot_note].filter(Boolean).join(" ");
 
   /* ---- filter state <-> URL hash ---- */
   var FIELDS = ["search", "filter-stage", "filter-fy", "value-min", "value-max", "filter-confidence", "filter-weeks"];
@@ -127,6 +127,7 @@
     var box = el("div", {});
     var where = [p.road, p.from && p.to ? p.from + " → " + p.to : null, p.suburb].filter(Boolean).join(" · ");
     if (where) box.appendChild(el("p", { class: "small muted", text: "Location: " + where }));
+    if (p.funding && p.funding.length) box.appendChild(el("p", { class: "small", text: "Funding: " + p.funding.join(" / ") }));
     if (p.flags && p.flags.length) box.appendChild(el("p", {}, pills(p.flags)));
     box.appendChild(el("h4", { text: "Sources (" + p.sources.length + ")" }));
     p.sources.forEach(function (s) {

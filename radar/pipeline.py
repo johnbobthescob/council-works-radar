@@ -16,7 +16,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from radar import changes, db, dedupe, digest, export
+from radar import blackspot, changes, db, dedupe, digest, export
 from radar.adapters import ADAPTER_MODULES
 from radar.adapters.base import DocRef
 from radar.extract import IMPLEMENTED
@@ -166,7 +166,7 @@ def replay_council(conn: sqlite3.Connection, council: Council, fetcher, config: 
         ref = DocRef(council_id=doc.council_id, url=doc.source_url, doc_type=doc.doc_type, title=doc.title,
                      meeting_date=doc.meeting_date, financial_year=doc.financial_year, listing_url=doc.listing_url,
                      extractor=_extractor_for(conn, doc, config))
-        path = fetcher._cached_by_sha(doc.source_url, doc.doc_id)
+        path = fetcher.cached_raw(doc.doc_id, doc.source_url)
         if not ref.extractor or ref.extractor not in IMPLEMENTED:
             result.add(IngestResult(ref, "unsupported", detail="no extractor known for this document"))
         elif path is None:
@@ -201,6 +201,43 @@ def run_council(conn: sqlite3.Connection, council: Council, fetcher, config: Cou
             res = fetch_and_extract(fetcher, conn, ref, allow_large=allow_large)
         except Exception as exc:              # extractor/text-layer crash on one doc: record, continue
             log.exception("%s: %s failed", council.key, ref.url)
+            res = IngestResult(ref, "error", detail=f"{type(exc).__name__}: {exc}")
+        result.add(res)
+    return result
+
+
+def cross_check_docs(config: CouncilsConfig, name: str) -> list[DocRef]:
+    """Document refs of an optional cross-check source (``cross_checks.<name>`` in councils.yaml)."""
+    cfg = config.cross_checks.get(name) or {}
+    return [DocRef(council_id=dedupe.CROSS_CHECK_COUNCIL, url=d["url"], doc_type=d.get("doc_type", "other"),
+                   title=d.get("title"), financial_year=d.get("financial_year"), fmt=d.get("format"),
+                   extractor=d.get("extractor", name), adapter="cross_check") for d in cfg.get("docs") or []]
+
+
+def run_cross_check(conn: sqlite3.Connection, name: str, fetcher, config: CouncilsConfig, *, allow_large: bool,
+                    offline: bool) -> CouncilResult:
+    """Fetch + extract (or, offline, replay from cache) the documents of one cross-check source."""
+    result = CouncilResult(name)
+    refs = cross_check_docs(config, name)
+    result.listed = result.selected = len(refs)
+    for ref in refs:
+        try:
+            if offline:
+                doc = next((d for d in db.all_source_documents(conn)
+                            if d.doc_key == ref.doc_key and not d.superseded_by), None)
+                path = fetcher.cached_raw(doc.doc_id, doc.source_url) if doc else None
+                if path is None:
+                    res = IngestResult(ref, "skipped", detail="offline: raw bytes not in .cache/raw")
+                else:
+                    d, n = extract_document(conn, path, council_id=doc.council_id, url=doc.source_url,
+                                            extractor=ref.extractor, doc_type=doc.doc_type, content_type=doc.content_type,
+                                            financial_year=doc.financial_year, title=doc.title,
+                                            cache_dir=fetcher.cache_dir)
+                    res = IngestResult(ref, "extracted", n, detail=f"{d.extract_status} (replayed from cache)")
+            else:
+                res = fetch_and_extract(fetcher, conn, ref, allow_large=allow_large)
+        except Exception as exc:
+            log.exception("cross-check %s: %s failed", name, ref.url)
             res = IngestResult(ref, "error", detail=f"{type(exc).__name__}: {exc}")
         result.add(res)
     return result
@@ -249,9 +286,14 @@ def run_pipeline(conn: sqlite3.Connection, councils: list[str] | None = None, *,
                               max_meeting_docs=max_meeting_docs, data_dir=Path(data_dir) if data_dir else None)
         results.append(res)
 
+    cross: dict[str, CouncilResult] = {}
+    if "blackspot" in enable and config.cross_checks.get("blackspot"):
+        log.info("cross-check blackspot")
+        cross["blackspot"] = run_cross_check(conn, "blackspot", fetcher, config, allow_large=allow_large, offline=offline)
     link_report = dedupe.link(conn)
+    tagged = blackspot.tag(conn) if "blackspot" in enable else 0
     change_report = changes.record_changes(conn, run, now=now)
-    errors = [{"council": r.council, "error": e} for r in results for e in r.errors]
+    errors = [{"council": r.council, "error": e} for r in [*results, *cross.values()] for e in r.errors]
     errors += [{"council": "fetcher", "error": f"host {h} paused: {why}"}
                for h, why in sorted(getattr(fetcher, "paused_this_run", {}).items())]
     totals: dict[str, int] = {}
@@ -263,7 +305,7 @@ def run_pipeline(conn: sqlite3.Connection, councils: list[str] | None = None, *,
     changes.finish_run(conn, run, counts, errors)
 
     dg = digest.write_digest(conn, out, run.iso_week, pdf=pdf, now=now, blackspot_enabled="blackspot" in enable)
-    ui_dir = export.export_ui(conn, out, now=now)
+    ui_dir = export.export_ui(conn, out, now=now, blackspot_enabled="blackspot" in enable)
 
     per_council_projects = {r[0]: r[1] for r in conn.execute("SELECT council_id, COUNT(*) FROM project GROUP BY council_id")}
     summary = {
@@ -279,6 +321,10 @@ def run_pipeline(conn: sqlite3.Connection, councils: list[str] | None = None, *,
         } for r in results},
         "totals": {**counts, "projects": change_report.projects, "events": len(change_report.events),
                    "events_by_type": change_report.by_type, "linked": dict(link_report.linked), "possible_duplicates_new": link_report.duplicates_new},
+        "cross_checks": {k: {
+            "name": (config.cross_checks.get(k) or {}).get("name"), "docs_listed": r.listed, "outcomes": r.outcomes,
+            "mentions_extracted": r.mentions, "projects_tagged": tagged, "documents": r.docs, "errors": r.errors,
+        } for k, r in cross.items()},
         "paused_hosts": dict(getattr(fetcher, "paused_this_run", {})),
         "errors": errors,
         "outputs": {"digest_html": dg.html_path.name, "digest_pdf": dg.pdf_path.name if dg.pdf_path else None,

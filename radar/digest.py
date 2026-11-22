@@ -17,6 +17,7 @@ from urllib.parse import urlsplit
 import jinja2
 
 from radar import changes, db
+from radar.dedupe import CROSS_CHECK_COUNCIL, CROSS_CHECK_EXTRACTORS
 from radar.models import ChangeEvent, Project, ProjectMention, Run, SourceDocument
 from radar.settings import OUT_DIR, MAX_QUOTE_CHARS, load_councils, load_trades
 
@@ -112,7 +113,9 @@ def load_data(conn: sqlite3.Connection) -> Data:
         mentions={m.mention_id: m for m in db.all_mentions(conn)},
         docs={d.doc_id: d for d in db.all_source_documents(conn)},
         by_project=by_project,
-        council_names={k: c.name for k, c in councils.councils.items()},
+        council_names={**{CROSS_CHECK_COUNCIL: v["name"] for k, v in councils.cross_checks.items()
+                          if k == "blackspot" and v.get("name")},
+                       **{k: c.name for k, c in councils.councils.items()}},
         trade_labels={k: t.label for k, t in trades.trades.items()},
         trade_order=list(trades.trades),
     )
@@ -138,12 +141,23 @@ def trade_chips(data: Data, p: Project) -> list[dict]:
     return [{"code": c, "label": c.replace("_", " ").title(), "implied": c not in rule} for c in codes]
 
 
+def project_funding(data: Data, p: Project, evidence: ProjectMention | None = None) -> list[str]:
+    """Funding refs of the evidence mention first, then those of every other linked mention (e.g. BlackSpot_State)."""
+    refs: list[str] = list(evidence.funding_refs or []) if evidence else []
+    for mid in sorted(data.by_project.get(p.project_id, [])):
+        for ref in (data.mentions[mid].funding_refs or []) if mid in data.mentions else []:
+            if ref not in refs:
+                refs.append(ref)
+    return refs
+
+
 def evidence_mention(data: Data, p: Project, preferred: str | None = None) -> ProjectMention | None:
     ms = [data.mentions[i] for i in data.by_project.get(p.project_id, []) if i in data.mentions]
     if not ms:
         return None
     if preferred and preferred in data.mentions:
         return data.mentions[preferred]
+    ms = [m for m in ms if m.extractor not in CROSS_CHECK_EXTRACTORS] or ms    # Black Spot rows are never the evidence
     valued = [m for m in ms if m.value_amount == p.latest_value and p.latest_value is not None] or ms
     return max(valued, key=lambda m: (m.confidence, m.mention_id))
 
@@ -200,7 +214,7 @@ def build_item(data: Data, p: Project, events: list[ChangeEvent] | None = None) 
         "council_id": p.council_id, "council": council, "suburb": p.suburb or (m.suburb if m else None),
         "ward": m.ward if m else None, "road": p.road_name, "trade": primary_trade(data, p),
         "chips": trade_chips(data, p), "value": p.latest_value, "value_text": value_text,
-        "funding": " / ".join(m.funding_refs) if m and m.funding_refs else None,
+        "funding": " / ".join(project_funding(data, p, m)) or None,
         "stage": p.latest_stage, "changes": change_lines(events or []), "dates": dates,
         "quote": short_quote(m.quote) if m else "", "source": source, "confidence": p.confidence,
         "confidence_label": confidence_label(p.confidence), "flags": flags, "review_needed": p.review_needed,
@@ -277,6 +291,8 @@ def health_section(conn: sqlite3.Connection, data: Data, runs: list, since: str 
     """Per-council document and fetch statistics from the DB (fetch_log rows since the week's first run)."""
     councils = load_councils()
     host_council = {h: k for k, c in councils.councils.items() for h in c.hosts}
+    for cc in councils.cross_checks.values():
+        host_council.update({h: CROSS_CHECK_COUNCIL for h in cc.get("hosts") or []})
     rows: dict[str, dict] = {}
 
     def row(cid: str) -> dict:

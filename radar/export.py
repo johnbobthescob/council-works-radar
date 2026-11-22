@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from radar import changes, db
-from radar.digest import FOOTER_TEXT, NONCOMMERCIAL_NOTE, load_data, primary_trade, short_quote, source_href
+from radar.digest import BLACKSPOT_NOTE, FOOTER_TEXT, evidence_mention, project_funding, NONCOMMERCIAL_NOTE, load_data, primary_trade, short_quote, source_href
 from radar.models import ChangeEvent, Run
 from radar.settings import OUT_DIR
 
@@ -23,7 +23,7 @@ DATA_PREFIX = "window.RADAR_DATA = "
 MAX_BYTES = 5 * 1024 * 1024
 
 
-def build_data(conn: sqlite3.Connection, *, now: datetime | None = None) -> dict:
+def build_data(conn: sqlite3.Connection, *, now: datetime | None = None, blackspot_enabled: bool = False) -> dict:
     data = load_data(conn)
     events: dict[str, list[ChangeEvent]] = {}
     for r in conn.execute("SELECT * FROM change_event ORDER BY created_at, event_id"):
@@ -61,6 +61,7 @@ def build_data(conn: sqlite3.Connection, *, now: datetime | None = None) -> dict
             "value": p.latest_value, "value_basis": p.latest_value_basis, "stage": p.latest_stage, "fy": p.financial_year,
             "first_seen": p.first_seen, "last_seen": p.last_seen, "confidence": p.confidence, "flags": p.flags,
             "review_needed": p.review_needed, "last_change": {"type": last.event_type, "at": last.created_at} if last else None,
+            "funding": project_funding(data, p, evidence_mention(data, p)),
             "history": history, "sources": sources,
         })
     return {
@@ -70,7 +71,8 @@ def build_data(conn: sqlite3.Connection, *, now: datetime | None = None) -> dict
         "councils": [{"id": k, "name": v} for k, v in data.council_names.items()
                      if any(p["council"] == k for p in projects)],
         "trades": [{"code": k, "label": data.trade_labels[k]} for k in data.trade_order],
-        "footer": FOOTER_TEXT, "noncommercial": NONCOMMERCIAL_NOTE, "projects": projects,
+        "footer": FOOTER_TEXT, "noncommercial": NONCOMMERCIAL_NOTE,
+        "blackspot_note": BLACKSPOT_NOTE if blackspot_enabled else None, "projects": projects,
     }
 
 
@@ -86,13 +88,14 @@ def parse_data_js(text: str) -> dict:
     return json.loads(body[len(DATA_PREFIX):-1])
 
 
-def export_ui(conn: sqlite3.Connection, out_dir: Path | str | None = None, *, now: datetime | None = None) -> Path:
+def export_ui(conn: sqlite3.Connection, out_dir: Path | str | None = None, *, now: datetime | None = None,
+              blackspot_enabled: bool = False) -> Path:
     """Write ``<out>/ui/{index.html,app.js,style.css,data.js}``; returns the ui directory."""
     ui = Path(out_dir or OUT_DIR) / "ui"
     ui.mkdir(parents=True, exist_ok=True)
     for name in UI_FILES:
         shutil.copyfile(UI_SOURCE_DIR / name, ui / name)
-    raw = render_data_js(build_data(conn, now=now)).encode("utf-8")
+    raw = render_data_js(build_data(conn, now=now, blackspot_enabled=blackspot_enabled)).encode("utf-8")
     if len(raw) > MAX_BYTES:
         raise ValueError(f"data.js is {len(raw):,} bytes, over the {MAX_BYTES:,}-byte budget")
     (ui / "data.js").write_bytes(raw)

@@ -354,3 +354,12 @@ def test_timeout_twice_gives_error_without_more_retries(server, tmp_path, clock)
     f.session.request = dead
     r = f.fetch(server.base + "/a.pdf")
     assert r.outcome == F.ERROR and len(calls) == 2
+
+
+def test_cached_raw_finds_bytes_stored_under_a_redirect_host(tmp_path, clock):
+    f = make_fetcher(tmp_path, clock)
+    p = tmp_path / "cache" / "raw" / "assets.example.org" / ("a" * 64 + ".pdf")
+    p.parent.mkdir(parents=True)
+    p.write_bytes(b"%PDF")
+    assert f.cached_raw("a" * 64, "https://www.example.org/doc.pdf") == p
+    assert f.cached_raw("b" * 64, "https://www.example.org/doc.pdf") is None

@@ -89,7 +89,7 @@ def test_ids_deterministic_and_unique(source, mentions):
 def test_registry():
     assert get_extractor("melville_cwp") is melville_cwp.extract
     with pytest.raises(KeyError):
-        get_extractor("blackspot")
+        get_extractor("not_built_extractor")
 
 
 def test_extract_document_end_to_end_offline(tmp_path):

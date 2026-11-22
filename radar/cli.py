@@ -206,11 +206,14 @@ def _extract(args: argparse.Namespace) -> int:
 
 
 def _link(args: argparse.Namespace) -> int:
-    from radar import db, dedupe
+    from radar import blackspot, db, dedupe
 
     conn = db.connect(args.db)
     report = dedupe.link(conn, council_id=args.council, rebuild=args.rebuild)
     print(report.summary())
+    tagged = blackspot.tag(conn)
+    if tagged:
+        print(f"Black Spot cross-check: {tagged} mention(s) linked to council projects")
     return 0
 
 

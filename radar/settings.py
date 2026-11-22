@@ -91,6 +91,7 @@ class CouncilsConfig:
     defaults: Defaults
     councils: dict[str, Council]
     global_blocklist: list[Blocklist]
+    cross_checks: dict[str, dict[str, Any]] = field(default_factory=dict)   # optional extra sources (PLAN M17)
 
 
 @dataclass
@@ -138,7 +139,8 @@ def load_councils(path: Path = COUNCILS_YAML) -> CouncilsConfig:
         )
 
     blocklist = [Blocklist(**entry) for entry in data.get("global_blocklist") or []]
-    return CouncilsConfig(defaults=defaults, councils=councils, global_blocklist=blocklist)
+    cross_checks = {k: dict(v or {}) for k, v in (data.get("cross_checks") or {}).items()}
+    return CouncilsConfig(defaults=defaults, councils=councils, global_blocklist=blocklist, cross_checks=cross_checks)
 
 
 def load_trades(path: Path = TRADES_YAML) -> TradesConfig:

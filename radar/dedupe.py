@@ -41,6 +41,8 @@ from radar.normalise import normalise_name, normalise_road, parse_intersection
 
 KEY_RANK = ("code", "segment", "intersection", "tender", "version")
 FUZZY_THRESHOLD = 90
+CROSS_CHECK_COUNCIL = "mainroads"             # council_id of cross-check *documents* (not a configured council)
+CROSS_CHECK_EXTRACTORS = ("blackspot",)       # cross-check mentions never create or shape projects (PLAN M17)
 STAGE_ORDER = ("proposed_budget", "adopted_budget", "budget_review", "tender_advertised", "tender_awarded",
                "in_progress", "completed")
 OVERRIDE_STAGES = ("deferred", "deleted")
@@ -229,7 +231,7 @@ class Linker:
                            if l.mention_id in mentions else ()):
             m = mentions.get(link.mention_id)
             p = projects.get(link.project_id)
-            if m is None or p is None:
+            if m is None or p is None or m.extractor in CROSS_CHECK_EXTRACTORS:
                 continue
             proj = self.projects.setdefault(p.project_id, _Proj(p.project_id, p.council_id, p.dedupe_key, p.dedupe_key_type))
             self._register(proj, m, mention_keys(m, self.doc_key(m)))
@@ -287,6 +289,8 @@ def derive_state(project: Project, mentions: list[ProjectMention], docs: dict[st
         d = docs.get(m.doc_id)
         return (d.retrieved_at if d and d.retrieved_at else m.extracted_at) or ""
 
+    # cross-check mentions (Black Spot) only add funding / sources: they never set name, value, stage or location
+    mentions = [m for m in mentions if m.extractor not in CROSS_CHECK_EXTRACTORS] or mentions
     by_conf = sorted(mentions, key=lambda m: (-m.confidence, date(m), m.mention_id))
     p = project
     p.canonical_name = by_conf[0].project_name_raw if by_conf else p.canonical_name
@@ -373,7 +377,8 @@ def link(conn: sqlite3.Connection, *, council_id: str | None = None, rebuild: bo
     linker = Linker(conn)
     linker.load()
     linked = {r[0] for r in conn.execute("SELECT mention_id FROM project_mention_link")}
-    todo = [m for m in db.all_mentions(conn, council_id) if m.mention_id not in linked]
+    todo = [m for m in db.all_mentions(conn, council_id)
+            if m.mention_id not in linked and m.extractor not in CROSS_CHECK_EXTRACTORS]
     todo.sort(key=linker.order_key)
     for m in todo:
         linker.link_mention(m)

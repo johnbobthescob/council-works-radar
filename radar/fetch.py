@@ -162,6 +162,14 @@ class Fetcher:
         host = host_key(url).replace(":", "_")
         return self.cache_dir / "raw" / host / f"{sha256}.{_guess_ext(content_type, url)}"
 
+    def cached_raw(self, sha256: str, url: str | None = None) -> Path | None:
+        """Cached raw bytes for ``sha256``: the URL's host folder first, then any host (redirects store bytes under
+        the final host, e.g. www.mainroads.wa.gov.au -> assets.mainroads.wa.gov.au)."""
+        hit = self._cached_by_sha(url, sha256) if url else None
+        if hit is None and (self.cache_dir / "raw").exists():
+            hit = next(iter(sorted((self.cache_dir / "raw").glob(f"*/{sha256}.*"))), None)
+        return hit
+
     def _cached_by_sha(self, url: str, sha256: str) -> Path | None:
         folder = self.cache_dir / "raw" / host_key(url).replace(":", "_")
         matches = sorted(folder.glob(f"{sha256}.*")) if folder.exists() else []
