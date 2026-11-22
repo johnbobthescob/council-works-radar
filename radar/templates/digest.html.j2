@@ -1,1 +1,114 @@
-<!-- digest template (PLAN §7.1, milestone M14). Placeholder. -->
+{# Weekly digest (PLAN §7.1). Self-contained: inline CSS, no JS. Facts, short quotes and source links only. #}
+{% macro card(i) %}
+<div class="card" data-project="{{ i.project_id }}">
+  <div class="title">{{ i.name }}</div>
+  <div class="where">{{ i.council }}{% if i.suburb %} · {{ i.suburb }}{% endif %}{% if i.ward %} · {{ i.ward }}{% endif %}
+    {% for c in i.chips %}<span class="chip{% if c.implied %} implied{% endif %}" title="{{ 'implied' if c.implied else 'matched' }}">{{ c.label }}</span> {% endfor %}</div>
+  <div>
+    {% for ch in i.changes %}<span class="badge {{ ch.type }}">{{ ch.text }}</span> {% endfor %}
+    {% if i.stage %}<span class="badge">{{ i.stage }}</span>{% endif %}
+  </div>
+  {% if i.value_text %}<div>Value: <strong>{{ i.value_text }}</strong>{% if i.funding %} · Funding: {{ i.funding }}{% endif %}</div>
+  {% elif i.funding %}<div>Funding: {{ i.funding }}</div>{% endif %}
+  {% if i.dates %}<div>Dates: {{ i.dates }}</div>{% endif %}
+  {% if i.quote %}<div class="quote">“{{ i.quote }}”</div>{% endif %}
+  <div class="source">Source: {% if i.source %}<a href="{{ i.source.url }}">{{ i.source.label }}</a>{% else %}<em>no source recorded</em>{% endif %}</div>
+  <div class="small">Confidence: <span class="conf-{{ i.confidence_label }}">{{ i.confidence_label }}</span> ({{ '%.2f'|format(i.confidence) }})
+    {% for f in i.flags %}<span class="pill">{{ f }}</span> {% endfor %}</div>
+</div>
+{% endmacro %}
+{% macro row(i) %}
+<tr><td>{{ i.name }}{% if i.code %} <span class="muted small">{{ i.code }}</span>{% endif %}</td><td>{{ i.council }}</td><td>{{ i.suburb or '—' }}</td>
+  <td class="num">{{ i.value|money }}</td><td>{{ i.stage or '—' }}</td>
+  <td><span class="conf-{{ i.confidence_label }}">{{ i.confidence_label }}</span>{% for f in i.flags %} <span class="pill">{{ f }}</span>{% endfor %}</td>
+  <td class="small">{% if i.source %}<a href="{{ i.source.url }}">{{ i.source.label }}</a>{% else %}—{% endif %}</td></tr>
+{% endmacro %}
+{% macro table(items) %}
+<table><thead><tr><th>Project</th><th>Council</th><th>Suburb</th><th class="num">Value</th><th>Stage</th><th>Confidence</th><th>Source</th></tr></thead><tbody>
+{% for i in items %}{{ row(i) }}{% endfor %}</tbody></table>
+{% endmacro %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WA Council Works Radar: {{ title }}</title>
+<style>
+{{ css }}
+</style>
+</head>
+<body>
+<h1 id="top">WA Council Works Radar: {{ title }}</h1>
+<div class="muted">Generated {{ generated }} · {{ run_count }} run(s) this week · {{ project_count }} projects tracked · {{ event_count }} change event(s)</div>
+{% if baseline %}
+<div class="banner" id="baseline-banner"><strong>Baseline run.</strong> This is the first run, so every project is new. Instead of listing them all, this digest shows the top projects per trade by value and the council × trade counts. The full list is in the filterable web UI; from the next run, this digest lists only what changed.</div>
+{% endif %}
+
+<h2 id="coverage-summary">Councils covered</h2>
+<table><thead><tr><th>Council</th><th class="num">Documents</th><th>Extraction</th><th>Last retrieved (UTC)</th></tr></thead><tbody>
+{% for c in health.councils %}<tr><td>{{ c.council }}</td><td class="num">{{ c.docs }}</td><td>{{ c.status_text }}</td><td>{{ c.last or '—' }}</td></tr>
+{% else %}<tr><td colspan="4">No councils processed yet.</td></tr>{% endfor %}</tbody></table>
+
+{% if baseline %}
+<h2 id="baseline">Baseline pipeline</h2>
+{% set b = baseline_section %}
+<p>{{ b.project_count }} projects across all councils. Counts by council and primary trade (non-civil and unclassified projects are counted but not listed below):</p>
+<table id="baseline-matrix"><thead><tr><th>Council</th>{% for h in b.matrix_headers %}<th class="num">{{ h }}</th>{% endfor %}<th class="num">Total</th></tr></thead><tbody>
+{% for r in b.matrix_rows %}<tr><td>{{ r.council }}</td>{% for n in r.counts %}<td class="num">{{ n or '' }}</td>{% endfor %}<td class="num">{{ r.total }}</td></tr>{% endfor %}</tbody></table>
+{% for t in b.top %}
+<h3 id="baseline-{{ t.code }}">{{ t.label }} <span class="muted small">top {{ t.entries|length }} of {{ t.total }} by value</span></h3>
+{% for i in t.entries %}{{ card(i) }}{% endfor %}
+{% endfor %}
+{% endif %}
+
+<h2 id="signals">This week’s signals</h2>
+{% if signals %}
+{% for g in signals %}
+<h3 id="signals-{{ g.code }}">{{ g.label }} <span class="muted small">{{ g.count }}</span></h3>
+{% for c in g.councils %}
+<h4>{{ c.name }}</h4>
+{% for i in c.entries %}{{ card(i) }}{% endfor %}
+{% endfor %}
+{% endfor %}
+{% elif baseline %}
+<p class="muted">No changes beyond the baseline yet.</p>
+{% else %}
+<p class="muted">No changes recorded this week{% if not run_count %} (no run was recorded for {{ week }}){% endif %}.</p>
+{% endif %}
+
+{% if not baseline %}
+<h2 id="pipeline">Upcoming / pipeline snapshot</h2>
+<p class="muted">Top {{ 25 }} civil projects per trade by value that have not yet reached tender award.</p>
+{% for t in pipeline %}
+<h3>{{ t.label }}</h3>
+{{ table(t.entries) }}
+{% else %}<p class="muted">No pre-tender civil projects.</p>{% endfor %}
+{% endif %}
+
+<h2 id="review">Needs review</h2>
+<h4>Possible duplicates ({{ review.duplicate_count }})</h4>
+{% if review.duplicates %}
+<table><thead><tr><th>Project A</th><th>Project B</th><th>Match</th></tr></thead><tbody>
+{% for d in review.duplicates %}<tr><td>{{ d.a.name }} <span class="muted small">({{ d.a.council }})</span>{% if d.a.source %}<br><a class="small" href="{{ d.a.source.url }}">{{ d.a.source.label }}</a>{% endif %}</td>
+<td>{{ d.b.name }} <span class="muted small">({{ d.b.council }})</span>{% if d.b.source %}<br><a class="small" href="{{ d.b.source.url }}">{{ d.b.source.label }}</a>{% endif %}</td>
+<td>possible match ({{ d.method }}, {{ '%.2f'|format(d.score) }})</td></tr>{% endfor %}</tbody></table>
+{% else %}<p class="muted">None.</p>{% endif %}
+<h4>Low-confidence items ({{ review.low_count }}{% if review.low_count > review.low|length %}, top {{ review.low|length }} by value shown{% endif %})</h4>
+{% if review.low %}{{ table(review.low) }}{% else %}<p class="muted">None.</p>{% endif %}
+<h4>Documents needing attention</h4>
+{% if review.documents %}
+<table><thead><tr><th>Council</th><th>Document</th><th>Status</th></tr></thead><tbody>
+{% for d in review.documents %}<tr><td>{{ d.council }}</td><td><a href="{{ d.url }}">{{ d.title }}</a></td><td>{{ d.status }}</td></tr>{% endfor %}</tbody></table>
+{% else %}<p class="muted">All documents extracted cleanly.</p>{% endif %}
+
+<h2 id="health">Coverage &amp; health</h2>
+{% for e in health.errors %}<div class="alert">{{ e if e is string else (e.get('council', '') ~ ': ' ~ e.get('error', e)) }}</div>{% endfor %}
+<table><thead><tr><th>Council</th><th>robots.txt</th><th class="num">Requests</th><th class="num">New / changed</th><th class="num">Unchanged (304)</th><th class="num">Blocked / skipped</th><th class="num">Failed</th><th>State</th></tr></thead><tbody>
+{% for c in health.councils %}<tr{% if c.paused or c.failed %} class="red"{% endif %}><td>{{ c.council }}</td><td>{{ c.robots }}</td><td class="num">{{ c.requests }}</td><td class="num">{{ c.fetched }}</td><td class="num">{{ c.unchanged }}</td><td class="num">{{ c.blocked }}</td><td class="num">{{ c.failed }}</td><td>{% if c.paused %}PAUSED (403/429/challenge){% elif c.failed %}errors{% else %}ok{% endif %}</td></tr>{% endfor %}</tbody></table>
+
+<footer id="footer">
+<p>{{ footer_text }}</p>
+<p>{{ noncommercial_note }}</p>
+{% if blackspot_note %}<p>{{ blackspot_note }}</p>{% endif %}
+</footer>
+</body>
+</html>

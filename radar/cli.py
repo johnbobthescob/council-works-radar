@@ -17,7 +17,6 @@ NOT_IMPLEMENTED_EXIT = 2
 
 # (name, milestone, help). Milestones refer to PLAN.md §10.
 STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("digest", "M14", "write the weekly digest to out/ (HTML, and PDF if WeasyPrint is installed)"),
     ("export", "M15", "write out/ui/data.js for the web UI"),
     ("serve", "M15", "serve out/ui/ on localhost with http.server"),
     ("run", "M16", "full pipeline for the selected councils (--councils a,b,c)"),
@@ -219,6 +218,19 @@ def _link(args: argparse.Namespace) -> int:
     return 0
 
 
+def _digest(args: argparse.Namespace) -> int:
+    from radar import db, digest
+
+    conn = db.connect(args.db)
+    res = digest.write_digest(conn, args.out, args.week, pdf=not args.no_pdf)
+    print(f"wrote {res.html_path}")
+    if res.pdf_path:
+        print(f"wrote {res.pdf_path} ({res.pdf_engine})")
+    elif res.pdf_error:
+        print(f"PDF not written: {res.pdf_error}", file=sys.stderr)
+    return 0
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -282,6 +294,14 @@ def build_parser() -> argparse.ArgumentParser:
     lk.add_argument("--council", default=None, help="only this council's mentions")
     lk.add_argument("--rebuild", action="store_true", help="clear links/projects first and relink everything")
     lk.set_defaults(handler=_link)
+
+    dg = sub.add_parser("digest", help="write the weekly digest to out/ (HTML, and PDF if possible) [M14]",
+                        description="Builds out/digest-YYYY-Www.html (+ .pdf via WeasyPrint, else PyMuPDF Story) from the DB.")
+    dg.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    dg.add_argument("--out", default=None, help="output directory (default out/)")
+    dg.add_argument("--week", default=None, help="ISO week, e.g. 2026-W47 (default: week of the latest run)")
+    dg.add_argument("--no-pdf", action="store_true", help="HTML only")
+    dg.set_defaults(handler=_digest)
 
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)

@@ -21,10 +21,12 @@ def test_config_check_exits_zero(capsys):
 
 
 def test_stub_command_reports_not_implemented(capsys):
-    assert cli.main(["digest"]) == cli.NOT_IMPLEMENTED_EXIT
+    import argparse
+
+    assert cli._make_stub("future", "M99")(argparse.Namespace()) == cli.NOT_IMPLEMENTED_EXIT
     err = capsys.readouterr().err
     assert "not implemented" in err
-    assert "M14" in err
+    assert "M99" in err
 
 
 def test_robots_check_offline_shows_blocklist_and_never_networks(capsys):
