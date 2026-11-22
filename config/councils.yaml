@@ -54,6 +54,12 @@ councils:
         endpoint: https://www.stirling.wa.gov.au/ksearchmna/ksearchresult
         method: POST
         body: {take: 12, skip: 0, page: 1, pageSize: 12}
+        search_param:                      # R§1.2.3
+          - {key: classname, values: ["AWPT.MNA"]}
+          - {key: searchindexes, values: ["MNA"]}
+          - {key: nodealiaspath, values: ["/City-and-Council/About-Council/Council-and-committees/Minutes-and-agendas"]}
+        search_filter:
+          - {key: Sort, values: ["ArticleReleaseDate DESC"]}
         response_list_key: Data
         fields:
           agenda: Agenda
@@ -78,6 +84,7 @@ councils:
       - type: kentico_ksearch
         endpoint: https://www.melvillecity.com.au/ksearch/mnaresult
         method: POST
+        body: {take: 12, skip: 0, page: 1, pageSize: 12}   # ASSUMPTION: body not documented in R§1.2.4; Stirling's shape
         search_param:
           - {key: classname, values: ["AWPT.MNA"]}
           - {key: searchindexes, values: ["MNA"]}
@@ -122,6 +129,7 @@ councils:
       - type: kentico_ksearch
         endpoint: https://rockingham.wa.gov.au/ksearch/mnaresult
         method: POST
+        body: {take: 12, skip: 0, page: 1, pageSize: 12}   # ASSUMPTION: body not documented in R§1.2.6; Stirling's shape
         search_param:
           - {key: classname, values: ["AWPT.MNA"]}
           - {key: searchindexes, values: ["MNA"]}

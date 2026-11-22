@@ -1,0 +1,35 @@
+{
+ "_note": "Hand-built from the field names in RESEARCH.md; values are illustrative, not a recorded response. Re-record before trusting.",
+ "Total": 279,
+ "Data": [
+  {
+   "ArticleTitle": "Council Meeting 17 November 2026",
+   "ArticleReleaseDate": "2026-11-17T00:00:00",
+   "Agenda": "/getmedia/11cb4985-d185-435a-aa2c-af1d7e0ea512/Council-Agenda-17-November-2026.pdf",
+   "MinutesFile": "/getmedia/bc87f6d5-383c-46c3-b4c6-9ece60b0be18/Council-Minutes-17-November-2026.pdf",
+   "NoticeOfMotion": null,
+   "Attachments": []
+  },
+  {
+   "ArticleTitle": "Community and Resources Committee 10 November 2026",
+   "ArticleReleaseDate": "2026-11-10T00:00:00",
+   "Agenda": "/getmedia/22222222-0000-4000-8000-000000000001/CRC-Agenda-10-November-2026.pdf",
+   "MinutesFile": null,
+   "NoticeOfMotion": null,
+   "Attachments": [
+    {
+     "Name": "Attachments",
+     "Url": "/getmedia/22222222-0000-4000-8000-000000000002/CRC-Attachments-10-November-2026.pdf"
+    }
+   ]
+  },
+  {
+   "ArticleTitle": "Council Meeting 3 November 2026",
+   "ArticleReleaseDate": "2026-11-03T00:00:00",
+   "Agenda": "https://www.stirling.wa.gov.au/getmedia/33333333-0000-4000-8000-000000000001/Council-Agenda-3-November-2026.pdf",
+   "MinutesFile": "",
+   "NoticeOfMotion": null,
+   "Attachments": []
+  }
+ ]
+}

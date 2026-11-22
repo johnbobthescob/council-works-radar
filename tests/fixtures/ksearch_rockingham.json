@@ -1,0 +1,46 @@
+{
+ "_note": "Hand-built from the field names in RESEARCH.md; values are illustrative, not a recorded response. Re-record before trusting.",
+ "Total": 5,
+ "Data": [
+  {
+   "MNATitle": "2026-11-(Nov)-Agenda-Ordinary-Council",
+   "MNAFileUrl": "/getContentAsset/bf814a1d-f809-401e-8895-48da3a720111/3ca954ad-3848-47c6-8f97-68cebe0b47a2/2026-11-(Nov)-Agenda-Ordinary-Council.pdf?language=en",
+   "MNADocumentType": "Agenda",
+   "MNAMeetingType": "Ordinary Council",
+   "MNAFileSizeByte": 5138022,
+   "MNAPublicationDate": "20261119"
+  },
+  {
+   "MNATitle": "2026-10-(Oct)-Minutes-Ordinary-Council",
+   "MNAFileUrl": "/getContentAsset/59a532a4-02b5-43c1-a892-c9a3e0b17a7e/3ca954ad-3848-47c6-8f97-68cebe0b47a2/2026-10-(Oct)-Minutes-Ordinary-Council.pdf?language=en",
+   "MNADocumentType": "Minutes",
+   "MNAMeetingType": "Ordinary Council",
+   "MNAFileSizeByte": 1900000,
+   "MNAPublicationDate": "20261105"
+  },
+  {
+   "MNATitle": "2026-11-(Nov)-Report-Attachments-Planning-and-Asset-Services",
+   "MNAFileUrl": "/getContentAsset/66666666-0000-4000-8000-000000000001/3ca954ad-3848-47c6-8f97-68cebe0b47a2/2026-11-Report-Attachments-PAS.pdf?language=en",
+   "MNADocumentType": "Report Attachments",
+   "MNAMeetingType": "Planning and Asset Services Committee",
+   "MNAFileSizeByte": 22000000,
+   "MNAPublicationDate": "20261112"
+  },
+  {
+   "MNATitle": "2026-11-(Nov)-Information-Bulletin",
+   "MNAFileUrl": "/getContentAsset/77777777-0000-4000-8000-000000000001/3ca954ad-3848-47c6-8f97-68cebe0b47a2/2026-11-Information-Bulletin.pdf?language=en",
+   "MNADocumentType": "Bulletins",
+   "MNAMeetingType": "Information Bulletin",
+   "MNAFileSizeByte": 900000,
+   "MNAPublicationDate": "20261101"
+  },
+  {
+   "MNATitle": "2026-11-(Nov)-Agenda-Planning-and-Asset-Services",
+   "MNAFileUrl": "/getContentAsset/88888888-0000-4000-8000-000000000001/3ca954ad-3848-47c6-8f97-68cebe0b47a2/2026-11-Agenda-PAS.pdf?language=en",
+   "MNADocumentType": "Agenda",
+   "MNAMeetingType": "Planning and Asset Services Committee",
+   "MNAFileSizeByte": 3000000,
+   "MNAPublicationDate": "20261112"
+  }
+ ]
+}

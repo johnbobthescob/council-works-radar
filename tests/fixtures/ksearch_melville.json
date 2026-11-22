@@ -1,0 +1,27 @@
+{
+ "_note": "Hand-built from the field names in RESEARCH.md; values are illustrative, not a recorded response. Re-record before trusting.",
+ "Total": 3,
+ "Data": [
+  {
+   "MNAFirstFileName": "Minutes-17-November-2026-OMC.pdf",
+   "MNAMeetingType": "Ordinary Meeting of Council",
+   "MNAFirstFileUrl": "/getContentAsset/21ed1f23-57da-4b53-82a9-79b75dcad9b2/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Minutes-17-November-2026-OMC.pdf?language=en",
+   "MNAFirstFileSize": "2.1 MB",
+   "PageUrl": "/our-city/our-council/agendas-and-minutes/minutes-ordinary-meeting-of-council-17-november-2026"
+  },
+  {
+   "MNAFirstFileName": "Agenda-8-December-2026-OMC.pdf",
+   "MNAMeetingType": "Ordinary Meeting of Council",
+   "MNAFirstFileUrl": "/getContentAsset/4c1124ba-2322-45d8-8cc2-ebbbb8fedd46/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Agenda-8-December-2026-OMC.pdf?language=en",
+   "MNAFirstFileSize": "51.5 MB",
+   "PageUrl": "/our-city/our-council/agendas-and-minutes/agenda-ordinary-meeting-of-council-8-december-2026"
+  },
+  {
+   "MNAFirstFileName": "Agenda-Briefing-Forum-3-November-2026.pdf",
+   "MNAMeetingType": "Agenda Briefing Forum",
+   "MNAFirstFileUrl": "/getContentAsset/55555555-0000-4000-8000-000000000001/3ca954ad-3848-47c6-8f97-68cebe0b47a2/Agenda-Briefing-Forum-3-November-2026.pdf?language=en",
+   "MNAFirstFileSize": 4200000,
+   "PageUrl": "/our-city/our-council/agendas-and-minutes/agenda-briefing-forum-3-november-2026"
+  }
+ ]
+}

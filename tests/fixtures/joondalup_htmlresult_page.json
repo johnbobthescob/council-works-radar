@@ -1,0 +1,6 @@
+{
+ "_note": "Hand-built from the field names in RESEARCH.md; values are illustrative, not a recorded response. Re-record before trusting.",
+ "recordCountValue": 50,
+ "suggestion": null,
+ "htmlResult": "<ul class=\"meeting-list\">\n<li class=\"meeting\"><h3>Council Meeting - 27 October 2026</h3>\n <a href=\"https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27%20Oct%202026%20-%20Council%20Agenda%20Inc%20Attachments.pdf?v=1\">Agenda</a>\n <a href=\"https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27%20October%202026%20-%20Council%20-%20Minutes%20inc%20Attach.pdf?v=1\">Minutes</a></li>\n<li class=\"meeting\"><h3>Briefing Session - 8 September 2026</h3>\n <a href=\"https://api.joondalup.wa.gov.au/files/councilmeetings/2026/8%20Septembe%202026%20-%20Briefing%20Session%20-%20Agenda%20inc%20att.pdf?v=1\">Agenda</a></li>\n<li class=\"meeting\"><h3>Council Meeting - 18 December 2018</h3>\n <a href=\"/files/councilmeetings/2018/CJ181218_MIN.pdf?v=1\">Minutes</a></li>\n<li><a href=\"/about\">About</a></li></ul>"
+}
