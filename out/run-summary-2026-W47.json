@@ -1,0 +1,738 @@
+{
+  "run_id": "20261122T133911-9a3e5e",
+  "iso_week": "2026-W47",
+  "started_at": "2026-11-22T13:39:11+00:00",
+  "finished_at": "2026-11-22T13:42:31+00:00",
+  "mode": "live",
+  "baseline": true,
+  "councils": {
+    "joondalup": {
+      "name": "City of Joondalup",
+      "docs_listed": 86,
+      "docs_selected": 3,
+      "outcomes": {
+        "extracted": 2,
+        "skipped": 1
+      },
+      "mentions_extracted": 220,
+      "projects_total": 218,
+      "documents": [
+        {
+          "url": "https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf",
+          "doc_type": "budget",
+          "title": null,
+          "meeting_date": null,
+          "extractor": "joondalup_budget",
+          "outcome": "extracted",
+          "mentions": 202,
+          "detail": "ok"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1",
+          "doc_type": "minutes",
+          "title": "27 October 2026 - Council - Minutes inc Attach",
+          "meeting_date": "2026-10-27",
+          "extractor": "agenda_items",
+          "outcome": "extracted",
+          "mentions": 18,
+          "detail": "ok"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/17 November 2026 - Council Agenda Inc Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "title": "17 November 2026 - Council Agenda Inc Attachments",
+          "meeting_date": "2026-11-17",
+          "extractor": "agenda_items",
+          "outcome": "skipped",
+          "mentions": 0,
+          "detail": "skipped_size: content-length 59773229 > large threshold 41943040 (use --allow-large)"
+        }
+      ],
+      "skipped": [
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/22 September 2026 - Council - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-09-22",
+          "reason": "meeting 2026-09-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/22 September 2026 - Council Meeting - Minutes inc Attach (3).pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-09-22",
+          "reason": "meeting 2026-09-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/8 Septembe 2026 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-09-08",
+          "reason": "meeting 2026-09-08 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/25 August 2026 - Council Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-25",
+          "reason": "meeting 2026-08-25 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/25 August 2026 - Council Minutes inc att (amended).pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-08-25",
+          "reason": "meeting 2026-08-25 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/11 August 2026 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-11",
+          "reason": "meeting 2026-08-11 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/28 July 2026 - Council Agenda Inc Attach.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-28",
+          "reason": "meeting 2026-07-28 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/28 July 2026 - Council Mins inc att (amended).pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-07-28",
+          "reason": "meeting 2026-07-28 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/28 July 2026 - Council Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-28",
+          "reason": "meeting 2026-07-28 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/14 July 2026 - Briefing - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-14",
+          "reason": "meeting 2026-07-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/23 June 2026 - Council Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-23",
+          "reason": "meeting 2026-06-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/23 June 2026 - Council Minutes - Inc Attach (amended).pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-06-23",
+          "reason": "meeting 2026-06-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/23 June 2026 - Council Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-23",
+          "reason": "meeting 2026-06-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/9 June 2026 - Briefing - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting 2026-06-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/26 May 2026 - Council - Agenda and Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-26",
+          "reason": "meeting 2026-05-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/26 May 2026 - Council Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-05-26",
+          "reason": "meeting 2026-05-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/26 May 2026 - Council - Addendum Agenda & Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-26",
+          "reason": "meeting 2026-05-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/12 May 2026 - Breifing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-05-12",
+          "reason": "meeting 2026-05-12 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/21 April 2026 - Council - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-04-21",
+          "reason": "meeting 2026-04-21 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/21 April 2026 - Council - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-04-21",
+          "reason": "meeting 2026-04-21 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/14 April 2026 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-04-14",
+          "reason": "meeting 2026-04-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/13 April 2026 - Special Council - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-04-13",
+          "reason": "meeting 2026-04-13 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/13 April 2026 - Special Council - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-04-13",
+          "reason": "meeting 2026-04-13 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/31 March 2026 - Special Council - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-03-31",
+          "reason": "meeting 2026-03-31 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/31 March 2026 - Special Council Meeting - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-03-31",
+          "reason": "meeting 2026-03-31 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/24 March 2026 - Council - Agenda in att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-03-24",
+          "reason": "meeting 2026-03-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/24 March 2026 - Council - Minutes and Att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-03-24",
+          "reason": "meeting 2026-03-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/24 March 2026 - Council - Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-03-24",
+          "reason": "meeting 2026-03-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/10 March 2026 - Briefing Session - Agenda and att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-03-10",
+          "reason": "meeting 2026-03-10 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/24 February 2026 - Council - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-02-24",
+          "reason": "meeting 2026-02-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/24 February 2026 - Council - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-02-24",
+          "reason": "meeting 2026-02-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/10 February 2026 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-02-10",
+          "reason": "meeting 2026-02-10 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/9 February 2026 - SCM - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-02-09",
+          "reason": "meeting 2026-02-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/9 February 2026 - Special Council - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-02-09",
+          "reason": "meeting 2026-02-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/29 January 2026 - AGM - Agenda and Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-01-29",
+          "reason": "meeting 2026-01-29 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/29 January 2026 - AGM - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-01-29",
+          "reason": "meeting 2026-01-29 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/13 January 2026 - Special Council - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-01-13",
+          "reason": "meeting 2026-01-13 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/13 January 2026 - Special Council - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2026-01-13",
+          "reason": "meeting 2026-01-13 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/16 December 2025 - Special Council Meeting - Agenda and att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-12-16",
+          "reason": "meeting 2025-12-16 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/16 December 2025 - Special Council Meeting - Minutes and att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-12-16",
+          "reason": "meeting 2025-12-16 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/9 December 2025 - Council Meeting - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-12-09",
+          "reason": "meeting 2025-12-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/9 December 2025 - Council - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-12-09",
+          "reason": "meeting 2025-12-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/2 December 2025 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-12-02",
+          "reason": "meeting 2025-12-02 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/25 November 2025 - Council Meeting - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-11-25",
+          "reason": "meeting 2025-11-25 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/25 November 2025 - Council Meeting - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-11-25",
+          "reason": "meeting 2025-11-25 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/11 November 2025 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-11-11",
+          "reason": "meeting 2025-11-11 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/3 November 2025 - Special Council Meeting - Agenda inc Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-11-03",
+          "reason": "meeting 2025-11-03 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/3 November 2025 - Special Council Meeting - Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-11-03",
+          "reason": "meeting 2025-11-03 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/22 October 2025 - Special Council - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-10-22",
+          "reason": "meeting 2025-10-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/22 October 2025 - Special Council - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-10-22",
+          "reason": "meeting 2025-10-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/10. 14 October 2025 - Council Meeting - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-10-14",
+          "reason": "meeting 2025-10-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/14 October 2025 - Council Meeting - Minutes and att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-10-14",
+          "reason": "meeting 2025-10-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/7 October 2025 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-10-07",
+          "reason": "meeting 2025-10-07 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/23 September 2025 - Council Meeting - Agenda and Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-09-23",
+          "reason": "meeting 2025-09-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/23 September 2025 - Council Minutes inc att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-09-23",
+          "reason": "meeting 2025-09-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/23 September 2025 - Council Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-09-23",
+          "reason": "meeting 2025-09-23 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/9 September 2025 - Briefing Session Agenda and Attach.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-09-09",
+          "reason": "meeting 2025-09-09 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/3 September 2025 - Special Council Meeting - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-09-03",
+          "reason": "meeting 2025-09-03 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/3 September 2025 - Special Council Meeting - Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-09-03",
+          "reason": "meeting 2025-09-03 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/26 August 2025 - Council Agenda and Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-08-26",
+          "reason": "meeting 2025-08-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/26 August 2025 - Council Minutes and Attachments.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-08-26",
+          "reason": "meeting 2025-08-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/26 August 2025 - Council Meeting - Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-08-26",
+          "reason": "meeting 2025-08-26 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/14 August 2025 - Special Council Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-08-14",
+          "reason": "meeting 2025-08-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/14 August 2025 - Special Council Minutes.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-08-14",
+          "reason": "meeting 2025-08-14 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/12 August 2025 - Briefing Session - Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-08-12",
+          "reason": "meeting 2025-08-12 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/22 July 2025 - Council Agenda and att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-07-22",
+          "reason": "meeting 2025-07-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/22 July 2025 - Council Minutes and amended.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-07-22",
+          "reason": "meeting 2025-07-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/22 July 2025 - Council Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-07-22",
+          "reason": "meeting 2025-07-22 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/8 July 2025 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-07-08",
+          "reason": "meeting 2025-07-08 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/24 June 2025 - Council Meeting - Agenda and Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-06-24",
+          "reason": "meeting 2025-06-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/24 June 2025 - Council Minutes and Att.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-06-24",
+          "reason": "meeting 2025-06-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/24 June 2025 - Council Meeting - Addendum Agenda and Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-06-24",
+          "reason": "meeting 2025-06-24 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/10 June 2025 - Briefing Session Agenda including Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-06-10",
+          "reason": "meeting 2025-06-10 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/27 May 2025 - Council Agenda and att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-05-27",
+          "reason": "meeting 2025-05-27 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/27 May 2025 - Council Minutes including Attachments1.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-05-27",
+          "reason": "meeting 2025-05-27 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/27 May 2025 - Council  - Addendum Agenda.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-05-27",
+          "reason": "meeting 2025-05-27 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/13 May 2025 - Briefing Session - Agenda and att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-05-13",
+          "reason": "meeting 2025-05-13 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/29 April 2025 - Council Agenda and Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-04-29",
+          "reason": "meeting 2025-04-29 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/29 April 2025 - Council Minutes and Attachments.pdf?v=1",
+          "doc_type": "minutes",
+          "meeting_date": "2025-04-29",
+          "reason": "meeting 2025-04-29 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2025/8 April 2025 - Briefing Session - Agenda and Att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2025-04-08",
+          "reason": "meeting 2025-04-08 outside the 60-day window"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 Oct 2026 - Council Agenda Inc Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-27",
+          "reason": "minutes of the same meeting preferred"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/10 November 2026 - Briefing Session - Agenda and Attachments.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-11-10",
+          "reason": "over the 2 meeting docs/run cap"
+        },
+        {
+          "url": "https://api.joondalup.wa.gov.au/files/councilmeetings/2026/13 October 2026 - Briefing Session - Agenda inc att.pdf?v=1",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-13",
+          "reason": "over the 2 meeting docs/run cap"
+        }
+      ],
+      "errors": [],
+      "status": "ok"
+    },
+    "melville": {
+      "name": "City of Melville",
+      "docs_listed": 1,
+      "docs_selected": 1,
+      "outcomes": {
+        "extracted": 1
+      },
+      "mentions_extracted": 23,
+      "projects_total": 23,
+      "documents": [
+        {
+          "url": "https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program",
+          "doc_type": "capital_program",
+          "title": null,
+          "meeting_date": null,
+          "extractor": "melville_cwp",
+          "outcome": "extracted",
+          "mentions": 23,
+          "detail": "ok"
+        }
+      ],
+      "skipped": [],
+      "errors": [],
+      "status": "ok"
+    },
+    "cockburn": {
+      "name": "City of Cockburn",
+      "docs_listed": 17,
+      "docs_selected": 3,
+      "outcomes": {
+        "extracted": 2,
+        "skipped": 1
+      },
+      "mentions_extracted": 59,
+      "projects_total": 58,
+      "documents": [
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx",
+          "doc_type": "project_plans",
+          "title": "Project Plans 2026-2027 PDF document",
+          "meeting_date": null,
+          "extractor": "cockburn_plans",
+          "outcome": "extracted",
+          "mentions": 49,
+          "detail": "ok"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/23b9b0d8-3604-4033-b8b2-282b1ed7d075/ECM_12948319_v1_Ordinary-Council-Meeting-Minutes-10-November-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "title": "Ordinary Council Meeting - Minutes - 10 November 2026 PDF document",
+          "meeting_date": "2026-11-10",
+          "extractor": "agenda_items",
+          "outcome": "skipped",
+          "mentions": 0,
+          "detail": "skipped_size: content-length 46226441 > large threshold 41943040 (use --allow-large)"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "title": "Ordinary Council Meeting - Minutes - 13 October 2026 PDF document",
+          "meeting_date": "2026-10-13",
+          "extractor": "agenda_items",
+          "outcome": "extracted",
+          "mentions": 10,
+          "detail": "ok"
+        }
+      ],
+      "skipped": [
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/750d5c6c-8d29-4683-8f63-150ddf872491/ECM_12897171_v1_OCM-13-October-2026-14-3-pdf.aspx",
+          "doc_type": "attachments",
+          "meeting_date": "2026-10-13",
+          "reason": "doc_type attachments is not an agenda or minutes"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/2bb2a4e7-dc2a-4176-b75e-24ec8b668379/ECM_12887631_v1_Ordinary-Council-Meeting-13-October-2026-Attachments-Under-Separate-Cover-Item-14-3-pdf.aspx",
+          "doc_type": "attachments",
+          "meeting_date": "2026-10-13",
+          "reason": "doc_type attachments is not an agenda or minutes"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/6cd525a0-bd67-40f9-998b-5a22031eaa51/ECM_12866657_v1_Ordinary-Council-Meeting-Minutes-8-September-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "meeting_date": "2026-09-08",
+          "reason": "meeting 2026-09-08 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/2d47f2e2-ed63-405d-9124-08c4c01baafe/ECM_12855252_v3_Ordinary-Council-Meeting-Agenda-8-September-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-09-08",
+          "reason": "meeting 2026-09-08 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/d2f540b8-8e64-4aa6-9147-47007d07dca5/ECM_12840332_v2_Ordinary-Council-Meeting-Minutes-11-August-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "meeting_date": "2026-08-11",
+          "reason": "meeting 2026-08-11 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/d399fce0-08eb-4ea4-a8bd-14b30a5948f8/ECM_12821182_v1_Ordinary-Council-Meeting-Agenda-11-August-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-08-11",
+          "reason": "meeting 2026-08-11 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/fb2a9ae2-0b5e-4e52-a00a-a84e5b78ae05/ECM_12795944_v2_Ordinary-Council-Meeting-Minutes-14-July-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "meeting_date": "2026-07-14",
+          "reason": "meeting 2026-07-14 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/6bb977d4-9d41-4240-9374-d85469eeffe5/ECM_12786138_v2_Ordinary-Council-Meeting-Agenda-14-July-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-07-14",
+          "reason": "meeting 2026-07-14 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/7c8e0862-e651-4d17-ae81-0bb4a06d694f/ECM_12761348_v3_Ordinary-Council-Meeting-Minutes-9-June-2026-pdf.aspx",
+          "doc_type": "minutes",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting 2026-06-09 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/7ec2f852-f749-4405-88c1-87acd37eacf7/ECM_12743229_v1_Ordinary-Council-Meeting-Agenda-9-June-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting 2026-06-09 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/5b6dc4ac-8075-4f21-87fa-edc41ad6a5cb/ECM_12743190_v1_OCM-9-June-2026-Attachments-under-separate-cover-14-1-1-and-14-4-pdf.aspx",
+          "doc_type": "attachments",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting 2026-06-09 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/c564696d-08c2-43a5-be8d-0dc1ddf7a1dc/ECM_12743189_v1_OCM-9-June-2026-Attachment-under-separate-cover-11-1-pdf.aspx",
+          "doc_type": "attachments",
+          "meeting_date": "2026-06-09",
+          "reason": "meeting 2026-06-09 outside the 60-day window"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/a5cf4eca-728c-4e5c-ae81-32e01d71c0fd/ECM_12928826_v1_Ordinary-Council-Meeting-Agenda-10-November-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-11-10",
+          "reason": "minutes of the same meeting preferred"
+        },
+        {
+          "url": "https://www.cockburn.wa.gov.au/getattachment/61a27517-6c1b-4c84-9a35-0eb613f98577/ECM_12895467_v7_Ordinary-Council-Meeting-Agenda-13-October-2026-pdf.aspx",
+          "doc_type": "agenda",
+          "meeting_date": "2026-10-13",
+          "reason": "minutes of the same meeting preferred"
+        }
+      ],
+      "errors": [],
+      "status": "ok"
+    }
+  },
+  "totals": {
+    "docs_listed": 104,
+    "docs_selected": 7,
+    "mentions_extracted": 302,
+    "docs_extracted": 5,
+    "docs_skipped": 2,
+    "projects": 299,
+    "events": 299,
+    "events_by_type": {
+      "new": 299
+    },
+    "linked": {
+      "singleton": 295,
+      "version": 3,
+      "fuzzy": 4
+    },
+    "possible_duplicates_new": 4
+  },
+  "paused_hosts": {},
+  "errors": [],
+  "outputs": {
+    "digest_html": "digest-2026-W47.html",
+    "digest_pdf": "digest-2026-W47.pdf",
+    "pdf_engine": "weasyprint",
+    "pdf_error": null,
+    "ui": "ui/index.html"
+  }
+}

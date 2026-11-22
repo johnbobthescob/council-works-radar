@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WA Council Works Radar: Week 47, 2026 (16–22 Nov)</title>
+<style>
+@page { size: A4; margin: 16mm 14mm 18mm 14mm; @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 8pt; color: #666; } @bottom-left { content: "WA Council Works Radar"; font-size: 8pt; color: #666; } }
+body { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; line-height: 1.35; color: #1b1f24; }
+h1 { font-size: 20pt; margin: 0 0 2pt 0; color: #123c5a; }
+h2 { font-size: 14pt; margin: 18pt 0 6pt 0; padding-bottom: 2pt; border-bottom: 1.5pt solid #123c5a; color: #123c5a; }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt 0; color: #123c5a; }
+h4 { font-size: 10pt; margin: 8pt 0 3pt 0; color: #444; }
+a { color: #0b5cad; }
+.muted { color: #666; }
+.small { font-size: 8pt; }
+.banner { background: #fff4d6; border: 1pt solid #e0b84a; padding: 6pt 8pt; margin: 8pt 0; }
+.alert { background: #fde7e7; border: 1pt solid #c0392b; padding: 6pt 8pt; margin: 8pt 0; color: #7a1a12; }
+.card { overflow-wrap: anywhere; word-wrap: break-word; border: 0.75pt solid #c9d1d9; border-left: 3pt solid #123c5a; padding: 5pt 8pt; margin: 0 0 6pt 0; page-break-inside: avoid; }
+.card .title { font-weight: bold; font-size: 10.5pt; }
+.card .where { color: #444; }
+.chip { display: inline; margin-left: 3pt; background: #e3eef7; color: #123c5a; padding: 0 4pt; font-size: 7.5pt; border: 0.5pt solid #9db9d1; }
+.chip.implied { background: #f4f6f8; color: #7b8794; border-color: #d5dbe1; }
+.badge { display: inline; font-size: 7.5pt; font-weight: bold; padding: 0 4pt; border: 0.5pt solid #888; }
+.badge.new { background: #dff3e4; border-color: #3c9d5a; color: #1d5c32; }
+.badge.value_changed { background: #fff0d9; border-color: #d98a00; color: #7a4a00; }
+.badge.stage_advanced { background: #e2e8fb; border-color: #4660c9; color: #1f2f7a; }
+.badge.deferred, .badge.deleted { background: #fde7e7; border-color: #c0392b; color: #7a1a12; }
+.badge.location_refined, .badge.source_added { background: #eef0f2; color: #333; }
+.conf-High { color: #1d5c32; font-weight: bold; }
+.conf-Medium { color: #7a4a00; font-weight: bold; }
+.conf-Low { color: #7a1a12; font-weight: bold; }
+.pill { display: inline; font-size: 7.5pt; background: #fff4d6; border: 0.5pt solid #e0b84a; color: #6b4e00; padding: 0 4pt; }
+.quote { color: #666; font-style: italic; margin: 3pt 0; }
+.source { font-size: 8.5pt; margin-top: 3pt; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0 8pt 0; }
+th, td { border: 0.5pt solid #c9d1d9; padding: 2pt 4pt; text-align: left; vertical-align: top; font-size: 8.5pt; }
+th { background: #eef3f8; }
+td.num, th.num { text-align: right; }
+tr.red td { background: #fde7e7; color: #7a1a12; }
+footer { margin-top: 20pt; padding-top: 6pt; border-top: 1pt solid #888; font-size: 8pt; color: #444; }
+
+</style>
+</head>
+<body>
+<h1 id="top">WA Council Works Radar: Week 47, 2026 (16–22 Nov)</h1>
+<div class="muted">Generated 2026-11-22 13:39 UTC · 1 run(s) this week · 299 projects tracked · 299 change event(s)</div>
+<div class="banner" id="baseline-banner"><strong>Baseline run.</strong> This is the first run, so every project is new. Instead of listing them all, this digest shows the top projects per trade by value and the council × trade counts. The full list is in the filterable web UI; from the next run, this digest lists only what changed.</div>
+
+<h2 id="coverage-summary">Councils covered</h2>
+<table><thead><tr><th>Council</th><th class="num">Documents</th><th>Extraction</th><th>Last retrieved (UTC)</th></tr></thead><tbody>
+<tr><td>City of Cockburn</td><td class="num">2</td><td>ok 2</td><td>2026-11-22 13:42</td></tr>
+<tr><td>City of Joondalup</td><td class="num">2</td><td>ok 2</td><td>2026-11-22 13:39</td></tr>
+<tr><td>City of Melville</td><td class="num">1</td><td>ok 1</td><td>2026-11-22 13:41</td></tr>
+</tbody></table>
+
+<h2 id="baseline">Baseline pipeline</h2>
+<p>299 projects across all councils. Counts by council and primary trade (non-civil and unclassified projects are counted but not listed below):</p>
+<table id="baseline-matrix"><thead><tr><th>Council</th><th class="num">Road resurfacing / preservation</th><th class="num">Road construction / upgrade</th><th class="num">Intersection / traffic treatment</th><th class="num">Drainage</th><th class="num">Footpaths / shared paths</th><th class="num">Car parks (cross-trade)</th><th class="num">Bridges / underpasses</th><th class="num">Streetscape (multi-trade)</th><th class="num">Non-civil (buildings, HVAC, changerooms, IT, recreation surfaces)</th><th class="num">No rule fired</th><th class="num">Total</th></tr></thead><tbody>
+<tr><td>City of Cockburn</td><td class="num">9</td><td class="num">10</td><td class="num">5</td><td class="num"></td><td class="num"></td><td class="num">1</td><td class="num"></td><td class="num"></td><td class="num">4</td><td class="num">29</td><td class="num">58</td></tr><tr><td>City of Joondalup</td><td class="num">90</td><td class="num">28</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">3</td><td class="num"></td><td class="num">3</td><td class="num">31</td><td class="num">57</td><td class="num">218</td></tr><tr><td>City of Melville</td><td class="num"></td><td class="num">5</td><td class="num">3</td><td class="num"></td><td class="num"></td><td class="num">1</td><td class="num">1</td><td class="num"></td><td class="num">1</td><td class="num">12</td><td class="num">23</td></tr></tbody></table>
+<h3 id="baseline-ROAD_RESURF">Road resurfacing / preservation <span class="muted small">top 15 of 99 by value</span></h3>
+<div class="card" data-project="a568eff6-46a8-5143-ad6c-7d9de52df56b">
+  <div class="title">Treetop Avenue to Joondalup (southbound) rehabilitation works to local</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$513,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“RPR3661 – Treetop Avenue to Joondalup (southbound) rehabilitation works to local – Gate 57 entrance. Resurfacing and Edgewater access road. – North- Central – $513,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="3f4e2f0b-b15d-5286-907f-033694cbc60b">
+  <div class="title">Granadilla Street to Davallia and rehabilitation works to local</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> <span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$428,470 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“RPR3593 – Granadilla Street to Davallia and rehabilitation works to local – Road including intersections. Resurfacing Duncraig access road. – South – $428,470”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=47">City of Joondalup, Budget 2026-27, p. 47, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="cd667361-f50e-5eae-84f4-adeef422134b">
+  <div class="title">Surface change at start of Freeway (westbound ) Road Centreline. Resurfacing distributor road.</div>
+  <div class="where">City of Joondalup · South-East<span class="chip" title="matched">Road Resurf</span> <span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$406,364 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RPR3542 – Surface change at start of Freeway (westbound ) Road Centreline. Resurfacing distributor road. – southbound slip lane - Davalia and rehabilitation works to district Warwick – South-East – $406,364”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="4f050137-6f4c-5e39-8de8-42a33c0e3c95">
+  <div class="title">Juniper Way to Warwick Road. local access road.</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$386,350 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve / Grant</div>
+<div class="quote">“RPR3633 – Juniper Way to Warwick Road. local access road. – Resurfacing and rehabilitation works to Duncraig – South – $386,350”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="cf07c0ac-51f1-5ee6-a667-61fec6d88a22">
+  <div class="title">Benbullen Boulevard to 76 Boloka works to local access road.</div>
+  <div class="where">City of Joondalup · South-East<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$351,320 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve / Grant</div>
+<div class="quote">“RPR3641 – Benbullen Boulevard to 76 Boloka works to local access road. – Rise. Resurfacing and rehabilitation Kingsley – South-East – $351,320”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="db9e8edd-b218-5512-967c-7e3a9b34d655">
+  <div class="title">St. Michaels Avenue to Mitchell rehabilitation works to district</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$321,747 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RPR3543 – St. Michaels Avenue to Mitchell rehabilitation works to district – Freeway. Resurfacing and Connolly distributor road – North- Central – $321,747”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="4c6523fd-af97-5fdb-85f3-7546acdeb6c8">
+  <div class="title">Elderslie Way to Lorne Road. local access road.</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$269,485 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“RPR3578 – Elderslie Way to Lorne Road. local access road. – Resurfacing and rehabilitation works to Duncraig – South – $269,485”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="bd721d99-cad6-5359-b3ec-7172bc5f64ed">
+  <div class="title">David Crescent to David Crescent. works to local access road.</div>
+  <div class="where">City of Joondalup · South-West<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$264,550 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve</div>
+<div class="quote">“RPR3630 – David Crescent to David Crescent. works to local access road. – Resurfacing and rehabilitation Hillarys – South-West – $264,550”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="8e47fc67-ca1c-569c-aecb-4f7de5b77339">
+  <div class="title">Venturi Drive to Swanson Way. to local access road.</div>
+  <div class="where">City of Joondalup · North- Reef Central<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$254,250 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Reserve</div>
+<div class="quote">“RPR3611 – Venturi Drive to Swanson Way. to local access road. – Resurfacing and rehabilitation works Ocean – North- Reef Central – $254,250”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=47">City of Joondalup, Budget 2026-27, p. 47, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="4d21115d-7a90-57d9-8e15-4eaf1dc2f6eb">
+  <div class="title">Oceanside to Philip Close including rehabilitation works to local</div>
+  <div class="where">City of Joondalup · Central<span class="chip" title="matched">Road Resurf</span> <span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$249,750 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“RPR3616 – Oceanside to Philip Close including rehabilitation works to local – intersection. Resurfacing and Mullaloo access road. – Central – $249,750”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=47">City of Joondalup, Budget 2026-27, p. 47, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="2371b737-bbb4-5da9-b707-5c7392c96855">
+  <div class="title">St Helier to Lacepede Drive excluding rehabilitation works to local</div>
+  <div class="where">City of Joondalup · South-West<span class="chip" title="matched">Road Resurf</span> <span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$248,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve / Grant</div>
+<div class="quote">“RPR3643 – St Helier to Lacepede Drive excluding rehabilitation works to local – roundabout. Resurfacing and Sorrento access road. – South-West – $248,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="dd855ed8-7277-53c2-8ba5-9d9aabb49178">
+  <div class="title">Netherby Road to cul-de-sac. local access road.</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$245,500 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve / Grant</div>
+<div class="quote">“RPR3632 – Netherby Road to cul-de-sac. local access road. – Resurfacing and rehabilitation works to Duncraig – South – $245,500”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=48">City of Joondalup, Budget 2026-27, p. 48, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="72409a25-5b2e-546e-b5d6-030a29b2543c">
+  <div class="title">Swanson Way to Diamond Drive. to local access road.</div>
+  <div class="where">City of Joondalup · North- Reef Central<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$232,450 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RPR3604 – Swanson Way to Diamond Drive. to local access road. – Resurfacing and rehabilitation works Ocean – North- Reef Central – $232,450”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=47">City of Joondalup, Budget 2026-27, p. 47, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="0d479a81-02c1-5cec-a53e-0c75251ccae6">
+  <div class="title">Bernedale Way to cul-de-sac. local access road.</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$221,500 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“RPR3579 – Bernedale Way to cul-de-sac. local access road. – Resurfacing and rehabilitation works to Duncraig – South – $221,500”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="32e97858-5928-5634-9fbb-587ea6d05a80">
+  <div class="title">Megiddo Way to Cumnock Place Place. Resurfacing and rehabilitation</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Resurf</span> <span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$216,250 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RPR3583 – Megiddo Way to Cumnock Place Place. Resurfacing and rehabilitation – including intersection at Cumnock Duncraig works to local access road. – South – $216,250”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=47">City of Joondalup, Budget 2026-27, p. 47, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<h3 id="baseline-ROAD_CONST">Road construction / upgrade <span class="muted small">top 15 of 43 by value</span></h3>
+<div class="card" data-project="40d9e6e2-6f37-5390-a039-254bddfa0f4a">
+  <div class="title">Upgrades to the infrastructure Redevelopment aligning with the construction Beach foreshore as per the Burns</div>
+  <div class="where">City of Joondalup · Beach North<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$6,000,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve</div>
+<div class="quote">“MPP2080 – Upgrades to the infrastructure Redevelopment aligning with the construction Beach foreshore as per the Burns – at the Burns Beach Node open space of a Café/Kiosk/Restaurant at Burns Burns Beach Master Plan. – Beach North – $6,000,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="3105e3d4-7284-56fa-8c42-983415dccfd0">
+  <div class="title">Upgrade of Joondalup Drive/Hodges additional right turn lane from Drive Intersection southbound and upgrades to facilities and freeway southbound</div>
+  <div class="where">City of Joondalup · North<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip" title="matched">Footpath</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$4,066,556 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RDC2027 – Upgrade of Joondalup Drive/Hodges additional right turn lane from Drive Intersection southbound and upgrades to facilities and freeway southbound – Drive intersection including Hodges Drive to Joondalup Drive Joondalup turning pockets, lighting, pedestrian access (multi-year project). – N…”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="e26ff1ee-9332-5503-9793-3a0e8980947d">
+  <div class="title">Troy Park Changeroom Upgrade</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$2,000,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Troy Park Changeroom Upgrade ($2,000,000) Design and construction of upgraded changeroom facilities.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> <span class="pill">possible duplicate</span> </div>
+</div>
+<div class="card" data-project="7f4e4208-4281-5450-9da0-d354b3f25c2c">
+  <div class="title">Upgrade Northshore Drive from carriageway with single lanes Boulevard Upgrade lanes from Whitfords Avenue intersection. Includes new single</div>
+  <div class="where">City of Joondalup · South-West<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,884,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“SBS2101 – Upgrade Northshore Drive from carriageway with single lanes Boulevard Upgrade lanes from Whitfords Avenue intersection. Includes new single – single carriageway to dual in each direction with on-road cycle Kallaroo to 140m north of Northshore Avenue lane roundabout at Northshore Ave. – So…”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="a6dbdadf-b6c2-5d3a-9bf2-1d4496946c12">
+  <div class="title">Upgrade of Eddystone Avenue Drive. Works include construction - Joondalup to Honeybush and modification of turning lanes Drive intersections (multi-year</div>
+  <div class="where">City of Joondalup · North<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,259,102 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal / Grant</div>
+<div class="quote">“RDC2032 – Upgrade of Eddystone Avenue Drive. Works include construction - Joondalup to Honeybush and modification of turning lanes Drive intersections (multi-year – from Joondalup Drive to Honeybush of an additional westbound lane Joondalup at Joondalup Drive and Honeybush project). – North – $1,25…”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="0b78e665-b0a2-55f3-9ef2-f111d0cca381">
+  <div class="title">Install left turn deceleration lane, right turn on Marmion Avenue. Intersection Upgrade Road eastern approach. Upgrade standards (multi-year project).</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip" title="matched">Footpath</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,000,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“SBS2092 – Install left turn deceleration lane, right turn on Marmion Avenue. Intersection Upgrade Road eastern approach. Upgrade standards (multi-year project). – seagull island in median and extend Reconfigure traffic island on Forrest Padbury pedestrian facilities to current – South – $1,000,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="d5a1f1e6-f5f7-5ac8-a60b-cb0345f1356e">
+  <div class="title">Upgrade of Craigie Leisure Centre/Whitfords a 4-way dual-lane roundabout connect to Pinnaroo Memorial intersection for Pinnaroo Memorial</div>
+  <div class="where">City of Joondalup · Central<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,000,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“RDC2033 – Upgrade of Craigie Leisure Centre/Whitfords a 4-way dual-lane roundabout connect to Pinnaroo Memorial intersection for Pinnaroo Memorial – Avenue T-intersection to including new leg on south side to Craigie and replacement of existing Tat Whitfords Avenue. – Central – $1,000,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="771bdbce-7809-5835-842a-20c7c1046e0d">
+  <div class="title">Upgrade to the coastal shared associated upgrades between Network Expansion installation of a shared pathway Gibson Avenue and Whitfords</div>
+  <div class="where">City of Joondalup · Various<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip" title="matched">Footpath</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,000,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant</div>
+<div class="quote">“FPN2299 – Upgrade to the coastal shared associated upgrades between Network Expansion installation of a shared pathway Gibson Avenue and Whitfords – pathway including other pathway- Hillarys and Burns Beach, and Multiple along Hepburn Avenue between Suburbs Avenue (multi-year project). – Various –…”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="89c8c90f-5f64-5673-aa62-0eaf46912baa">
+  <div class="title">Winnacott Reserve Changeroom Upgrade</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$1,000,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Winnacott Reserve Changeroom Upgrade ($1,000,000) Design and construction of upgraded changeroom facilities.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> <span class="pill">possible duplicate</span> </div>
+</div>
+<div class="card" data-project="fb95466c-5055-53ab-894b-b6cc89eb94dc">
+  <div class="title">Renewal and upgrade of existing Mitigation Program including the Marmion Angling Seawall, Sorrento Groynes and</div>
+  <div class="where">City of Joondalup · Various<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$830,011 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant / CarryForward</div>
+<div class="quote">“FNM2103 – Renewal and upgrade of existing Mitigation Program including the Marmion Angling Seawall, Sorrento Groynes and – coastal protection infrastructure Multiple &amp; Aquatic Club Seawall, Sorrento Suburbs Mullaloo Seawall (multi-year project). – Various – $830,011”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">carry forward</span> <span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="66a58df4-7567-56ce-bbb4-fc4d82a33e6b">
+  <div class="title">Marmion Reserve Floodlighting Upgrade</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$700,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Marmion Reserve Floodlighting Upgrade ($700,000) Design and installation of floodlighting funded through a State Government election commitment.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> </div>
+</div>
+<div class="card" data-project="46495958-f794-5e7c-b0f4-a78e95d5d0d0">
+  <div class="title">Lighting Upgrades Upgrades to the sport lighting</div>
+  <div class="where">City of Joondalup · South<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$432,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant / Contribution</div>
+<div class="quote">“STL2203 – Lighting Upgrades Upgrades to the sport lighting – at Marri Park. Duncraig – South – $432,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.90)
+</div>
+</div>
+<div class="card" data-project="e38b51b1-daf4-51f8-8073-d6eb9ac8adfb">
+  <div class="title">Stage 1 of the redevelopment Redevelopment - Stage 1 community sporting facility, connectivity and landscaping</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$400,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Reserve</div>
+<div class="quote">“MPP2084 – Stage 1 of the redevelopment Redevelopment - Stage 1 community sporting facility, connectivity and landscaping – of Heathridge Park, including the new tennis court upgrades and associated Heathridge works – North- Central – $400,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="b9ccb865-01f2-5df3-bdb1-12c5ad3dc045">
+  <div class="title">Beasley Reserve Changeroom Upgrade</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Road Const</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$300,000 (current year, FY2026-27, GST unknown)</strong> · Funding: Reserve</div>
+<div class="quote">“Beasley Reserve Changeroom Upgrade ($300,000) Funding for the design and construction of the changeroom upgrade at Beasley Reserve.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> <span class="pill">possible duplicate</span> </div>
+</div>
+<div class="card" data-project="4d001aed-0bba-5040-b8a7-1a3625aa0c62">
+  <div class="title">Upgrade of The Plaza/West Coast Coast Drive Intersection single lane roundabout or alternative movements and pedestrian facilities.</div>
+  <div class="where">City of Joondalup · South-West<span class="chip" title="matched">Road Const</span> <span class="chip" title="matched">Intersection</span> <span class="chip implied" title="implied">Drainage</span> <span class="chip" title="matched">Footpath</span> <span class="chip implied" title="implied">Kerbing</span> <span class="chip implied" title="implied">Line Mark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$270,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Grant / Contribution</div>
+<div class="quote">“RDC2022 – Upgrade of The Plaza/West Coast Coast Drive Intersection single lane roundabout or alternative movements and pedestrian facilities. – Drive T-Junction intersection with treatment for right turn Sorrento – South-West – $270,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<h3 id="baseline-INTERSECTION">Intersection / traffic treatment <span class="muted small">top 10 of 10 by value</span></h3>
+<div class="card" data-project="5923fc6d-8c59-547f-bb36-be2b67a98358">
+  <div class="title">Ardross Street and Munro Road Roundabout Installation</div>
+  <div class="where">City of Melville · Ardross<span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$700,000 (current year, FY2026-27, GST unknown)</strong> · Funding: BlackSpot_State / Grant</div>
+<div class="quote">“Ardross Street and Munro Road Roundabout Installation ($700,000) External funding secured under the Black Spot funding program to install a roundabout at the intersection.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.80)
+<span class="pill">GST unknown</span> </div>
+</div>
+<div class="card" data-project="6a6c0a82-d17f-5353-9fe0-13823644eafa">
+  <div class="title">Norma Road and McCoy Street Roundabout</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$550,000 (current year, FY2026-27, GST unknown)</strong> · Funding: BlackSpot_State</div>
+<div class="quote">“Norma Road and McCoy Street Roundabout ($550,000) Modification of the existing roundabout under the Black Spot funding program.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.80)
+<span class="pill">GST unknown</span> </div>
+</div>
+<div class="card" data-project="a367c113-870d-5fd4-b5d8-97d466e1327c">
+  <div class="title">Justinian Street and Cleopatra Street Roundabout</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$227,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Justinian Street and Cleopatra Street Roundabout ($227,000) Installation of a new roundabout at the intersection.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.80)
+<span class="pill">GST unknown</span> </div>
+</div>
+<div class="card" data-project="26979e52-15e4-5c90-9652-f52926629658">
+  <div class="title">Planting of new trees at various Program 26/27 road verges and medians throughout</div>
+  <div class="where">City of Joondalup · Various<span class="chip" title="matched">Intersection</span> <span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$150,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“PDP2415 – Planting of new trees at various Program 26/27 road verges and medians throughout – locations across parks, open spaces, Multiple the City. Suburbs – Various – $150,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=45">City of Joondalup, Budget 2026-27, p. 45, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="69d805f9-a4c0-5af4-a4c6-4f55d1a12535">
+  <div class="title">Installation of lighting on Eddystone Infill Lighting roundabout.</div>
+  <div class="where">City of Joondalup · Central<span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$75,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“STL2175 – Installation of lighting on Eddystone Infill Lighting roundabout. – Avenue and Perilya Road Craigie – Central – $75,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="58714292-bf38-5ab6-b336-bacf7aaf2219">
+  <div class="title">begin installing the new traffic signals.</div>
+  <div class="where">City of Cockburn<span class="chip" title="matched">Intersection</span> <span class="chip" title="matched">Footpath</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Funding: BlackSpot_State</div><div class="quote">“begin installing the new traffic signals. ID: 4C.11 Directorate: Infrastructure Services”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=72">City of Cockburn, Project Plans 2026-2027 PDF document, p. 72, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">name only, no location</span> <span class="pill">value missing</span> </div>
+</div>
+<div class="card" data-project="70207c3d-2341-588c-91bb-14743405dbc3">
+  <div class="title">begin installing the new traffic signals.</div>
+  <div class="where">City of Cockburn<span class="chip" title="matched">Intersection</span> <span class="chip" title="matched">Footpath</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Funding: BlackSpot_State</div><div class="quote">“begin installing the new traffic signals. ID: 4C.12 Directorate: Infrastructure Services”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=75">City of Cockburn, Project Plans 2026-2027 PDF document, p. 75, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">name only, no location</span> <span class="pill">value missing</span> </div>
+</div>
+<div class="card" data-project="8e9bb1c6-4314-5b5d-8c66-2ff31b3621cb">
+  <div class="title">begin installing the new traffic signals.</div>
+  <div class="where">City of Cockburn · Beeliar<span class="chip" title="matched">Intersection</span> <span class="chip" title="matched">Footpath</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div class="quote">“begin installing the new traffic signals. ID: 4C.08 Directorate: Infrastructure Services”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=67">City of Cockburn, Project Plans 2026-2027 PDF document, p. 67, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.80)
+<span class="pill">value missing</span> </div>
+</div>
+<div class="card" data-project="b9861a24-826c-5315-9546-0724207ba2f4">
+  <div class="title">begin installing the new traffic signals.</div>
+  <div class="where">City of Cockburn<span class="chip" title="matched">Intersection</span> <span class="chip" title="matched">Footpath</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Funding: BlackSpot_State</div><div class="quote">“begin installing the new traffic signals. ID: 4C.13 Directorate: Infrastructure Services”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=77">City of Cockburn, Project Plans 2026-2027 PDF document, p. 77, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">name only, no location</span> <span class="pill">value missing</span> </div>
+</div>
+<div class="card" data-project="e90da1b0-1095-5fec-ac0f-9ca79d2366c4">
+  <div class="title">begin installing the new traffic signals.</div>
+  <div class="where">City of Cockburn<span class="chip" title="matched">Intersection</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Dates: Project End Date – $3,000,000</div><div class="quote">“begin installing the new traffic signals. ID: 4C.14 Directorate: Infrastructure Services Project Benefits • Upgraded traffic signals will significantly reduce the risk of crashes at the intersection, benefiting drivers, pedestrians, and cyclists by minimising confusion and improving predictability…”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=80">City of Cockburn, Project Plans 2026-2027 PDF document, p. 80, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">name only, no location</span> <span class="pill">value missing</span> </div>
+</div>
+<h3 id="baseline-DRAINAGE">Drainage <span class="muted small">top 2 of 2 by value</span></h3>
+<div class="card" data-project="c658c126-eec1-5367-9f93-6e5e66151373">
+  <div class="title">Stormwater Renewal Renewal of stormwater drainage</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Drainage</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$75,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“SWD2267 – Stormwater Renewal Renewal of stormwater drainage – at Deauville Place Connolly. Connolly – North- Central – $75,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=50">City of Joondalup, Budget 2026-27, p. 50, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.90)
+</div>
+</div>
+<div class="card" data-project="42d1726f-0e0f-55f6-8d2f-702429436f7c">
+  <div class="title">Implementation Improve amenity and aesthetics</div>
+  <div class="where">City of Joondalup · Various<span class="chip" title="matched">Drainage</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$25,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“SWD2266 – Implementation Improve amenity and aesthetics – Multiple of sumps across the City. Suburbs – Various – $25,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<h3 id="baseline-FOOTPATH">Footpaths / shared paths <span class="muted small">top 2 of 2 by value</span></h3>
+<div class="card" data-project="8d475478-1233-58a7-8933-e32b6777a9ba">
+  <div class="title">Construction of 2x shared paths. Ocean Reef Rd between Trappers - Trappers/Yellagonga (180m). 2nd section between through Yellagonga Regional</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Footpath</span> <span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$60,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“FPN2331 – Construction of 2x shared paths. Ocean Reef Rd between Trappers - Trappers/Yellagonga (180m). 2nd section between through Yellagonga Regional – 1st section along the north verge of Dr and Yellagonga Shared path Edgewater the Trappers Dr intsc. extending north Park to Apalie Trail (145m).…”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="473cb1c5-a0ce-5e47-98a0-28b011dedd0b">
+  <div class="title">Installation of two light poles, Security Lighting luminaires and smart controls Hepburn Avenue dual use pathway.</div>
+  <div class="where">City of Joondalup · South-East<span class="chip" title="matched">Footpath</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$20,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“STL2169 – Installation of two light poles, Security Lighting luminaires and smart controls Hepburn Avenue dual use pathway. – complete with energy efficient LED to provide security lighting along Kingsley – South-East – $20,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<h3 id="baseline-CARPARK">Car parks (cross-trade) <span class="muted small">top 5 of 5 by value</span></h3>
+<div class="card" data-project="3e612e0d-87c7-590c-9262-198a2d9ae376">
+  <div class="title">Goolugatup Heathcote Lower Development – Stage 2</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Carpark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$2,500,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Goolugatup Heathcote Lower Development – Stage 2 ($2,500,000) Construction of redevelopment works including shelter, welcome area, carpark, path and furniture.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> </div>
+</div>
+<div class="card" data-project="e95f1fa8-d626-56f0-83ff-a9f0f27a908f">
+  <div class="title">Renewal of existing park, public Renewal 26/27 carpark lighting infrastructure</div>
+  <div class="where">City of Joondalup · Various<span class="chip" title="matched">Carpark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$130,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“STL2184 – Renewal of existing park, public Renewal 26/27 carpark lighting infrastructure – open space, public access way and Multiple throughout the City. Suburbs – Various – $130,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=49">City of Joondalup, Budget 2026-27, p. 49, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="86082ff7-a6d8-51fb-9dea-5da430b210c1">
+  <div class="title">Construction of new carpark including installation of standard Improvements along Lymburner Drive adjacent Changerooms.</div>
+  <div class="where">City of Joondalup · South-West<span class="chip" title="matched">Carpark</span> <span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$100,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“PFP2083 – Construction of new carpark including installation of standard Improvements along Lymburner Drive adjacent Changerooms. – on the verge adjacent to Hillarys Park hardstand bays and ACROD facilities Hillarys to the Hillarys Park Toilets and – South-West – $100,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=46">City of Joondalup, Budget 2026-27, p. 46, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="f30561a5-570e-5b8f-a86e-a85768c2365f">
+  <div class="title">Renewal of pathway within the Pathway Renewal Beachside Park and the Burns</div>
+  <div class="where">City of Joondalup · Beach North<span class="chip" title="matched">Carpark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$20,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“FPR2305 – Renewal of pathway within the Pathway Renewal Beachside Park and the Burns – Burns Beach foreshore between Burns Beach foreshore carpark. – Beach North – $20,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="330dc594-8cda-58c0-9f2e-b974082f7f31">
+  <div class="title">budget approval.</div>
+  <div class="where">City of Cockburn · Treeby<span class="chip" title="matched">Carpark</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Funding: Reserve</div><div class="quote">“budget approval. ID: 3B.18 Directorate: Community and Place”</div>  <div class="source">Source: <a href="https://www.cockburn.wa.gov.au/getattachment/91e79b42-247f-4c86-a1bd-050ad2cf769f/ECM_12774885_v2_Project-Plans-2026-2027-pdf.aspx#page=39">City of Cockburn, Project Plans 2026-2027 PDF document, p. 39, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-High">High</span> (0.80)
+<span class="pill">value missing</span> </div>
+</div>
+<h3 id="baseline-BRIDGE">Bridges / underpasses <span class="muted small">top 1 of 1 by value</span></h3>
+<div class="card" data-project="0e2c6238-e6c1-56d7-94f3-76c68382ab11">
+  <div class="title">Moreau Mews Town Square Public Open Space Development</div>
+  <div class="where">City of Melville<span class="chip" title="matched">Bridge</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$4,500,000 (current year, FY2026-27, GST unknown)</strong></div>
+<div class="quote">“Moreau Mews Town Square Public Open Space Development ($4,500,000) Development and construction of a new park in the Canning Bridge Precinct.”</div>  <div class="source">Source: <a href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">GST unknown</span> </div>
+</div>
+<h3 id="baseline-STREETSCAPE">Streetscape (multi-trade) <span class="muted small">top 3 of 3 by value</span></h3>
+<div class="card" data-project="9bc8dc54-c1ee-5d7e-8282-2dd390796147">
+  <div class="title">Renewal of pathway along the Drive Pathway Renewal (park to school link).</div>
+  <div class="where">City of Joondalup · North<span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$60,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“FPR2311 – Renewal of pathway along the Drive Pathway Renewal (park to school link). – northern verge of Blue Mountain Drive Joondalup – North – $60,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="a73207c9-0ae4-50f2-bef8-5df7d4290c29">
+  <div class="title">Construction of new pathway - St Cloud to Baltusrol Circle (alongside Baltusrol Park) Baltusrol Rise.</div>
+  <div class="where">City of Joondalup · North- Central<span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$30,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“FPN2313 – Construction of new pathway - St Cloud to Baltusrol Circle (alongside Baltusrol Park) Baltusrol Rise. – along the southern verge of Fairway between St Cloud Gardens and Connolly – North- Central – $30,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+<div class="card" data-project="631a1c89-34ef-5d90-9764-025a16aada38">
+  <div class="title">Construction of new, school - Tasman to Pacific PAWs verge of Cutter Crescent between public access ways.</div>
+  <div class="where">City of Joondalup · Central<span class="chip" title="matched">Streetscape</span> </div>
+  <div>
+<span class="badge">adopted_budget</span>  </div>
+<div>Value: <strong>$30,000 (budget total, FY2026-27, GST unknown)</strong> · Funding: Municipal</div>
+<div class="quote">“FPN2238 – Construction of new, school - Tasman to Pacific PAWs verge of Cutter Crescent between public access ways. – connection pathway on the northern the Tasman Road and Pacific Way Beldon – Central – $30,000”</div>  <div class="source">Source: <a href="https://www.joondalup.wa.gov.au/awcontent/Web/Documents/Budget,%20Fees%20and%20Financial%20Reports/Budget-2026-27.pdf#page=44">City of Joondalup, Budget 2026-27, p. 44, retrieved 2026-11-22</a></div>
+  <div class="small">Confidence: <span class="conf-Medium">Medium</span> (0.70)
+<span class="pill">wrapped text</span> </div>
+</div>
+
+<h2 id="signals">This week’s signals</h2>
+<p class="muted">No changes beyond the baseline yet.</p>
+
+
+<h2 id="review">Needs review</h2>
+<h4>Possible duplicates (4)</h4>
+<table><thead><tr><th>Project A</th><th>Project B</th><th>Match</th></tr></thead><tbody>
+<tr><td>2026-27 CAPITAL WORKS <span class="muted small">(City of Joondalup)</span><br><a class="small" href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=258">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 258, retrieved 2026-11-22</a></td>
+<td>ADJUSTMENT OF 2026-27 BUDGET INCLUDING THE CAPITAL WORKS <span class="muted small">(City of Joondalup)</span><br><a class="small" href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=149">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 149, retrieved 2026-11-22</a></td>
+<td>possible match (fuzzy, 1.00)</td></tr><tr><td>Winnacott Reserve Changeroom Upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>Changeroom upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>possible match (fuzzy, 1.00)</td></tr><tr><td>Changeroom upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>Beasley Reserve Changeroom Upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>possible match (fuzzy, 1.00)</td></tr><tr><td>Changeroom upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>Troy Park Changeroom Upgrade <span class="muted small">(City of Melville)</span><br><a class="small" href="https://www.melvillecity.com.au/our-city/about-our-city/capital-works-program">City of Melville, Capital works program 2026-27, p. 1, retrieved 2026-11-22</a></td>
+<td>possible match (fuzzy, 1.00)</td></tr></tbody></table>
+<h4>Low-confidence items (22)</h4>
+<table><thead><tr><th>Project</th><th>Council</th><th>Suburb</th><th class="num">Value</th><th>Stage</th><th>Confidence</th><th>Source</th></tr></thead><tbody>
+<tr><td>(2026/MINUTE NO 0152) Budget Amendments to the 2026-27</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">$13,371</td><td>budget_review</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">GST unknown</span> <span class="pill">name only, no location</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=72">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 72, retrieved 2026-11-22</a></td></tr>
+<tr><td>ADJUSTMENT OF 2026-27 BUDGET INCLUDING THE CAPITAL WORKS</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">$457</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">GST unknown</span> <span class="pill">name only, no location</span> <span class="pill">possible duplicate</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=149">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 149, retrieved 2026-11-22</a></td></tr>
+<tr><td>(2026/MINUTE NO 0155) Asset Management Plans 2024 to 2028</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>deferred</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=206">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 206, retrieved 2026-11-22</a></td></tr>
+<tr><td>00723</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=337">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 337, retrieved 2026-11-22</a></td></tr>
+<tr><td>01425</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=355">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 355, retrieved 2026-11-22</a></td></tr>
+<tr><td>15/7/2026 4PM - CLC TEAM SPORTS JULY</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=385">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 385, retrieved 2026-11-22</a></td></tr>
+<tr><td>2026-27 CAPITAL WORKS</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">possible duplicate</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=258">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 258, retrieved 2026-11-22</a></td></tr>
+<tr><td>263.55</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=176">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 176, retrieved 2026-11-22</a></td></tr>
+<tr><td>286.20</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=176">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 176, retrieved 2026-11-22</a></td></tr>
+<tr><td>BUNNINGS GROUP LIMITED (TOOL KIT</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=342">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 342, retrieved 2026-11-22</a></td></tr>
+<tr><td>COMMITTEE STRUCTURE REVIEW (WARD - ALL)</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>tender_awarded</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=69">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 69, retrieved 2026-11-22</a></td></tr>
+<tr><td>Converting an area from overhead power lines to</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=220">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 220, retrieved 2026-11-22</a></td></tr>
+<tr><td>EF191869</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=89">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 89, retrieved 2026-11-22</a></td></tr>
+<tr><td>EF192097</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=93">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 93, retrieved 2026-11-22</a></td></tr>
+<tr><td>FINANCIAL ACTIVITY STATEMENT - AUGUST 2026 (SUBJECT TO END</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=130">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 130, retrieved 2026-11-22</a></td></tr>
+<tr><td>FUTURO NOMINEES PTY LTD</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=355">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 355, retrieved 2026-11-22</a></td></tr>
+<tr><td>ITEM 2 - STATUS REPORT ON</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=220">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 220, retrieved 2026-11-22</a></td></tr>
+<tr><td>PROPOSAL</td><td>City of Cockburn</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://www.cockburn.wa.gov.au/getattachment/a9c882fe-03ab-4938-bc8d-53ceab8e719b/ECM_12915695_v3_Ordinary-Council-Meeting-Minutes-13-October-2026-pdf.aspx#page=17">City of Cockburn, Ordinary Council Meeting - Minutes - 13 October 2026 PDF document, p. 17, retrieved 2026-11-22</a></td></tr>
+<tr><td>REGIONAL HOMELESSNESS PLAN (WARD – ALL)</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=39">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 39, retrieved 2026-11-22</a></td></tr>
+<tr><td>REVIEW OF PROCEDURES FOR STRATEGY SESSIONS, BRIEFING</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=83">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 83, retrieved 2026-11-22</a></td></tr>
+<tr><td>STATEMENT OF FINANCIAL POSITION - AUGUST 2026 (SUBJECT TO</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=130">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 130, retrieved 2026-11-22</a></td></tr>
+<tr><td>SUPPORTING COMMENTARY - AUGUST 2026 (SUBJECT TO END OF</td><td>City of Joondalup</td><td>—</td>
+  <td class="num">—</td><td>—</td>
+  <td><span class="conf-Low">Low</span> <span class="pill">name only, no location</span> <span class="pill">value missing</span></td>
+  <td class="small"><a href="https://api.joondalup.wa.gov.au/files/councilmeetings/2026/27 October 2026 - Council - Minutes inc Attach.pdf?v=1#page=130">City of Joondalup, 27 October 2026 - Council - Minutes inc Attach, p. 130, retrieved 2026-11-22</a></td></tr>
+</tbody></table>
+<h4>Documents needing attention</h4>
+<p class="muted">All documents extracted cleanly.</p>
+<h2 id="health">Coverage &amp; health</h2>
+<table><thead><tr><th>Council</th><th>robots.txt</th><th class="num">Requests</th><th class="num">New / changed</th><th class="num">Unchanged (304)</th><th class="num">Blocked / skipped</th><th class="num">Failed</th><th>State</th></tr></thead><tbody>
+<tr><td>City of Cockburn</td><td>not checked</td><td class="num">5</td><td class="num">5</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>ok</td></tr><tr><td>City of Joondalup</td><td>not checked</td><td class="num">6</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>ok</td></tr><tr class="red"><td>City of Melville</td><td>not checked</td><td class="num">5</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">4</td><td>errors</td></tr></tbody></table>
+
+<footer id="footer">
+<p>Council material © the respective City. Facts are extracted from public documents and link to the official source; documents are not reproduced. Verify against the source before relying on any figure. Values are as stated in source documents; GST basis may be unknown.</p>
+<p>Some councils (Cockburn, Melville, Perth) limit reuse of their website material to personal or non-commercial use, and Rockingham requires written permission to reproduce material. This digest is a private research pilot that republishes facts and links only.</p>
+</footer>
+</body>
+</html>
