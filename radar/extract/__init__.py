@@ -1,1 +1,16 @@
-"""Extractors (PLAN.md §4.3). Not implemented yet."""
+"""Extractors (PLAN.md §4.3): ``extract(doc_text, source_document) -> list[ProjectMention]`` per module."""
+
+from __future__ import annotations
+
+import importlib
+
+IMPLEMENTED = {
+    "melville_cwp": "radar.extract.melville_cwp",
+}
+
+
+def get_extractor(name: str):
+    """The ``extract`` callable for ``name``; KeyError if the extractor is not built yet (M9, M11, M17)."""
+    if name not in IMPLEMENTED:
+        raise KeyError(f"extractor {name!r} is not implemented yet")
+    return importlib.import_module(IMPLEMENTED[name]).extract

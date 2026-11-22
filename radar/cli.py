@@ -17,7 +17,6 @@ NOT_IMPLEMENTED_EXIT = 2
 
 # (name, milestone, help). Milestones refer to PLAN.md §10.
 STUB_COMMANDS: list[tuple[str, str, str]] = [
-    ("extract", "M8", "extract project mentions from fetched documents"),
     ("link", "M12", "dedupe mentions into projects (idempotent)"),
     ("digest", "M14", "write the weekly digest to out/ (HTML, and PDF if WeasyPrint is installed)"),
     ("export", "M15", "write out/ui/data.js for the web UI"),
@@ -172,6 +171,46 @@ def _list(args: argparse.Namespace) -> int:
     return 0
 
 
+def _extract(args: argparse.Namespace) -> int:
+    from radar import db
+    from radar.extract import IMPLEMENTED
+    from radar.ingest import extract_document, fetch_and_extract
+
+    conn = db.connect(args.db)
+    if args.file:
+        missing = [n for n in ("council", "extractor", "url") if not getattr(args, n)]
+        if missing:
+            print(f"--file needs --{', --'.join(missing)}", file=sys.stderr)
+            return 2
+        doc, n = extract_document(conn, args.file, council_id=args.council, url=args.url, extractor=args.extractor,
+                                  doc_type=args.doc_type, content_type="text/html" if str(args.file).lower().endswith(("htm", "html")) else None)
+        print(f"{doc.extract_status}: {n} mention(s) from {args.file}")
+        return 0
+    if not args.council:
+        print("give --council X (live: fetches that council's configured documents) or --file PATH", file=sys.stderr)
+        return 2
+    from radar.adapters import list_council
+    from radar.adapters import static_links
+    from radar.fetch import Fetcher
+
+    councils = load_councils()
+    council = councils.councils.get(args.council)
+    if council is None:
+        print(f"unknown council {args.council!r}; configured: {', '.join(councils.councils)}", file=sys.stderr)
+        return 2
+    fetcher = Fetcher(config=councils, conn=conn)
+    # Annual documents only (static_links); meeting extractors arrive in later milestones.
+    council_static = type(council)(**{**council.__dict__, "adapters": [a for a in council.adapters if a.type == "static_links"]})
+    refs = [r for r in list_council(council_static, fetcher) if r.extractor in IMPLEMENTED]
+    if not refs:
+        print("no documents with an implemented extractor")
+        return 0
+    for ref in refs:
+        result = fetch_and_extract(fetcher, conn, ref, allow_large=args.allow_large)
+        print(f"{result.outcome:<12} {result.mentions:>4} mention(s)  {ref.url}  {result.detail or ''}")
+    return 0
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -214,6 +253,18 @@ def build_parser() -> argparse.ArgumentParser:
     lst.add_argument("--council", required=True, help="council key from config/councils.yaml")
     lst.add_argument("--limit", type=int, default=30, help="max rows to print (newest first)")
     lst.set_defaults(handler=_list)
+
+    ex = sub.add_parser("extract", help="extract project mentions from documents into the DB [M8]",
+                        description="Live: fetch a council's configured annual documents (static_links) and run their "
+                                    "extractor. Offline: --file PATH --council X --extractor E --url URL.")
+    ex.add_argument("--council", help="council key from config/councils.yaml")
+    ex.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    ex.add_argument("--file", help="extract a local file instead of fetching (no network)")
+    ex.add_argument("--extractor", help="extractor name for --file (melville_cwp, cockburn_plans)")
+    ex.add_argument("--url", help="source URL to record for --file")
+    ex.add_argument("--doc-type", default="other")
+    ex.add_argument("--allow-large", action="store_true", help="allow documents over the 40 MB threshold")
+    ex.set_defaults(handler=_extract)
 
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)
