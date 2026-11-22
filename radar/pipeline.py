@@ -27,6 +27,7 @@ log = logging.getLogger(__name__)
 
 ANNUAL_TYPES = ("budget", "capital_program", "project_plans", "blackspot_list")
 MEETING_TYPES = ("minutes", "agenda")
+FAILURE_PREFIXES = ("http_error", "challenge", "error", "paused")
 OPTIONAL_EXTRACTORS = {"blackspot"}            # disabled unless named in ``enable`` (PLAN M17)
 
 
@@ -110,7 +111,8 @@ class CouncilResult:
         self.docs.append({"url": res.ref.url, "doc_type": res.ref.doc_type, "title": res.ref.title,
                           "meeting_date": res.ref.meeting_date, "extractor": res.ref.extractor,
                           "outcome": res.outcome, "mentions": res.mentions, "detail": res.detail})
-        if res.outcome == "error":
+        # hard failures go in the errors list; policy skips (robots, blocklist, size) stay in the documents list
+        if res.outcome == "error" or (res.outcome == "skipped" and (res.detail or "").startswith(FAILURE_PREFIXES)):
             self.errors.append(f"{res.ref.url}: {res.detail}")
 
 

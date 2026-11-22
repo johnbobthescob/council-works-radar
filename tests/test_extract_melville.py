@@ -103,3 +103,15 @@ def test_extract_document_end_to_end_offline(tmp_path):
     _, n2 = extract_document(conn, FIX, council_id="melville", url=URL, extractor="melville_cwp",
                              doc_type="capital_program", content_type="text/html", cache_dir=tmp_path / "cache")
     assert n2 == 5 and len(db.mentions_for_document(conn, doc.doc_id)) == 5
+
+
+def test_refetch_with_new_bytes_but_same_text_is_not_a_new_version(tmp_path):
+    conn = db.connect(":memory:")
+    kw = dict(council_id="melville", url=URL, extractor="melville_cwp", doc_type="capital_program",
+              content_type="text/html", cache_dir=tmp_path / "c")
+    d1, n1 = extract_document(conn, FIX, **kw)
+    copy = tmp_path / "page.html"                                   # e.g. a per-request token in a <script>
+    copy.write_bytes(FIX.read_bytes() + b"\n<script>var token='abc123';</script>\n")
+    d2, n2 = extract_document(conn, copy, **kw)
+    assert d2.doc_id == d1.doc_id and d2.version_no == 1 and n2 == n1
+    assert len(db.all_source_documents(conn)) == 1

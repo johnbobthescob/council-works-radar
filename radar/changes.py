@@ -72,8 +72,9 @@ def project_state(project: Project, source_count: int) -> dict:
 def current_state(conn: sqlite3.Connection) -> dict[str, dict]:
     """``project_id -> state`` from the database as it is now."""
     counts = {r[0]: r[1] for r in conn.execute(
-        "SELECT l.project_id, COUNT(DISTINCT m.doc_id) FROM project_mention_link l "
-        "JOIN project_mention m ON m.mention_id = l.mention_id GROUP BY l.project_id")}
+        "SELECT l.project_id, COUNT(DISTINCT d.doc_key) FROM project_mention_link l "
+        "JOIN project_mention m ON m.mention_id = l.mention_id JOIN source_document d ON d.doc_id = m.doc_id "
+        "GROUP BY l.project_id")}       # distinct documents (URLs): a new version of the same doc is not a new source
     return {p.project_id: project_state(p, counts.get(p.project_id, 0)) for p in db.all_projects(conn)}
 
 

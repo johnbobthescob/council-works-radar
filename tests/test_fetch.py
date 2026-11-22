@@ -322,3 +322,35 @@ def test_prune_raw(server, tmp_path, clock):
     r = f.fetch(server.base + "/a.pdf")
     os.utime(r.path, (1, 1))
     assert f.prune_raw(30) == 1 and not r.path.exists()
+
+
+def test_timeout_retried_once_then_succeeds(server, tmp_path, clock):
+    f = make_fetcher(tmp_path, clock)
+    real, calls = f.session.request, []
+
+    def flaky(method, url, *a, **kw):
+        if url.endswith("/robots.txt"):
+            return real(method, url, *a, **kw)
+        calls.append(url)
+        if len(calls) == 1:
+            raise requests.ReadTimeout("stalled")
+        return real(method, url, *a, **kw)
+
+    f.session.request = flaky
+    r = f.fetch(server.base + "/a.pdf")
+    assert r.outcome == F.OK and len(calls) == 2 and 10 in clock.sleeps
+
+
+def test_timeout_twice_gives_error_without_more_retries(server, tmp_path, clock):
+    f = make_fetcher(tmp_path, clock)
+    real, calls = f.session.request, []
+
+    def dead(method, url, *a, **kw):
+        if url.endswith("/robots.txt"):
+            return real(method, url, *a, **kw)
+        calls.append(1)
+        raise requests.ConnectTimeout("down")
+
+    f.session.request = dead
+    r = f.fetch(server.base + "/a.pdf")
+    assert r.outcome == F.ERROR and len(calls) == 2

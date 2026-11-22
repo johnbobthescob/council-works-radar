@@ -42,6 +42,9 @@ def extract_document(conn, path: str | Path, *, council_id: str, url: str, extra
     key = canonical_url(url)
     prior = db.latest_document_for_key(conn, key)
     existing = db.get_source_document(conn, doc_id)
+    if existing is None and prior and not prior.superseded_by and prior.text_sha256 == dt.text_sha256:
+        # New bytes but identical text (per-request tokens in HTML, re-saved PDFs): the same version, not a new one.
+        existing = prior
     now = utc_now()
     doc = existing or SourceDocument(
         doc_id=doc_id, doc_key=key, council_id=council_id, source_url=url, doc_type=doc_type, title=title,

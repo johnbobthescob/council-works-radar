@@ -154,3 +154,14 @@ def test_previous_snapshot_uses_latest_other_run(conn, baseline):
     fresh = db.connect(":memory:")
     assert changes.previous_snapshot(fresh, "x") is None
     assert changes.iso_week(datetime(2027, 1, 3, 20, 0, tzinfo=timezone.utc)) == "2027-W01"   # Perth (UTC+8) is already Mon 4 Jan
+
+
+def test_new_version_of_same_document_is_not_source_added(conn, baseline):
+    run_cycle(conn, datetime(2026, 11, 16, 1, tzinfo=timezone.utc))
+    v2 = SourceDocument(doc_id=("v" * 64), doc_key=baseline.doc_key, council_id="joondalup", source_url=baseline.source_url,
+                        doc_type="budget", meeting_date="2026-07-01", retrieved_at="2026-11-23T00:00:00+00:00", version_no=2)
+    db.upsert_source_document(conn, v2)
+    mention(conn, v2, "1", "Warwick Road", council_project_code="RPR1", value_amount=400000, value_basis="budget_total",
+            stage="adopted_budget", road_name="Warwick Road", financial_year="2026-27")
+    _, report = run_cycle(conn, datetime(2026, 11, 23, 1, tzinfo=timezone.utc))
+    assert "source_added" not in by_code(conn, report, "RPR1")

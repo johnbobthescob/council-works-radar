@@ -279,8 +279,12 @@ def test_link_over_extractor_output_is_idempotent(tmp_path):
     pdf = build_schedule_pdf(tmp_path / "s.pdf")
     extract_document(conn, pdf, council_id="joondalup", url=JURL, extractor="joondalup_budget", doc_type="budget",
                      financial_year="2026-27", cache_dir=tmp_path / "c")
-    pdf.write_bytes(pdf.read_bytes() + b"\n% new version\n")          # same URL, new bytes -> version 2
-    extract_document(conn, pdf, council_id="joondalup", url=JURL, extractor="joondalup_budget", doc_type="budget",
+    import pymupdf
+
+    with pymupdf.open(pdf) as d:                                    # same URL, new text -> version 2
+        d[0].insert_text((900, 30), "Revised", fontsize=8)
+        d.save(tmp_path / "s2.pdf")
+    extract_document(conn, tmp_path / "s2.pdf", council_id="joondalup", url=JURL, extractor="joondalup_budget", doc_type="budget",
                      financial_year="2026-27", cache_dir=tmp_path / "c")
     rep = dedupe.link(conn)
     joondalup = db.all_projects(conn, "joondalup")

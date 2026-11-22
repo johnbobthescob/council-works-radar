@@ -196,3 +196,9 @@ def test_html_still_written_when_every_pdf_engine_fails(conn, tmp_path, monkeypa
     monkeypatch.setattr(digest, "html_to_pdf", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("no engines")))
     res = digest.write_digest(conn, tmp_path, "2026-W47")
     assert res.html_path.exists() and res.pdf_path is None and "no engines" in res.pdf_error
+
+
+def test_inline_css_is_not_html_escaped(conn):
+    html = digest.render_html(digest.build_context(conn))
+    style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+    assert "&#34;" not in style and "&quot;" not in style and 'content: "Page "' in style

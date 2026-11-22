@@ -312,6 +312,12 @@ class Fetcher:
                         timeout=self.timeout, allow_redirects=False, stream=True,
                     )
                 except requests.RequestException as exc:
+                    transient = isinstance(exc, (requests.Timeout, requests.ConnectionError))
+                    if transient and attempt == 0 and self.backoff:     # one polite retry for a stalled server
+                        self._log(method, current, started=started, robots=robots_decision,
+                                  note=f"error: {type(exc).__name__}; retry in {self.backoff[0]}s")
+                        self._sleep(self.backoff[0])
+                        continue
                     self._log(method, current, started=started, robots=robots_decision,
                               note=f"error: {type(exc).__name__}: {exc}")
                     return FetchResult(url, ERROR, reason=f"{type(exc).__name__}: {exc}", final_url=current)
