@@ -7,6 +7,7 @@ adds the polite fetcher in front. A 304 reuses the stored document and mentions.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -50,7 +51,8 @@ def extract_document(conn, path: str | Path, *, council_id: str, url: str, extra
         version_no=(prior.version_no + 1) if prior else 1)
     doc.last_checked_at = now
 
-    mentions = extract(dt, doc) if dt.status != "failed" else []
+    kwargs = {"path": path} if "path" in inspect.signature(extract).parameters else {}
+    mentions = extract(dt, doc, **kwargs) if dt.status != "failed" else []
     doc.extractor_version = ",".join(sorted({m.extractor_version or "" for m in mentions})) or None
     if dt.status == "ocr_needed":
         doc.extract_status = "ocr_needed"

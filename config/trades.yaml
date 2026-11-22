@@ -157,7 +157,7 @@ trades:
 
 # Code-prefix priors (PLAN §6.3 step 2; RESEARCH §5.5). Strong priors, recorded as prefix:<code>.
 code_prefixes:
-  joondalup: {RPR: ROAD_RESURF, RDC: ROAD_CONST, PEP: NON_CIVIL}   # extend from fixture in M9
+  joondalup: {RPR: ROAD_RESURF, RDC: ROAD_CONST, PEP: NON_CIVIL}   # only these 3 families are documented (R§1.2.1); extend after the M16 spot-check
 
 # A bare single-token keyword match starting with the key (pipe, path, landscap) counts only when one of
 # these context words appears (as a substring) in the same text.

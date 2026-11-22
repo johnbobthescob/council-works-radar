@@ -1,0 +1,20 @@
+# Text-layer fixture for tests/test_extract_joondalup.py (pdftotext -layout style, 2+ spaces between cells).
+# Facts from RESEARCH.md §1.2.1 (City of Joondalup Budget 2026-27 capital works schedule, retrieved 2026-11-22):
+#   RPR3542 W5033 621 Warwick Road (westbound) / ...Resurfacing and rehabilitation works... / Warwick / South-East /
+#     135,455 ... 270,909 ... 406,364   (the column holding 270,909 is not recorded: placed under Grants New here)
+#   RDC2032 W4530 621 Eddystone Ave - Joondalup to Honeybush / Joondalup / North / 509,102 ... 750,000
+#     (750,000 assumed to be Expenditure; Grants New 240,898 derived as 750,000 - 509,102; no description recorded)
+# Only these two rows are documented in RESEARCH; re-check against the real PDF at the M16 spot-check.
+# Lines starting with '#' are stripped by the test.
+Project   Cost   Team  Project Name               Description                     Suburb      Ward             Municipal       Reserve         Trust        Grants        Grants  Contribution       Brought          Loan   Expenditure
+Number    Code                                                                                                                                                 New          Cfwd                         Fwd
+
+Road Preservation / Resurfacing
+                                                  Resurfacing and
+RPR3542   W5033  621   Warwick Road (westbound)   rehabilitation works            Warwick     South-East         135,455             -             -       270,909             -             -             -             -       406,364
+
+Road Construction
+RDC2032   W4530  621   Eddystone Ave - Joondalup                                  Joondalup   North              509,102             -             -       240,898             -             -             -             -       750,000
+                       to Honeybush
+
+                       Total Capital Works                                                                       644,557             -             -       511,807             -             -             -             -     1,156,364

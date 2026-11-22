@@ -272,3 +272,11 @@ def lookup_suburb(text: str | None, council: str | None = None) -> str | None:
         if re.search(rf"(?<!\w){re.escape(name)}(?!\w)", text, re.IGNORECASE) and (best is None or len(name) > len(best)):
             best = name
     return best
+
+
+_ROAD_NAME_RE = re.compile(rf"^\s*(?:[A-Z][\w'’.]*\s+){{1,4}}(?:{_ROAD_TYPE_RE})\b\.?\s*(?:\([^)]*\))?\s*$", re.IGNORECASE)
+
+
+def looks_like_road(text: str | None) -> bool:
+    """True for a bare road name, optionally with a bracketed qualifier: 'Warwick Road (westbound)', 'Eddystone Ave'."""
+    return bool(text and _ROAD_NAME_RE.match(text))
