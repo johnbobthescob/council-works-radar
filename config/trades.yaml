@@ -20,7 +20,7 @@ trades:
       - 'tennis'
       - 'netball'
       - 'basketball'
-      - '\bcourts?\b'
+      - '\b(?:sports?|hard|multi-?purpose|volleyball|squash|bocce) courts?\b'   # not bare "court": it is also a road type
       - 'synthetic (?:turf|surface)'
       - 'bowling green'
       - 'cricket (?:pitch|wicket)'
@@ -38,7 +38,14 @@ trades:
       - 'dual carriageway'
       - 'road construction'
       - '\breconstruct\w*'
-    negative: []
+    negative:          # "upgrade"/"extension" are generic: buildings and IT are not road works
+      - '\bbuildings?\b'
+      - 'pavilion'
+      - 'club ?(?:house|rooms?)'
+      - '\blibrar(?:y|ies)'
+      - '\bIT (?:systems?|network|software)'
+      - '\bsoftware'
+    on_negative: NON_CIVIL
 
   INTERSECTION:
     label: Intersection / traffic treatment
@@ -79,6 +86,8 @@ trades:
       - '\bpedestrian'
       - '\bcycleway'
       - 'bike lane'
+      - '\bpaths?\s*(?:&|and|,)\s*kerb'     # "Roads, Paths & Kerb Renewals"
+      - '\bpaths? (?:renewal|program)'
       - '\bpath\b'       # bare "path" needs foot/shared/cycle context (context_required below)
     negative:
       - 'bush ?walk'
@@ -133,6 +142,11 @@ trades:
       - '\bbuildings?\b'
       - '\bhvac\b'
       - 'change ?rooms?'
+      - '\bpavilion'
+      - 'club ?(?:house|rooms?)'
+      - '\blibrar(?:y|ies)'
+      - '\btoilets?\b'
+      - '\bplayground'
       - '\bIT (?:systems?|network|upgrade|software)'   # bare "IT" would match "it" (patterns are case-insensitive)
     negative: []
 
@@ -145,7 +159,8 @@ trades:
 code_prefixes:
   joondalup: {RPR: ROAD_RESURF, RDC: ROAD_CONST, PEP: NON_CIVIL}   # extend from fixture in M9
 
-# A bare keyword counts only when one of these context words appears in the same text.
+# A bare single-token keyword match starting with the key (pipe, path, landscap) counts only when one of
+# these context words appears (as a substring) in the same text.
 context_required:
   pipe: [drain, stormwater]
   path: [foot, shared, cycle]

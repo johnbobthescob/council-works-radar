@@ -19,7 +19,6 @@ NOT_IMPLEMENTED_EXIT = 2
 STUB_COMMANDS: list[tuple[str, str, str]] = [
     ("list", "M6", "list recent source documents for a council (--council X)"),
     ("extract", "M8", "extract project mentions from fetched documents"),
-    ("trades-report", "M5", "per-trade counts and top UNKNOWN project names"),
     ("link", "M12", "dedupe mentions into projects (idempotent)"),
     ("digest", "M14", "write the weekly digest to out/ (HTML, and PDF if WeasyPrint is installed)"),
     ("export", "M15", "write out/ui/data.js for the web UI"),
@@ -97,6 +96,57 @@ def _prune(args: argparse.Namespace) -> int:
     return 0
 
 
+def trades_report_text(conn, top: int = 20) -> str:
+    """Per-trade mention counts and the most frequent UNKNOWN project names (PLAN §6.5 tuning loop)."""
+    import json
+    from collections import Counter
+
+    per_trade: Counter[str] = Counter()
+    unknown: Counter[str] = Counter()
+    total = 0
+    for row in conn.execute("SELECT project_name_raw, trade_labels FROM project_mention"):
+        total += 1
+        codes = {lab["code"] for lab in json.loads(row["trade_labels"] or "[]")} or {"UNKNOWN"}
+        per_trade.update(codes)
+        if codes == {"UNKNOWN"}:
+            unknown[row["project_name_raw"].strip()] += 1
+    lines = [f"mentions: {total}"]
+    if not total:
+        lines.append("no mentions in the database yet (extractors arrive in M8+); use --gold to check the rules")
+        return "\n".join(lines)
+    lines.append("per-trade counts (a mention can have several labels):")
+    lines += [f"  {code:<13} {n}" for code, n in per_trade.most_common()]
+    lines.append(f"top {top} UNKNOWN names:")
+    lines += [f"  {n:>4}  {name}" for name, n in unknown.most_common(top)] or ["  (none)"]
+    return "\n".join(lines)
+
+
+def gold_report_text(path=None) -> tuple[str, bool]:
+    from radar import trades
+
+    rows = trades.load_gold(path) if path else trades.load_gold()
+    metrics = trades.evaluate_gold(rows)
+    lines = [f"gold rows: {len(rows)}", f"{'label':<13} {'prec':>5} {'recall':>6}  tp fp fn"]
+    ok = True
+    for code, m in metrics.items():
+        flag = "" if m["precision"] >= 0.85 and m["recall"] >= 0.85 else "  <-- below 0.85"
+        ok &= not flag
+        lines.append(f"{code:<13} {m['precision']:>5.2f} {m['recall']:>6.2f}  {m['tp']:>2} {m['fp']:>2} {m['fn']:>2}{flag}")
+    return "\n".join(lines), ok
+
+
+def _trades_report(args: argparse.Namespace) -> int:
+    from radar import db
+
+    if args.gold is not None:
+        text, ok = gold_report_text(args.gold or None)
+        print(text)
+        return 0 if ok else 1
+    conn = db.connect(args.db)
+    print(trades_report_text(conn, args.top))
+    return 0
+
+
 def _make_stub(name: str, milestone: str):
     def _handler(_args: argparse.Namespace) -> int:
         print(
@@ -125,6 +175,14 @@ def build_parser() -> argparse.ArgumentParser:
     robots.add_argument("--offline", action="store_true", help="use blocklist and cached robots.txt only; no network")
     robots.add_argument("--url", action="append", default=[], help="check this URL instead of the configured hosts (repeatable)")
     robots.set_defaults(handler=_robots_check)
+
+    tr = sub.add_parser("trades-report", help="per-trade counts and top UNKNOWN project names [M5]",
+                        description="Tuning aid for config/trades.yaml (PLAN §6.5). --gold checks the gold CSV instead.")
+    tr.add_argument("--db", default=None, help="SQLite path (default data/radar.sqlite)")
+    tr.add_argument("--top", type=int, default=20, help="how many UNKNOWN names to list")
+    tr.add_argument("--gold", nargs="?", const="", default=None, metavar="CSV",
+                    help="print per-label precision/recall on the gold CSV (default tests/fixtures/trade_gold.csv); exit 1 if < 0.85")
+    tr.set_defaults(handler=_trades_report)
 
     prune = sub.add_parser("prune", help="delete .cache/raw files older than N days [M2]")
     prune.add_argument("--days", type=int, default=30)

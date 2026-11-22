@@ -1,0 +1,42 @@
+# Initial gold seed (PLAN §6.5): names/phrases taken from RESEARCH.md observations plus hand-written
+# civil/non-civil examples in the same style. Labels are what a civil contractor would expect, incl. implied labels.
+# Extend with real names after M8. Columns: name,description,council,code,labels (pipe-separated)
+name,description,council,code,labels
+Warwick Road (westbound) Resurfacing and rehabilitation works,,joondalup,RPR3542,ROAD_RESURF
+Eddystone Ave - Joondalup to Honeybush,,joondalup,RDC2032,ROAD_CONST|KERBING|DRAINAGE|LINE_MARK
+Tennis court resurfacing,,joondalup,PEP2925,NON_CIVIL
+Elderberry Dr - South Lake to Berrigan Dr resurfacing,,cockburn,,ROAD_RESURF
+Roads Resurfacing Program,,cockburn,,ROAD_RESURF
+Ardross Street and Munro Road Roundabout Installation,External funding secured under the Black Spot funding program,melville,,INTERSECTION
+Norma Road and McCoy Street Roundabout,Black Spot,melville,,INTERSECTION
+Morris Buzzacott car park renewal,,melville,,CARPARK
+PCEC Car Park Resurfacing,,perth,,CARPARK|ROAD_RESURF
+"Roads, Paths & Kerb Renewals",,perth,,FOOTPATH|KERBING
+Asset Renewal - Paths & Kerbs,,perth,,FOOTPATH|KERBING
+Hutton Street Extension,,stirling,,ROAD_CONST|KERBING|DRAINAGE|LINE_MARK
+Road Renewal Program,,stirling,,ROAD_RESURF
+Footpaths Program,,stirling,,FOOTPATH
+Drainage Program,,stirling,,DRAINAGE
+"9 Leeway Court, Osborne Park Roof and HVAC",,stirling,,NON_CIVIL
+Leach Highway shared path,,melville,,FOOTPATH
+Smith Court resurfacing,,wanneroo,,ROAD_RESURF
+Basketball court resurfacing,,wanneroo,,NON_CIVIL
+Lakeside Drive duplication,,wanneroo,,ROAD_CONST|KERBING|DRAINAGE|LINE_MARK
+Stormwater sump renewal,,rockingham,,DRAINAGE
+Kerb ramp installation,,rockingham,,KERBING
+Line marking program,,rockingham,,LINE_MARK
+RRPM replacement,,rockingham,,LINE_MARK
+Wanneroo Road bridge strengthening,,wanneroo,,BRIDGE
+Hepburn Avenue streetscape,,joondalup,,STREETSCAPE
+Water pipe replacement,,wanneroo,,UNKNOWN
+Library extension,,stirling,,NON_CIVIL
+IT systems upgrade,,stirling,,NON_CIVIL
+Park path lighting,,melville,,UNKNOWN
+Principal Shared Path Mitchell Freeway PSP,,joondalup,,FOOTPATH
+Intersection upgrade Marmion Ave / Hepburn Ave,,joondalup,,INTERSECTION|ROAD_CONST|KERBING|DRAINAGE|LINE_MARK
+Traffic calming Hocking Road,Black Spot,wanneroo,,INTERSECTION
+Spray seal Karnup Road,,rockingham,,ROAD_RESURF
+Mill and fill asphalt overlay Beach Road,,rockingham,,ROAD_RESURF
+Changeroom refurbishment Percy Doyle Reserve,,joondalup,,NON_CIVIL
+Culvert replacement Gnangara Road,,wanneroo,,DRAINAGE
+Pipe drainage upgrade Alvan Street,,melville,,DRAINAGE|ROAD_CONST|KERBING|LINE_MARK
