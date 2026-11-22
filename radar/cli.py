@@ -282,6 +282,8 @@ def _run(args: argparse.Namespace) -> int:
               f"mentions {c['mentions_extracted']:>4}  projects {c['projects_total']:>4}")
         for e in c["errors"]:
             print(f"      error: {e}")
+        for n in c.get("notes", []):
+            print(f"      note: {n}")
     t = s["totals"]
     print(f"projects {t['projects']}, events {t['events']} {t['events_by_type']}")
     if res.digest:

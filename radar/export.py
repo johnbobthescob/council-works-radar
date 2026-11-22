@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from radar import changes, db
-from radar.digest import BLACKSPOT_NOTE, FOOTER_TEXT, evidence_mention, project_funding, NONCOMMERCIAL_NOTE, load_data, primary_trade, short_quote, source_href
+from radar.digest import BLACKSPOT_NOTE, PROGRAM_TOTALS_NOTE, program_totals, FOOTER_TEXT, evidence_mention, project_funding, NONCOMMERCIAL_NOTE, load_data, primary_trade, short_quote, source_href
 from radar.models import ChangeEvent, Run
 from radar.settings import OUT_DIR
 
@@ -73,6 +73,7 @@ def build_data(conn: sqlite3.Connection, *, now: datetime | None = None, blacksp
         "trades": [{"code": k, "label": data.trade_labels[k]} for k in data.trade_order],
         "footer": FOOTER_TEXT, "noncommercial": NONCOMMERCIAL_NOTE,
         "blackspot_note": BLACKSPOT_NOTE if blackspot_enabled else None, "projects": projects,
+        "program_totals": program_totals(data), "program_totals_note": PROGRAM_TOTALS_NOTE,
     }
 
 

@@ -134,6 +134,40 @@ def primary_trade(data: Data, p: Project) -> str:
     return "UNKNOWN"
 
 
+PROGRAM_TOTALS_NOTE = (
+    "Sum of values extracted from council documents (budget totals unless stated); not the council's statutory "
+    "budget total. GST basis may vary."
+)
+EXCLUDED_STAGES = ("deferred", "deleted")
+
+
+def program_totals(data: Data) -> list[dict]:
+    """Extracted capital program totals per council and financial year (deferred/deleted projects excluded).
+
+    ``total_all`` sums every project value; ``total_civil`` only projects whose primary trade is neither
+    NON_CIVIL nor UNKNOWN. ``no_value`` counts projects without a value.
+    """
+    rows: dict[tuple[str, str], dict] = {}
+    for p in data.projects.values():
+        if p.latest_stage in EXCLUDED_STAGES:
+            continue
+        key = (p.council_id, p.financial_year or "")
+        r = rows.setdefault(key, {
+            "council_id": p.council_id, "council": data.council_names.get(p.council_id, p.council_id),
+            "financial_year": p.financial_year, "projects": 0, "no_value": 0, "total_all": 0.0,
+            "civil_projects": 0, "total_civil": 0.0})
+        r["projects"] += 1
+        civil = primary_trade(data, p) not in NOT_LISTED_TRADES
+        r["civil_projects"] += civil
+        if p.latest_value is None:
+            r["no_value"] += 1
+            continue
+        r["total_all"] += p.latest_value
+        if civil:
+            r["total_civil"] += p.latest_value
+    return sorted(rows.values(), key=lambda r: (r["council"], r["financial_year"] or "~"))
+
+
 def trade_chips(data: Data, p: Project) -> list[dict]:
     rule = {lab["code"] for mid in data.by_project.get(p.project_id, []) for lab in data.mentions[mid].trade_labels or []
             if lab.get("method") != "rule_implied"}
@@ -359,6 +393,8 @@ def build_context(conn: sqlite3.Connection, week: str | None = None, *, now: dat
         "blackspot_note": BLACKSPOT_NOTE if blackspot_enabled else None,
         "flag_labels": FLAG_LABELS, "event_count": len(events),
     }
+    ctx["program_totals"] = program_totals(data)
+    ctx["program_totals_note"] = PROGRAM_TOTALS_NOTE
     ctx["health"] = health_section(conn, data, runs, runs[0].started_at if runs else None)
     ctx["review"] = review_section(conn, data)
     if baseline:

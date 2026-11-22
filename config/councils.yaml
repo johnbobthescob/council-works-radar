@@ -70,6 +70,12 @@ councils:
           minutes: MinutesFile
           attachments: Attachments
         extractor: agenda_items
+        fallback:                            # ASSUMPTION: sitemap URL pattern unverified
+          type: sitemap
+          sitemap_url: https://www.stirling.wa.gov.au/sitemap.xml
+          pattern: 'minutes-and-agendas'
+          follow_pages: 2
+          doc_pattern: '\.pdf|getmedia|getattachment|/files/'
 
   melville:
     name: City of Melville
@@ -99,6 +105,12 @@ councils:
           file_size: MNAFirstFileSize
           page_url: PageUrl
         extractor: agenda_items
+        fallback:
+          type: sitemap
+          sitemap_url: https://www.melvillecity.com.au/sitemap.xml
+          pattern: '/our-city/our-council/agendas-and-minutes/(agenda|minutes)-[a-z-]*\d{1,2}-[a-z]+-20\d{2}'
+          follow_pages: 2
+          doc_pattern: '\.pdf|getmedia|/files/'
     notes: "Non-commercial terms; minutes preferred over 50 MB agendas (PLAN §3.3)."
 
   cockburn:
@@ -145,6 +157,12 @@ councils:
           file_size: MNAFileSizeByte
           publication_date: MNAPublicationDate
         extractor: agenda_items
+        fallback:                            # ASSUMPTION: sitemap URL pattern unverified
+          type: sitemap
+          sitemap_url: https://rockingham.wa.gov.au/sitemap.xml
+          pattern: '(agenda|minutes)'
+          follow_pages: 2
+          doc_pattern: '\.pdf|getmedia|/files/'
     notes: "Terms say no reuse or redistribution without prior written permission (RESEARCH §1.2.6). Flag in the digest footer; see PLAN §3.2."
 
 # Optional cross-check sources (PLAN §3.2 Main Roads licence caution, M17). Disabled by default: the Main Roads

@@ -7,7 +7,6 @@ re-extracts the documents already stored in the DB from their cached raw bytes i
 
 from __future__ import annotations
 
-import importlib
 import json
 import logging
 import sqlite3
@@ -17,7 +16,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from radar import blackspot, changes, db, dedupe, digest, export
-from radar.adapters import ADAPTER_MODULES
+from radar.adapters import list_adapter
 from radar.adapters.base import DocRef
 from radar.extract import IMPLEMENTED
 from radar.ingest import IngestResult, extract_document, fetch_and_extract
@@ -104,6 +103,7 @@ class CouncilResult:
     docs: list[dict] = field(default_factory=list)
     skipped: list[dict] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)       # soft notes (e.g. an empty listing served by a fallback)
 
     def add(self, res: IngestResult) -> None:
         self.outcomes[res.outcome] = self.outcomes.get(res.outcome, 0) + 1
@@ -120,8 +120,9 @@ def list_refs(council: Council, fetcher, result: CouncilResult) -> list[DocRef]:
     refs: list[DocRef] = []
     for adapter in council.adapters:
         try:
-            module = importlib.import_module(ADAPTER_MODULES[adapter.type])
-            got = module.list_docs(council, adapter.raw, fetcher)
+            got, errors, notes = list_adapter(council, adapter, fetcher)
+            result.errors += errors
+            result.notes += notes
         except Exception as exc:              # one adapter failing must not stop the council or the run
             log.warning("%s: adapter %s failed: %s", council.key, adapter.type, exc)
             result.errors.append(f"adapter {adapter.type}: {type(exc).__name__}: {exc}")
@@ -315,7 +316,7 @@ def run_pipeline(conn: sqlite3.Connection, councils: list[str] | None = None, *,
             "name": config.councils[r.council].name, "docs_listed": r.listed, "docs_selected": r.selected,
             "outcomes": r.outcomes, "mentions_extracted": r.mentions,
             "projects_total": per_council_projects.get(r.council, 0), "documents": r.docs,
-            "skipped": r.skipped, "errors": r.errors,
+            "skipped": r.skipped, "errors": r.errors, "notes": r.notes,
             "status": "ok" if r.outcomes.get("extracted", 0) + r.outcomes.get("not_modified", 0) and not r.errors
             else ("partial" if r.outcomes.get("extracted", 0) + r.outcomes.get("not_modified", 0) else "failed"),
         } for r in results},

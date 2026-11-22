@@ -47,6 +47,15 @@
   distinct("stage").forEach(function (s) { $("filter-stage").appendChild(el("option", { value: s, text: s })); });
   distinct("fy").forEach(function (s) { $("filter-fy").appendChild(el("option", { value: s, text: s })); });
   $("meta").textContent = "Week " + (DATA.iso_week || "") + (DATA.baseline ? " · baseline run" : "") + " · data generated " + (DATA.generated_at || "");
+  var totals = (DATA.program_totals || []).map(function (t) {
+    return t.council + " " + (t.financial_year || "FY unknown") + ": " + money(t.total_all) + " extracted over " + t.projects +
+      " projects (" + money(t.total_civil) + " civil trades, " + t.no_value + " without value)";
+  });
+  if (totals.length) {
+    var box = $("program-totals");
+    totals.forEach(function (line) { box.appendChild(el("div", { class: "muted small", text: line })); });
+    box.appendChild(el("div", { class: "muted small", text: DATA.program_totals_note || "" }));
+  }
   $("footer-text").textContent = DATA.footer || "";
   $("footer-note").textContent = [DATA.noncommercial, DATA.blackspot_note].filter(Boolean).join(" ");
 

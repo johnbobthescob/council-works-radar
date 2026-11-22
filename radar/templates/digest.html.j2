@@ -48,6 +48,13 @@
 {% for c in health.councils %}<tr><td>{{ c.council }}</td><td class="num">{{ c.docs }}</td><td>{{ c.status_text }}</td><td>{{ c.last or '—' }}</td></tr>
 {% else %}<tr><td colspan="4">No councils processed yet.</td></tr>{% endfor %}</tbody></table>
 
+{% if program_totals %}
+<h2 id="program-totals">Extracted capital program totals</h2>
+<table id="program-totals-table"><thead><tr><th>Council</th><th>Financial year</th><th class="num">Projects</th><th class="num">No value</th><th class="num">All extracted</th><th class="num">Civil trades only</th></tr></thead><tbody>
+{% for r in program_totals %}<tr><td>{{ r.council }}</td><td>{{ r.financial_year or 'unknown' }}</td><td class="num">{{ r.projects }}</td><td class="num">{{ r.no_value }}</td><td class="num">{{ r.total_all|money }}</td><td class="num">{{ r.total_civil|money }}</td></tr>{% endfor %}</tbody></table>
+<p class="muted small" id="program-totals-note">{{ program_totals_note }}</p>
+{% endif %}
+
 {% if baseline %}
 <h2 id="baseline">Baseline pipeline</h2>
 {% set b = baseline_section %}
